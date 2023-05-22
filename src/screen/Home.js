@@ -1,74 +1,126 @@
-import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
-import { Card, Title, Paragraph } from "react-native-paper";
+import { Image, ScrollView, View, FlatList, Dimensions } from "react-native";
+import {
+  VStack,
+  Box,
+  Heading,
+  Input,
+  Icon,
+  NativeBaseProvider,
+  Center,
+  Text,
+} from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Home = () => {
-  return (
-    <ScrollView style={{ backgroundColor: "#5F8D8590" }}>
-      <Image
-        source={require("../../assets/logo_gyozilla.png")}
-        style={{
-          marginTop: 10,
-          height: 280,
-          resizeMode: "contain",
-          width: "100%",
-        }}
-      />
 
-      {/* <Card
-        style={{
-          backgroundColor: "#CDE8E7",
-          borderColor: "black",
-          borderWidth: 1,
-          elevation: 20,
-          shadowColor: "black",
-          flex: 1,
-          height: 200,
-          marginTop: 30,
-          marginHorizontal: 20,
-          justifyContent: "center",
-        }}
-      >
-        <Card.Title
-          style={{ marginTop: 30 }}
-          title="PRESENTATION"
-          titleStyle={{
-            flex: 1,
-            fontSize: 28,
-            color: "#F8A500",
-            textAlign: "center",
+  const carouselData = [
+    { id: "1", title: "C'est dans la boite !", image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp") },
+    { id: "2", title: "Ça croustille !", image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp") },
+    { id: "3", title: "Non mais tu bacon !", image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp") },
+  ];
+
+  const renderNewsCarouselItem = ({ item }) => (
+    <View style={{ width: 200, height: 200, marginRight: 30}}>
+        <Image source={item.image} style={{ flex: 1, width: 200, height: 200}} resizeMode="contain"/>
+        <Text style={{ fontWeight: "bold"}}>{item.title}</Text>
+    </View>
+  );
+  
+
+  function SearchBar() {
+    return (
+      <VStack my="4" space={5} w="100%" maxW="300px" divider={<Box px="2" />}>
+        <VStack w="100%" space={5} alignSelf="center">
+          <Input
+            size="md"
+            placeholder="Trouver un restaurant"
+            width="100%"
+            borderRadius="4"
+            py="3"
+            px="1"
+            borderWidth={2}
+            borderColor="white"
+            fontSize={14}
+            color="white"
+            placeholderTextColor="white"
+            InputLeftElement={
+              <Icon
+                m="2"
+                ml="3"
+                size="6"
+                color="white"
+                as={<MaterialIcons name="search" />}
+              />
+            }
+          />
+        </VStack>
+      </VStack>
+    );
+  }
+
+  function SearchStore() {
+    return (
+      <Center flex={1} px="2">
+        <SearchBar />
+      </Center>
+    );
+  }
+
+  return (
+    <NativeBaseProvider>
+      <ScrollView style={{ backgroundColor: "white" }}>
+        <Image
+          source={require("../../assets/logo_gyozilla.png")}
+          style={{
+            marginTop: 10,
+            height: 280,
+            resizeMode: "contain",
+            width: "100%",
           }}
         />
-      </Card> */}
-      <Card
-        style={{
-          backgroundColor: "#CDE8E7",
-          borderColor: "black",
-          borderWidth: 1,
-          margin: 20,
-          padding: 10,
-          elevation: 20,
-          shadowColor: "black",
-        }}
-      >
-        <Card.Content style={{ margin: 10 }}>
-          <Paragraph
-            style={{
-              fontSize: 20,
-              textAlign: "justify",
-              color: "#F8A500",
-              lineHeight: 30,
-            }}
-          >
-            GYOZILLA est un fast-food asiatique, situé à Amiens. Venez découvrir
-            la gastronomie japonaise et chinoise sur place ou tout simplement
-            depuis chez vous. Nos livreurs sont équipés d'un terminal de
-            paiement par CB. Modes de paiement acceptés : Carte Bancaire,
-            espèces et Ticket Restaurant. Nous n'acceptons pas les chèques.
-          </Paragraph>
-        </Card.Content>
-      </Card>
-    </ScrollView>
+        <SearchStore />
+        <Box marginLeft={4}>
+          <Heading color="black" fontSize={18} marginTop={4}>
+            Chaud devant !
+          </Heading>
+          <Text color="black">
+            Découvrez les actualités Gyozilla®
+          </Text>
+          <FlatList
+          data={carouselData}
+          renderItem={renderNewsCarouselItem}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+        />
+          <Heading color="black" width={250} fontSize={18} marginTop={20}>
+            Une petite ou une grosse faim ?
+          </Heading>
+          <Box alignItems={"center"} flex={1} marginRight={4} marginTop={10}>
+          <FlatList
+          numColumns={2}
+          data={carouselData}
+          renderItem={({
+            item
+          })=>{
+            return <Box style={{
+              width:125,
+              height:125,
+              backgroundColor: "red",
+              margin: 10
+            }}>
+            <Text>{item.title}</Text>
+            </Box>
+          }
+        }
+        />
+          </Box>
+        </Box>
+
+      </ScrollView>
+    </NativeBaseProvider>
   );
 };
 
