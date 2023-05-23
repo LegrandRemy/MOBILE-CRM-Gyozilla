@@ -9,7 +9,6 @@ import {
   NativeBaseProvider,
   Center,
   Text,
-  Container,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import ListHomeImgBG from "../Components/ListHomeImgBG";

@@ -3,8 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import BottomNav from "./src/Components/TapBar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-// import Header from "./src/components/Header";
-import Home from "./src/screen/Home";
 import { useState } from "react";
 import Loader from "./src/Components/loader";
 
