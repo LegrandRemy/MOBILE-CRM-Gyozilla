@@ -2,7 +2,7 @@ import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
 import { Card, Title, Paragraph } from "react-native-paper";
 
-const Home = () => {
+const Accueil = () => {
   return (
     <ScrollView style={{ backgroundColor: "#5F8D8590" }}>
       <Image
@@ -72,4 +72,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Accueil;

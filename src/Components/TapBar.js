@@ -1,14 +1,12 @@
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import * as React from "react";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Home from "../screen/Home";
-import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import LaCarte from "../screen/LaCarte";
-import NosEngagements from "../screen/NosEngagements";
-import ContactezNous from "../screen/ContactezNous";
+import GeoLoc from "../screen/Geoloc";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,10 +17,6 @@ export default BottomNav = () => {
       shifting={true}
       sceneAnimationEnabled={false}
       screenOptions={({ route }) => ({
-        // header: ({ options }) => {
-        //   return <Header title={route.name} />;
-        // },
-
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let newSize;
@@ -39,31 +33,31 @@ export default BottomNav = () => {
             }
           } else if (route.name === "La carte") {
             if (focused) {
-              iconName = "book-open-page-variant-outline";
+              iconName = "noodles";
               newSize = 35;
               newColor = "#F8A500";
             } else {
-              iconName = "book-open-page-variant";
+              iconName = "noodles";
               newSize = 25;
               newColor = "black";
             }
-          } else if (route.name === "Nos Engagements") {
+          } else if (route.name === "GeoLoc") {
             if (focused) {
-              iconName = "hammer";
+              iconName = "map-marker-multiple-outline";
               newSize = 35;
               newColor = "#F8A500";
             } else {
-              iconName = "hand-saw";
+              iconName = "map-marker-multiple";
               newSize = 25;
               newColor = "black";
             }
-          } else if (route.name === "Contactez-nous") {
+          } else if (route.name === "Menu") {
             if (focused) {
-              iconName = "card-account-mail-outline";
+              iconName = "format-list-bulleted";
               newSize = 35;
               newColor = "#F8A500";
             } else {
-              iconName = "card-account-mail";
+              iconName = "format-list-bulleted";
               newSize = 25;
               newColor = "black";
             }
@@ -84,8 +78,8 @@ export default BottomNav = () => {
     >
       <Tab.Screen component={Home} name="Accueil" />
       <Tab.Screen component={LaCarte} name="La carte" />
-      <Tab.Screen component={NosEngagements} name="Nos Engagements" />
-      <Tab.Screen component={ContactezNous} name="Contactez-nous" />
+      <Tab.Screen component={GeoLoc} name="GeoLoc" />
+      <Tab.Screen component={StackMenuListNavigator} name="Menu" />
     </Tab.Navigator>
   );
 };
