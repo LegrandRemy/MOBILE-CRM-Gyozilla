@@ -3,12 +3,12 @@ import React from "react";
 
 const loader = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#faeccb" }}>
       <Image
         source={require("../../assets/logo_gyozilla.png")}
         style={{
-          width: "70%",
-          height: "70%",
+          width: "50%",
+          height: "50%",
           resizeMode: "contain",
         }}
       />

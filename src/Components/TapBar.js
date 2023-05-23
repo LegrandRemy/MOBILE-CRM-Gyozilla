@@ -7,6 +7,7 @@ import LaCarte from "../screen/LaCarte";
 import GeoLoc from "../screen/Geoloc";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
+import Header from "../templates/header/Header";
 
 const Tab = createBottomTabNavigator();
 
@@ -76,10 +77,10 @@ export default BottomNav = () => {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen component={Home} name="Accueil" />
-      <Tab.Screen component={LaCarte} name="La carte" />
-      <Tab.Screen component={GeoLoc} name="GeoLoc" />
-      <Tab.Screen component={StackMenuListNavigator} name="Menu" />
+      <Tab.Screen options={{header: ()=><Header/>}} component={Home} name="Accueil" />
+      <Tab.Screen options={{header: ()=><Header/>}} component={LaCarte} name="La carte" />
+      <Tab.Screen options={{header: ()=><Header/>}} component={GeoLoc} name="GeoLoc" />
+      <Tab.Screen options={{header: ()=><Header/>}} component={StackMenuListNavigator} name="Menu" />
     </Tab.Navigator>
   );
 };
