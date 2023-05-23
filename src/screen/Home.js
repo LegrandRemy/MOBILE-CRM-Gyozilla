@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, View, FlatList, Dimensions } from "react-native";
+import { Image, ScrollView, View, FlatList, Dimensions, ImageBackground } from "react-native";
 import {
   VStack,
   Box,
@@ -9,8 +9,10 @@ import {
   NativeBaseProvider,
   Center,
   Text,
+  Container,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import ListHomeImgBG from "../Components/ListHomeImgBG";
 
 const Home = () => {
 
@@ -40,16 +42,15 @@ const Home = () => {
             py="3"
             px="1"
             borderWidth={2}
-            borderColor="white"
+            borderColor="black"
             fontSize={14}
-            color="white"
-            placeholderTextColor="white"
+            placeholderTextColor="black"
             InputLeftElement={
               <Icon
                 m="2"
                 ml="3"
                 size="6"
-                color="white"
+                color="black"
                 as={<MaterialIcons name="search" />}
               />
             }
@@ -80,7 +81,7 @@ const Home = () => {
           }}
         />
         <SearchStore />
-        <Box marginLeft={4}>
+        <Box backgroundColor={"blue"} marginLeft={4}>
           <Heading color="black" fontSize={18} marginTop={4}>
             Chaud devant !
           </Heading>
@@ -98,27 +99,10 @@ const Home = () => {
           <Heading color="black" width={250} fontSize={18} marginTop={20}>
             Une petite ou une grosse faim ?
           </Heading>
-          <Box alignItems={"center"} flex={1} marginRight={4} marginTop={10}>
-          <FlatList
-          numColumns={2}
-          data={carouselData}
-          renderItem={({
-            item
-          })=>{
-            return <Box style={{
-              width:125,
-              height:125,
-              backgroundColor: "red",
-              margin: 10
-            }}>
-            <Text>{item.title}</Text>
-            </Box>
-          }
-        }
-        />
+          <Box flexDirection={"row"} flexWrap={"wrap"} marginRight={4} justifyContent={"center"} marginTop={10}>
+            <ListHomeImgBG props={carouselData}/>
           </Box>
         </Box>
-
       </ScrollView>
     </NativeBaseProvider>
   );
