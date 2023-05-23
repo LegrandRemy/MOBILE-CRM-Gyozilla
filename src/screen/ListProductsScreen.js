@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { FlatList } from "native-base";
 import { useNavigation } from "@react-navigation/native";
+import Entrees from "./Repas/Entrees";
 
 const ListProductsScreen = ({ route }) => {
   console.log("route.params", route.params);
@@ -21,12 +22,12 @@ const ListProductsScreen = ({ route }) => {
 
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-      />
-      <Text>ListProductsScreen</Text>
+      /> */}
+      <Entrees />
     </View>
   );
 };

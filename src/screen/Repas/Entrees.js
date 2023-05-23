@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-const Card = () => {
+const Entrees = () => {
   const cartes = [
     { id: 1, titre: "Carte 1", contenu: "Contenu de la carte 1" },
     { id: 2, titre: "Carte 2", contenu: "Contenu de la carte 2" },
@@ -18,12 +18,12 @@ const Card = () => {
       </Text>
       <View style={styles.row}>
         {cartes.map((carte) => (
-          <TouchableOpacity onPress={handleImageClick}>
+          <TouchableOpacity>
             <View style={styles.carte} key={carte.id}>
               <Text style={styles.titre}>{carte.titre}</Text>
               <Text style={styles.contenu}>{carte.contenu}</Text>
               <Image
-                source={require("./../../assets/favicon.png")}
+                source={require("./../../../assets/favicon.png")}
                 style={styles.image}
               />
             </View>
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default Entrees;
