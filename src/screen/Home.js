@@ -96,9 +96,9 @@ const Home = () => {
           keyExtractor={(item) => item.id}
         />
           <Heading color="black" width={250} fontSize={18} marginTop={20}>
-            Une petite ou une grosse faim ?
+            Une petite ou une grosse faim ? &#127836;
           </Heading>
-          <Box flexDirection={"row"} flexWrap={"wrap"} marginRight={4} justifyContent={"center"} marginTop={10}>
+          <Box flexDirection={"row"} flexWrap={"wrap"} marginRight={4} justifyContent={"center"} marginTop={10} marginBottom={10}>
             <ListHomeImgBG props={carouselData}/>
           </Box>
         </Box>
