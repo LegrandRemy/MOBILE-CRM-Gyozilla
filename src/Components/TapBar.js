@@ -1,10 +1,10 @@
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import * as React from "react";
-import Home from "../screen/Home";
+import HomeScreen from "../screen/TapBar/HomeScreen";
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import LaCarte from "../screen/LaCarte";
-import GeoLoc from "../screen/Geoloc";
+import LaCarteScreen from "../screen/TapBar/LaCarteScreen";
+import GeolocScreen from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 
@@ -76,10 +76,14 @@ export default BottomNav = () => {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen component={Home} name="Accueil" />
-      <Tab.Screen component={LaCarte} name="La carte" />
-      <Tab.Screen component={GeoLoc} name="GeoLoc" />
-      <Tab.Screen component={StackMenuListNavigator} name="Menu" />
+      <Tab.Screen component={HomeScreen} name="Accueil" />
+      <Tab.Screen component={LaCarteScreen} name="La carte" />
+      <Tab.Screen component={GeolocScreen} name="GeoLoc" />
+      <Tab.Screen
+        options={{ headerShown: false }}
+        component={StackMenuListNavigator}
+        name="Menu"
+      />
     </Tab.Navigator>
   );
 };

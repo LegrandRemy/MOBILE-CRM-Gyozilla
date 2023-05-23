@@ -2,11 +2,11 @@ import { View, Text, Image, ScrollView } from "react-native";
 import React from "react";
 import { Card, Title, Paragraph } from "react-native-paper";
 
-const Accueil = () => {
+const HomeScreen = () => {
   return (
     <ScrollView style={{ backgroundColor: "#5F8D8590" }}>
       <Image
-        source={require("../../assets/logo_gyozilla.png")}
+        source={require("../../../assets/logo_gyozilla.png")}
         style={{
           marginTop: 10,
           height: 280,
@@ -14,32 +14,6 @@ const Accueil = () => {
           width: "100%",
         }}
       />
-
-      {/* <Card
-        style={{
-          backgroundColor: "#CDE8E7",
-          borderColor: "black",
-          borderWidth: 1,
-          elevation: 20,
-          shadowColor: "black",
-          flex: 1,
-          height: 200,
-          marginTop: 30,
-          marginHorizontal: 20,
-          justifyContent: "center",
-        }}
-      >
-        <Card.Title
-          style={{ marginTop: 30 }}
-          title="PRESENTATION"
-          titleStyle={{
-            flex: 1,
-            fontSize: 28,
-            color: "#F8A500",
-            textAlign: "center",
-          }}
-        />
-      </Card> */}
       <Card
         style={{
           backgroundColor: "#CDE8E7",
@@ -72,4 +46,4 @@ const Accueil = () => {
   );
 };
 
-export default Accueil;
+export default HomeScreen;
