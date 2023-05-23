@@ -11,23 +11,24 @@ const Entrees = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.intro}>
-        {" "}
-        Savourez nos meilleurs plats avec un accompagnement au choix et une
-        boisson!
-      </Text>
+      <View style={styles.intro}>
+        <Text>
+          Savourez nos meilleurs plats avec un accompagnement au choix et une
+          boisson!
+        </Text>
+      </View>
       <View style={styles.row}>
         {cartes.map((carte) => (
-          <TouchableOpacity>
-            <View style={styles.carte} key={carte.id}>
-              <Text style={styles.titre}>{carte.titre}</Text>
-              <Text style={styles.contenu}>{carte.contenu}</Text>
-              <Image
-                source={require("./../../../assets/favicon.png")}
-                style={styles.image}
-              />
-            </View>
-          </TouchableOpacity>
+          // <TouchableOpacity>
+          <View style={styles.carte} key={carte.id}>
+            <Text style={styles.titre}>{carte.titre}</Text>
+            <Text style={styles.contenu}>{carte.contenu}</Text>
+            <Image
+              source={require("./../../../assets/favicon.png")}
+              style={styles.image}
+            />
+          </View>
+          //</TouchableOpacity>
         ))}
       </View>
     </View>
@@ -35,23 +36,20 @@ const Entrees = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
   intro: {
-    marginTop: 15,
+    //flex: 1,
     marginBottom: 15,
     marginLeft: 5,
     marginRight: 5,
   },
   row: {
+    //flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
   },
   carte: {
     backgroundColor: "white",
-    padding: 10,
+    padding: 1,
     margin: 6,
     borderRadius: 5,
     shadowColor: "black",
