@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { instanceAxios } from "../../utils/Interceptor";
-import { Image } from "native-base";
+import { ScrollView } from "native-base";
 
 const Starter = () => {
   const [productsEntrees, setProductsEntrees] = useState([]);
@@ -22,7 +22,7 @@ const Starter = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.intro}>
         <Text>
           Savourez nos meilleurs plats avec un accompagnement au choix et une
@@ -32,17 +32,23 @@ const Starter = () => {
       <View style={styles.row}>
         {productsEntrees.map((productEntree) => (
           <View style={styles.carte} key={productEntree.id}>
-            <Text style={styles.titre}>{productEntree.name}</Text>
-            <Text style={styles.contenu}>{productEntree.description}</Text>
-            <Image
-              alt="photo d'une entrée"
-              source={{ uri: `../../../assets/${productEntree.image}` }}
-              style={styles.image}
-            />
+            <View style={styles.cardText}>
+              <Text style={styles.titre}>{productEntree.name}</Text>
+              <Text style={styles.contenu}>{productEntree.description}</Text>
+            </View>
+            <View style={styles.cardImage}>
+              <Image
+                alt="photo d'une entrée"
+                source={{
+                  uri: `https://api-gyozilla.onrender.com/${productEntree.image}`,
+                }}
+                style={styles.image}
+              />
+            </View>
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -56,7 +62,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
   },
+  cardText: { flex: 1 },
+  cardImage: {
+    flex: 2,
+  },
   carte: {
+    width: 350,
+    height: 250,
     backgroundColor: "white",
     padding: 1,
     margin: 6,
@@ -76,7 +88,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   image: {
+    width: "100%",
+    height: "100%",
     alignSelf: "center",
+    resizeMode: "contain",
   },
 });
 
