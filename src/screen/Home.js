@@ -1,10 +1,11 @@
 import React from "react";
-import { Image, ScrollView, View, FlatList } from "react-native";
+import { Image, ScrollView, View, FlatList, TouchableHighlight } from "react-native";
 import {
   Box,
   Heading,
   Text,
   AspectRatio,
+  Link,
 } from "native-base";
 import ListHomeImgBG from "../Components/ListHomeImgBG";
 import SearchHomeInput from "../Components/SearchHomeInput";
@@ -33,11 +34,13 @@ const Home = () => {
           </Heading>
         </Box>
         <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-        <AspectRatio w="90%" ratio={16 / 9}>
-            <Image borderRadius={10} source={{
-            uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg"
-          }} alt="image" />
-          </AspectRatio>
+          <TouchableHighlight>
+            <AspectRatio w="90%" ratio={16 / 9}>
+                <Image borderRadius={10} source={{
+                uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg"
+              }} alt="image" />
+            </AspectRatio>
+          </TouchableHighlight>
         </Box>
         <Box backgroundColor={"blue"} marginLeft={4}>
           <Heading color="black" fontSize={18} marginTop={4}>

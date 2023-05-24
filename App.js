@@ -6,7 +6,6 @@ import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
 import Loader from "./src/Components/loader";
 import { NativeBaseProvider } from 'native-base';
-import Header from "./src/templates/header/Header";
 
 const theme = {
   ...DefaultTheme,
