@@ -5,7 +5,6 @@ import {
   Heading,
   Text,
   AspectRatio,
-  Link,
 } from "native-base";
 import ListHomeImgBG from "../Components/ListHomeImgBG";
 import SearchHomeInput from "../Components/SearchHomeInput";
