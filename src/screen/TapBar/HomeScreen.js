@@ -1,24 +1,8 @@
 import React from "react";
-import {
-  Image,
-  ScrollView,
-  View,
-  FlatList,
-  Dimensions,
-  ImageBackground,
-} from "react-native";
-import {
-  VStack,
-  Box,
-  Heading,
-  Input,
-  Icon,
-  NativeBaseProvider,
-  Center,
-  Text,
-} from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
-import ListHomeImgBG from "../../Components/ListHomeImgBG";
+import { Image, ScrollView, View, FlatList } from "react-native";
+import { Box, Heading, Text, AspectRatio } from "native-base";
+import ListHomeImgBG from "../Components/ListHomeImgBG";
+import SearchHomeInput from "../Components/SearchHomeInput";
 
 const Home = () => {
   const carouselData = [
@@ -50,86 +34,53 @@ const Home = () => {
     </View>
   );
 
-  function SearchBar() {
-    return (
-      <VStack my="4" space={5} w="100%" maxW="300px" divider={<Box px="2" />}>
-        <VStack w="100%" space={5} alignSelf="center">
-          <Input
-            size="md"
-            placeholder="Trouver un restaurant"
-            width="100%"
-            borderRadius="4"
-            py="3"
-            px="1"
-            borderWidth={2}
-            borderColor="black"
-            fontSize={14}
-            placeholderTextColor="black"
-            InputLeftElement={
-              <Icon
-                m="2"
-                ml="3"
-                size="6"
-                color="black"
-                as={<MaterialIcons name="search" />}
-              />
-            }
-          />
-        </VStack>
-      </VStack>
-    );
-  }
-
-  function SearchStore() {
-    return (
-      <Center flex={1} px="2">
-        <SearchBar />
-      </Center>
-    );
-  }
-
   return (
-    <NativeBaseProvider>
-      <ScrollView style={{ backgroundColor: "white" }}>
-        <Image
-          source={require("../../../assets/logo_gyozilla.png")}
-          style={{
-            marginTop: 10,
-            height: 280,
-            resizeMode: "contain",
-            width: "100%",
-          }}
-        />
-        <SearchStore />
-        <Box backgroundColor={"blue"} marginLeft={4}>
-          <Heading color="black" fontSize={18} marginTop={4}>
-            Chaud devant !
-          </Heading>
-          <Text color="black">Découvrez les actualités Gyozilla®</Text>
-          <FlatList
-            data={carouselData}
-            renderItem={renderNewsCarouselItem}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
+    <ScrollView style={{ backgroundColor: "white" }}>
+      <Box paddingBottom={10} backgroundColor={"#77614c"}>
+        <SearchHomeInput />
+        <Heading color="#faeccb" fontSize={18} marginLeft={4} marginTop={4}>
+          En ce moment
+        </Heading>
+      </Box>
+      <Box alignItems={"center"} marginY={-8} marginBottom={3}>
+        <AspectRatio w="90%" ratio={16 / 9}>
+          <Image
+            borderRadius={10}
+            source={{
+              uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+            }}
+            alt="image"
           />
-          <Heading color="black" width={250} fontSize={18} marginTop={20}>
-            Une petite ou une grosse faim ? &#127836;
-          </Heading>
-          <Box
-            flexDirection={"row"}
-            flexWrap={"wrap"}
-            marginRight={4}
-            justifyContent={"center"}
-            marginTop={10}
-            marginBottom={10}
-          >
-            <ListHomeImgBG props={carouselData} />
-          </Box>
+        </AspectRatio>
+      </Box>
+      <Box backgroundColor={"blue"} marginLeft={4}>
+        <Heading color="black" fontSize={18} marginTop={4}>
+          Chaud devant !
+        </Heading>
+        <Text color="black">Découvrez les actualités Gyozilla®</Text>
+        <FlatList
+          data={carouselData}
+          renderItem={renderNewsCarouselItem}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id}
+        />
+        <Heading color="black" width={250} fontSize={18} marginTop={20}>
+          Une petite ou une grosse faim ? &#127836;
+        </Heading>
+        <Box
+          flexDirection={"row"}
+          flexWrap={"wrap"}
+          marginRight={4}
+          justifyContent={"center"}
+          marginTop={10}
+          marginBottom={10}
+        >
+          <ListHomeImgBG props={carouselData} />
         </Box>
-      </ScrollView>
-    </NativeBaseProvider>
+      </Box>
+    </ScrollView>
   );
 };
 
