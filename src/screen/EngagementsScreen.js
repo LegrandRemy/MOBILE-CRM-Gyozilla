@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Nouveautes = () => {
+const Engagements = () => {
   return (
     <View>
-      <Text>Nouveautes</Text>
+      <Text>Nos Engagements</Text>
     </View>
   );
 };
 
-export default Nouveautes;
+export default Engagements;

@@ -1,10 +1,10 @@
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import * as React from "react";
-import HomeScreen from "../screen/TapBar/HomeScreen";
+import Home from "../screen/TapBar/HomeScreen";
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import LaCarteScreen from "../screen/TapBar/LaCarteScreen";
-import GeolocScreen from "../screen/TapBar/GeolocScreen";
+import RestaurantMenu from "../screen/TapBar/RestaurantMenuScreen";
+import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
@@ -84,12 +84,12 @@ export default BottomNav = () => {
       />
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={LaCarte}
+        component={RestaurantMenu}
         name="La carte"
       />
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={GeoLoc}
+        component={Geoloc}
         name="GeoLoc"
       />
       <Tab.Screen

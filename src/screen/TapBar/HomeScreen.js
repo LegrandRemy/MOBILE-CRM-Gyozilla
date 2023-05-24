@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, ScrollView, View, FlatList } from "react-native";
 import { Box, Heading, Text, AspectRatio } from "native-base";
-import ListHomeImgBG from "../Components/ListHomeImgBG";
-import SearchHomeInput from "../Components/SearchHomeInput";
+import ListHomeImgBG from "../../Components/ListHomeImgBG";
+import SearchHomeInput from "../../Components/SearchHomeInput";
 
 const Home = () => {
   const carouselData = [

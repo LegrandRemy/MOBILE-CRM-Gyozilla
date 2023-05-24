@@ -2,9 +2,9 @@ import { View, Text } from "react-native";
 import React from "react";
 import { FlatList } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import Entrees from "./Repas/Entrees";
+import Entrees from "./Repas/StarterScreen";
 
-const ListProductsScreen = ({ route }) => {
+const ListProducts = ({ route }) => {
   console.log("route.params", route.params);
 
   const data = data;
@@ -32,4 +32,4 @@ const ListProductsScreen = ({ route }) => {
   );
 };
 
-export default ListProductsScreen;
+export default ListProducts;

@@ -42,44 +42,46 @@ const MenuList = () => {
 
       <List.Accordion
         title="La carte"
-        expanded={expanded === "laCarte"}
-        onPress={() => handleAccordion("laCarte")}
+        expanded={expanded === "RestaurantMenu"}
+        onPress={() => handleAccordion("RestaurantMenu")}
         style={{ backgroundColor: "#eaeaea" }}
       >
         <List.Item
           title="Nouveautés"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Nouveautés" })
+            handleMenuItemPress("ListProductsScreen", { name: "NewsScreen" })
           }
         />
         <List.Item
           title="Menus"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Menus" })
+            handleMenuItemPress("ListProductsScreen", { name: "MenusScreen" })
           }
         />
         <List.Item
           title="Entrées"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Entrées" })
+            handleMenuItemPress("ListProductsScreen", { name: "StarterScreen" })
           }
         />
         <List.Item
           title="Plats"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Plats" })
+            handleMenuItemPress("ListProductsScreen", { name: "DishesScreen" })
           }
         />
         <List.Item
           title="Desserts"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Desserts" })
+            handleMenuItemPress("ListProductsScreen", {
+              name: "DessertsScreen",
+            })
           }
         />
         <List.Item
           title="Boissons"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "Boissons" })
+            handleMenuItemPress("ListProductsScreen", { name: "DrinksScreen" })
           }
         />
       </List.Accordion>
@@ -91,7 +93,7 @@ const MenuList = () => {
         style={{ backgroundColor: "#eaeaea" }}
       />
       <List.Item
-        title="Engagements"
+        title="Nos engagements"
         onPress={() => handleMenuItemPress("Engagements")}
         style={{ backgroundColor: "#eaeaea" }}
       />

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { instanceAxios } from "../../utils/interceptor";
 import { Image } from "native-base";
 
-const Entrees = () => {
+const Starter = () => {
   const [productsEntrees, setProductsEntrees] = useState([]);
 
   useEffect(() => {
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Entrees;
+export default Starter;

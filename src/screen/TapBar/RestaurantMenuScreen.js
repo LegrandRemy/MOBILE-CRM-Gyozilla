@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-const LaCarteScreen = () => {
+const RestaurantMenu = () => {
   const menuData = [
     {
       id: 1,
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LaCarteScreen;
+export default RestaurantMenu;
