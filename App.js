@@ -6,6 +6,7 @@ import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
 import Loader from "./src/Components/loader";
 import { NativeBaseProvider } from "native-base";
+import StackNewsNavigator from "./src/navigation/StackNewsNavigator";
 
 const theme = {
   ...DefaultTheme,
@@ -29,6 +30,7 @@ export default function App() {
       <NativeBaseProvider>
         <StatusBar translucent={false} style="light"></StatusBar>
         <NavigationContainer>
+        <StackNewsNavigator/>
           {!load ? <Loader></Loader> : <BottomNav></BottomNav>}
         </NavigationContainer>
       </NativeBaseProvider>

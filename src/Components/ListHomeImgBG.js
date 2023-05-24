@@ -11,8 +11,8 @@ const ListHomeImgBG = ({props}) => {
                 padding:10,
                 marginHorizontal: 5,
                 marginVertical: 5,
-            }} source={prop.image} resizeMode="cover" >
-                <Text style={{fontWeight:"600"}}>{prop.title}</Text>
+            }} source={{uri: `https://api-gyozilla.onrender.com/${prop.image}`}} resizeMode="contain" >
+                <Text style={{fontWeight:"600"}}>{prop.name}</Text>
             </ImageBackground>
         ))}
         </>
