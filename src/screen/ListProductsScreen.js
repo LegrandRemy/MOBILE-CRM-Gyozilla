@@ -3,56 +3,61 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { instanceAxios } from "../utils/interceptor";
 import { ScrollView } from "native-base";
 
+const checkNew = (item) => {
+  const today = new Date();
+  const lastWeek = new Date(today);
+  lastWeek.setDate(lastWeek.getDate() - 7);
+  return (
+    new Date(item.createdAt) >= lastWeek && new Date(item.createdAt) <= today
+  );
+};
+
 const ListProductsScreen = ({ route }) => {
   const [products, setProducts] = useState([]);
+  const [choiceMenus, setChoiceMenus] = useState([]);
 
-  const name = route.params;
+  const { name } = route.params;
 
   useEffect(() => {
     instanceAxios
       .get("/products")
       .then((response) => {
-        console.log("response", response.data);
-
-        const filteredProducts = [];
+        let filteredProducts = [];
         switch (name) {
-          // case "NewsScreen":
-          //   const filteredProducts = response.data.filter(
-          //     (product) => product.productCategory.name === "Nouveautes"
-          //   );
-          //   break;
-          // case "MenusScreen":
-          //   const filteredProducts = response.data.filter(
-          //     (product) => product.productCategory.name === "Menus"
-          //   );
-          //   break;
-          case "StarterScreen":
+          case "News":
+            filteredProducts = response.data.filter(checkNew);
+            break;
+          case "Menus":
+            filteredProducts = response.data.filter((product) => product.menu);
+            break;
+          case "Starter":
             filteredProducts = response.data.filter(
               (product) => product.productCategory.name === "Entrées"
             );
             break;
-          case "DishesScreen":
+          case "Dishes":
             filteredProducts = response.data.filter(
               (product) => product.productCategory.name === "Plats"
             );
             break;
-          case "DessertsScreen":
+          case "Desserts":
             filteredProducts = response.data.filter(
               (product) => product.productCategory.name === "Desserts"
             );
             break;
-          case "DrinksScreen":
+          case "Drinks":
             filteredProducts = response.data.filter(
               (product) => product.productCategory.name === "Boissons"
             );
             break;
         }
+        console.log("filteredProducts", filteredProducts);
         setProducts(filteredProducts);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [name]);
 
   return (
     <ScrollView style={styles.container}>
@@ -62,25 +67,33 @@ const ListProductsScreen = ({ route }) => {
           boisson!
         </Text>
       </View>
-      <View style={styles.row}>
-        {products.map((product) => (
-          <View style={styles.carte} key={product.id}>
-            <View style={styles.cardText}>
-              <Text style={styles.titre}>{product.name}</Text>
-              <Text style={styles.contenu}>{product.description}</Text>
-            </View>
-            <View style={styles.cardImage}>
-              <Image
-                alt="photo d'une entrée"
-                source={{
-                  uri: `https://api-gyozilla.onrender.com/${product.image}`,
-                }}
-                style={styles.image}
-              />
-            </View>
+      {
+        (name = "Menus" ? (
+          <View>
+            <Text>coucou</Text>
           </View>
-        ))}
-      </View>
+        ) : (
+          <View style={styles.row}>
+            {products.map((product) => (
+              <View style={styles.carte} key={product.id}>
+                <View style={styles.cardText}>
+                  <Text style={styles.titre}>{product.name}</Text>
+                  <Text style={styles.contenu}>{product.description}</Text>
+                </View>
+                <View style={styles.cardImage}>
+                  <Image
+                    alt="photo d'une entrée"
+                    source={{
+                      uri: `https://api-gyozilla.onrender.com/${product.image}`,
+                    }}
+                    style={styles.image}
+                  />
+                </View>
+              </View>
+            ))}
+          </View>
+        ))
+      }
     </ScrollView>
   );
 };
