@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { instanceAxios } from "../../utils/interceptor";
+import { instanceAxios } from "../../utils/Interceptor";
 import { Image } from "native-base";
 
 const Starter = () => {
