@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const ContactezNous = () => {
+const Engagements = () => {
   return (
     <View>
-      <Text>ContactezNous</Text>
+      <Text>Nos Engagements</Text>
     </View>
   );
 };
 
-export default ContactezNous;
+export default Engagements;

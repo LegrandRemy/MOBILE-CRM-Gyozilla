@@ -1,50 +1,54 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const baseUrl = "https://api-gyozilla.onrender.com/api/";
 
 // Création d'une instance Axios
-const instance = axios.create({
-  baseURL: process.env.REACT_APP_URL_API + "/",
-  timeout: 5000,
+const instanceAxios = axios.create({
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
+    Accept: "application/json",
   },
 });
 
-// Ajout d'un intercepteur de requête
-instance.interceptors.request.use(
-    (config) => {
-        // console.log(config)
+instanceAxios.interceptors.request.use(
+  async (config) => {
+    const token = await AsyncStorage.getItem("@token");
 
-        // Récupération du token depuis le local storage
-        const token = localStorage.getItem("token");
-
-        // Si il y a un token on l'ajoute dans l'en-tête de la requête
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+    if (token) {
+      // console.log(token, 'gettoken');
+      config.headers["Authorization"] = "Bearer " + token;
     }
-);
-
-// Ajout d'un intercepteur de réponse
-instance.interceptors.response.use(
-    (response) => {
-      if (response.data.message === 'Authentification réussi') {
-        localStorage.setItem('token', response.data.token)
-      }
-      return response;
-    },
-    (error) => {
-      if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-        console.log(error.response)
-        // Déconnexion de l'utilisateur et suppression du token
-        localStorage.removeItem('token');
-        // window.location.href = '/login'; // rediriger vers la page de connexion
-      }
-      return Promise.reject(error);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
 );
 
-export default instance;
+instanceAxios.interceptors.response.use(
+  async (res) => {
+    if (res.data.token) {
+      await AsyncStorage.setItem("@token", res.data.token);
+    }
+    return res;
+  },
+  async (err) => {
+    const originalConfig = err.config;
+    if (err.response) {
+      // Access Token was expired
+      if (err.response.status === 401 && !originalConfig._retry) {
+        AsyncStorage.removeItem("@token");
+      }
+    }
+    if (err.response.status === 403 && err.response.data) {
+      AsyncStorage.removeItem("@token");
+
+      if (err.response.data.error !== "2 - Aucune correspondance") {
+      }
+    }
+    return err.response;
+  }
+);
+
+export { instanceAxios };

@@ -8,20 +8,20 @@ import {
   StyleSheet,
 } from "react-native";
 
-const LaCarte = () => {
+const RestaurantMenu = () => {
   const menuData = [
     {
       id: 1,
       name: "Whopper",
       description:
         "Délicieux hamburger avec du fromage, de la salade et de la sauce",
-      image: require("../../assets/1.jpg"),
+      image: require("../../../assets/1.jpg"),
     },
     {
       id: 2,
       name: "Chicken Royale",
       description: "Sandwich de poulet croustillant avec de la mayonnaise",
-      image: require("../../assets/2.jpg"),
+      image: require("../../../assets/2.jpg"),
     },
   ];
 
@@ -75,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LaCarte;
+export default RestaurantMenu;
