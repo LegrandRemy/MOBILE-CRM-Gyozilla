@@ -18,24 +18,24 @@ import {
   Text,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import ListHomeImgBG from "../Components/ListHomeImgBG";
+import ListHomeImgBG from "../../Components/ListHomeImgBG";
 
 const Home = () => {
   const carouselData = [
     {
       id: "1",
       title: "C'est dans la boite !",
-      image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
+      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
     },
     {
       id: "2",
       title: "Ça croustille !",
-      image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
+      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
     },
     {
       id: "3",
       title: "Non mais tu bacon !",
-      image: require("../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
+      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
     },
   ];
 
@@ -92,7 +92,7 @@ const Home = () => {
     <NativeBaseProvider>
       <ScrollView style={{ backgroundColor: "white" }}>
         <Image
-          source={require("../../assets/logo_gyozilla.png")}
+          source={require("../../../assets/logo_gyozilla.png")}
           style={{
             marginTop: 10,
             height: 280,

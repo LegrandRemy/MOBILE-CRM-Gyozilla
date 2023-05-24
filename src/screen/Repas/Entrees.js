@@ -1,13 +1,25 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { instanceAxios } from "../../utils/interceptor";
+import { Image } from "native-base";
 
 const Entrees = () => {
-  const cartes = [
-    { id: 1, titre: "Carte 1", contenu: "Contenu de la carte 1" },
-    { id: 2, titre: "Carte 2", contenu: "Contenu de la carte 2" },
-    { id: 3, titre: "Carte 3", contenu: "Contenu de la carte 3" },
-    // Ajoutez autant d'objets carte que nécessaire
-  ];
+  const [productsEntrees, setProductsEntrees] = useState([]);
+
+  useEffect(() => {
+    instanceAxios
+      .get("/products")
+      .then((response) => {
+        console.log("response", response.data);
+        const filteredProducts = response.data.filter(
+          (product) => product.productCategory.name === "Entrées"
+        );
+        setProductsEntrees(filteredProducts);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -18,17 +30,16 @@ const Entrees = () => {
         </Text>
       </View>
       <View style={styles.row}>
-        {cartes.map((carte) => (
-          // <TouchableOpacity>
-          <View style={styles.carte} key={carte.id}>
-            <Text style={styles.titre}>{carte.titre}</Text>
-            <Text style={styles.contenu}>{carte.contenu}</Text>
+        {productsEntrees.map((productEntree) => (
+          <View style={styles.carte} key={productEntree.id}>
+            <Text style={styles.titre}>{productEntree.name}</Text>
+            <Text style={styles.contenu}>{productEntree.description}</Text>
             <Image
-              source={require("./../../../assets/favicon.png")}
+              alt="photo d'une entrée"
+              source={{ uri: `../../../assets/${productEntree.image}` }}
               style={styles.image}
             />
           </View>
-          //</TouchableOpacity>
         ))}
       </View>
     </View>
@@ -37,13 +48,11 @@ const Entrees = () => {
 
 const styles = StyleSheet.create({
   intro: {
-    //flex: 1,
     marginBottom: 15,
     marginLeft: 5,
     marginRight: 5,
   },
   row: {
-    //flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
   },

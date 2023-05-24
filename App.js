@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
 import Loader from "./src/Components/loader";
+import { NativeBaseProvider } from "native-base";
 
 const theme = {
   ...DefaultTheme,
@@ -24,12 +25,14 @@ export default function App() {
   };
   setTimeout(inter, 4000);
   return (
-    <PaperProvider theme={theme}>
-      <StatusBar translucent={false} style="light"></StatusBar>
-      <NavigationContainer>
-        {!load ? <Loader></Loader> : <BottomNav></BottomNav>}
-      </NavigationContainer>
-    </PaperProvider>
+    <NativeBaseProvider>
+      <PaperProvider theme={theme}>
+        <StatusBar translucent={false} style="light"></StatusBar>
+        <NavigationContainer>
+          {!load ? <Loader></Loader> : <BottomNav></BottomNav>}
+        </NavigationContainer>
+      </PaperProvider>
+    </NativeBaseProvider>
   );
 }
 
@@ -40,4 +43,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-})
+});

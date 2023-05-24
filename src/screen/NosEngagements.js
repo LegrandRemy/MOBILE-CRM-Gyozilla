@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const NosEngagements = () => {
+const Engagements = () => {
   return (
     <View>
       <Text>NosEngagements</Text>
@@ -9,4 +9,4 @@ const NosEngagements = () => {
   );
 };
 
-export default NosEngagements;
+export default Engagements;

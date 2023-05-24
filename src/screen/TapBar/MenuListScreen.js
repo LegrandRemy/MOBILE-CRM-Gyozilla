@@ -90,6 +90,11 @@ const MenuList = () => {
         onPress={() => handleMenuItemPress("Contactez-nous")}
         style={{ backgroundColor: "#eaeaea" }}
       />
+      <List.Item
+        title="Engagements"
+        onPress={() => handleMenuItemPress("Engagements")}
+        style={{ backgroundColor: "#eaeaea" }}
+      />
     </View>
   );
 };
