@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { instanceAxios } from "../../utils/Interceptor";
-import { ScrollView } from "native-base";
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { instanceAxios } from '../../utils/interceptor'
+import { ScrollView } from 'native-base'
 
 const Starter = () => {
-  const [productsEntrees, setProductsEntrees] = useState([]);
+  const [productsEntrees, setProductsEntrees] = useState([])
 
   useEffect(() => {
     instanceAxios
-      .get("/products")
+      .get('/products')
       .then((response) => {
-        console.log("response", response.data);
+        console.log('response', response.data)
         const filteredProducts = response.data.filter(
-          (product) => product.productCategory.name === "Entrées"
-        );
-        setProductsEntrees(filteredProducts);
+          (product) => product.productCategory.name === 'Entrées',
+        )
+        setProductsEntrees(filteredProducts)
       })
       .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+        console.error(error)
+      })
+  }, [])
 
   return (
     <ScrollView style={styles.container}>
@@ -49,8 +49,8 @@ const Starter = () => {
         ))}
       </View>
     </ScrollView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   intro: {
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   cardText: { flex: 1 },
   cardImage: {
@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
   carte: {
     width: 350,
     height: 250,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     padding: 1,
     margin: 6,
     borderRadius: 5,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 2,
@@ -81,18 +81,18 @@ const styles = StyleSheet.create({
   },
   titre: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 5,
   },
   contenu: {
     fontSize: 16,
   },
   image: {
-    width: "100%",
-    height: "100%",
-    alignSelf: "center",
-    resizeMode: "contain",
+    width: '100%',
+    height: '100%',
+    alignSelf: 'center',
+    resizeMode: 'contain',
   },
-});
+})
 
-export default Starter;
+export default Starter
