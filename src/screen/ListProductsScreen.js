@@ -1,35 +1,130 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { FlatList } from "native-base";
-import { useNavigation } from "@react-navigation/native";
-import Entrees from "./Repas/StarterScreen";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { instanceAxios } from "../utils/interceptor";
+import { ScrollView } from "native-base";
 
-const ListProducts = ({ route }) => {
-  console.log("route.params", route.params);
+const ListProductsScreen = ({ route }) => {
+  const [products, setProducts] = useState([]);
 
-  const data = data;
+  const name = route.params;
 
-  // Rendu de chaque élément de menu
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer}>
-      <Image source={item.image} style={styles.itemImage} />
-      <View style={styles.itemContent}>
-        <Text style={styles.itemName}>{item.name}</Text>
-        <Text style={styles.itemDescription}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  useEffect(() => {
+    instanceAxios
+      .get("/products")
+      .then((response) => {
+        console.log("response", response.data);
+
+        const filteredProducts = [];
+        switch (name) {
+          // case "NewsScreen":
+          //   const filteredProducts = response.data.filter(
+          //     (product) => product.productCategory.name === "Nouveautes"
+          //   );
+          //   break;
+          // case "MenusScreen":
+          //   const filteredProducts = response.data.filter(
+          //     (product) => product.productCategory.name === "Menus"
+          //   );
+          //   break;
+          case "StarterScreen":
+            filteredProducts = response.data.filter(
+              (product) => product.productCategory.name === "Entrées"
+            );
+            break;
+          case "DishesScreen":
+            filteredProducts = response.data.filter(
+              (product) => product.productCategory.name === "Plats"
+            );
+            break;
+          case "DessertsScreen":
+            filteredProducts = response.data.filter(
+              (product) => product.productCategory.name === "Desserts"
+            );
+            break;
+          case "DrinksScreen":
+            filteredProducts = response.data.filter(
+              (product) => product.productCategory.name === "Boissons"
+            );
+            break;
+        }
+        setProducts(filteredProducts);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
-    <View>
-      {/* <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      /> */}
-      <Entrees />
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.intro}>
+        <Text>
+          Savourez nos meilleurs plats avec un accompagnement au choix et une
+          boisson!
+        </Text>
+      </View>
+      <View style={styles.row}>
+        {products.map((product) => (
+          <View style={styles.carte} key={product.id}>
+            <View style={styles.cardText}>
+              <Text style={styles.titre}>{product.name}</Text>
+              <Text style={styles.contenu}>{product.description}</Text>
+            </View>
+            <View style={styles.cardImage}>
+              <Image
+                alt="photo d'une entrée"
+                source={{
+                  uri: `https://api-gyozilla.onrender.com/${product.image}`,
+                }}
+                style={styles.image}
+              />
+            </View>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 };
+export default ListProductsScreen;
 
-export default ListProducts;
+const styles = StyleSheet.create({
+  intro: {
+    marginBottom: 15,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  cardText: { flex: 1 },
+  cardImage: {
+    flex: 2,
+  },
+  carte: {
+    width: 350,
+    height: 250,
+    backgroundColor: "white",
+    padding: 1,
+    margin: 6,
+    borderRadius: 5,
+    shadowColor: "black",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  titre: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  contenu: {
+    fontSize: 16,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
+    resizeMode: "contain",
+  },
+});
