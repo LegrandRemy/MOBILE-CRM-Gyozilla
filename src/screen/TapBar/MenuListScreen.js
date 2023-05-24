@@ -49,40 +49,36 @@ const MenuList = () => {
       >
         <List.Item
           title="Nouveautés"
-          onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "NewsScreen" })
-          }
+          onPress={() => handleMenuItemPress("ListProducts", { name: "News" })}
         />
         <List.Item
           title="Menus"
-          onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "MenusScreen" })
-          }
+          onPress={() => handleMenuItemPress("ListProducts", { name: "Menus" })}
         />
         <List.Item
           title="Entrées"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "StarterScreen" })
+            handleMenuItemPress("ListProducts", { name: "Starter" })
           }
         />
         <List.Item
           title="Plats"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "DishesScreen" })
+            handleMenuItemPress("ListProducts", { name: "Dishes" })
           }
         />
         <List.Item
           title="Desserts"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", {
-              name: "DessertsScreen",
+            handleMenuItemPress("ListProducts", {
+              name: "Desserts",
             })
           }
         />
         <List.Item
           title="Boissons"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "DrinksScreen" })
+            handleMenuItemPress("ListProducts", { name: "Drinks" })
           }
         />
       </List.Accordion>

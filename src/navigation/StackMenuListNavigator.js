@@ -13,10 +13,7 @@ const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="MenuList" component={MenuList}></Stack.Screen>
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
-      <Stack.Screen
-        name="ListProductsScreen"
-        component={ListProducts}
-      ></Stack.Screen>
+      <Stack.Screen name="ListProducts" component={ListProducts}></Stack.Screen>
       <Stack.Screen name="Contactez-nous" component={ContactUs}></Stack.Screen>
       <Stack.Screen name="Engagements" component={Engagements}></Stack.Screen>
     </Stack.Navigator>
