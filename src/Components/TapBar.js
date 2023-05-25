@@ -26,7 +26,7 @@ export default BottomNav = () => {
             if (focused) {
               iconName = "home-outline";
               newSize = 35;
-              newColor = "#F8A500";
+              newColor = "#faeccb";
             } else {
               iconName = "home";
               newSize = 25;
@@ -36,7 +36,7 @@ export default BottomNav = () => {
             if (focused) {
               iconName = "noodles";
               newSize = 35;
-              newColor = "#F8A500";
+              newColor = "#faeccb";
             } else {
               iconName = "noodles";
               newSize = 25;
@@ -46,7 +46,7 @@ export default BottomNav = () => {
             if (focused) {
               iconName = "map-marker-multiple-outline";
               newSize = 35;
-              newColor = "#F8A500";
+              newColor = "#faeccb";
             } else {
               iconName = "map-marker-multiple";
               newSize = 25;
@@ -56,7 +56,7 @@ export default BottomNav = () => {
             if (focused) {
               iconName = "format-list-bulleted";
               newSize = 35;
-              newColor = "#F8A500";
+              newColor = "#faeccb";
             } else {
               iconName = "format-list-bulleted";
               newSize = 25;
@@ -73,8 +73,10 @@ export default BottomNav = () => {
             />
           );
         },
-        tabBarActiveTintColor: "#F8A500",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: "#faeccb",
+        tabBarInactiveTintColor: "black",
+        tabBarActiveBackgroundColor: "#77614c",
+        tabBarInactiveBackgroundColor: "#77614c",
       })}
     >
       <Tab.Screen
