@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView, View, FlatList, TouchableHighlight } from "react-native";
+import { Image, ScrollView } from "react-native";
 import { Box, Heading, Text, AspectRatio } from "native-base";
 import ListHomeImgBG from "../../Components/ListHomeImgBG";
 import SearchHomeInput from "../../Components/SearchHomeInput";
