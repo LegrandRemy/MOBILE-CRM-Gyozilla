@@ -1,7 +1,15 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import Card from '../Components/Card'
-import { Box, AspectRatio, Center, Stack, Heading, HStack } from 'native-base'
+import {
+  Box,
+  AspectRatio,
+  Center,
+  Stack,
+  Heading,
+  HStack,
+  Image,
+} from 'native-base'
 const team = require('../../assets/example.jpg')
 const plats = require('../../assets/plats.jpg')
 const boissons = require('../../assets/boissons.jpg')
@@ -11,11 +19,9 @@ const Engagements = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Nos engagements</Text>
-
       <Text style={styles.subtitle}>
         Nous vous accueillons avec un plaisir infini
       </Text>
-
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>
           Un établissement adapté à tout profil
@@ -26,7 +32,6 @@ const Engagements = () => {
           avons pensé à tous les cas de figure.
         </Text>
       </View>
-
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Un service rapide et efficace</Text>
         <Text style={styles.sectionText}>
@@ -36,21 +41,16 @@ const Engagements = () => {
           court laps de temps.
         </Text>
       </View>
-
-      {/* Similar sections for "Une ambiance dépaysante" and "Un personnel attentif à vos besoins et à votre écoute" */}
-
       <Text style={styles.subtitle}>
         Toute notre équipe travaille avec joie pour vous satisfaire
       </Text>
-
       <View style={styles.imageContainer}>
         <Image source={team} style={styles.image} />
       </View>
-
       <Text style={styles.subtitle}>
         La qualité est garantie pour chacun des produits
       </Text>
-      <Text style={styles.sectionText}>
+      <Text style={styles.sectionText} marginBottom={15}>
         Nous accordons une grande importance à toutes les étapes de préparation
         de nos produits. Que ce soit les fournisseurs des ingrédients, le
         respect des normes d'hygiène ou encore la façon dont le service est
@@ -74,7 +74,7 @@ const Engagements = () => {
         />
       </View> */}
 
-      <Box alignItems="center">
+      <Box alignItems="center" marginTop={18} style={styles.card}>
         <Box
           maxW="80"
           rounded="lg"
@@ -93,14 +93,20 @@ const Engagements = () => {
             backgroundColor: 'gray.50',
           }}
         >
+          <Box />
           <Box>
-            <AspectRatio w="100%" ratio={16 / 9}>
-              <Image source={plats} resizeMode="cover" />
+            <AspectRatio w="100%" height={200} ratio={16 / 9}>
+              <Image
+                height={200}
+                width={'100%'}
+                resizeMode={'cover'}
+                source={plats}
+              />
             </AspectRatio>
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
-              <Heading size="md" ml="-1">
+              <Heading size="md" ml="-1" style={styles.heading}>
                 Nos plats
               </Heading>
             </Stack>
@@ -117,7 +123,7 @@ const Engagements = () => {
           </Stack>
         </Box>
       </Box>
-      <Box alignItems="center">
+      <Box alignItems="center" style={styles.card}>
         <Box
           maxW="80"
           rounded="lg"
@@ -137,13 +143,18 @@ const Engagements = () => {
           }}
         >
           <Box>
-            <AspectRatio w="100%" ratio={16 / 9}>
-              <Image source={boissons} />
+            <AspectRatio w="100%" height={200} ratio={16 / 9}>
+              <Image
+                height={200}
+                source={boissons}
+                width={'100%'}
+                resizeMode={'cover'}
+              />
             </AspectRatio>
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
-              <Heading size="md" ml="-1">
+              <Heading size="md" ml="-1" style={styles.heading}>
                 Nos boissons
               </Heading>
             </Stack>
@@ -155,7 +166,7 @@ const Engagements = () => {
           </Stack>
         </Box>
       </Box>
-      <Box alignItems="center">
+      <Box alignItems="center" style={styles.card}>
         <Box
           maxW="80"
           rounded="lg"
@@ -175,13 +186,18 @@ const Engagements = () => {
           }}
         >
           <Box>
-            <AspectRatio w="100%" ratio={16 / 9}>
-              <Image source={desserts} />
+            <AspectRatio w="100%" height={200} ratio={16 / 9}>
+              <Image
+                height={200}
+                source={desserts}
+                width={'100%'}
+                resizeMode={'cover'}
+              />
             </AspectRatio>
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
-              <Heading size="md" ml="-1">
+              <Heading size="md" ml="-1" style={styles.heading}>
                 Nos desserts
               </Heading>
             </Stack>
@@ -205,18 +221,27 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: 25,
+    color: 'red',
+    borderWidth: 1,
+    borderColor: '#F8A500',
+    backgroundColor: 'black',
+    padding: 10,
+    color: '#F8A500',
   },
   subtitle: {
     fontSize: 20,
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
+    color: '#F8A500',
   },
   section: {
-    marginVertical: 10,
+    marginVertical: 15,
   },
   sectionTitle: {
     fontSize: 18,
+    color: '#739B94',
+    marginVertical: 10,
   },
   sectionText: {
     fontSize: 16,
@@ -234,30 +259,36 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
   },
-  cardsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
   card: {
-    width: 375,
-    height: 300,
-    margin: 10,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    elevation: 3,
+    marginVertical: 5,
   },
-  cardImage: {
-    width: '100%',
-    height: 140,
+  heading: {
+    color: '#739B94',
   },
-  cardTitle: {
-    fontSize: 18,
-    margin: 10,
-  },
-  cardDescription: {
-    fontSize: 16,
-    marginHorizontal: 10,
-  },
+  // cardsContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  // },
+  // card: {
+  //   width: 375,
+  //   height: 300,
+  //   margin: 10,
+  //   backgroundColor: '#fff',
+  //   borderRadius: 5,
+  //   elevation: 3,
+  // },
+  // cardImage: {
+  //   width: '100%',
+  //   height: 140,
+  // },
+  // cardTitle: {
+  //   fontSize: 18,
+  //   margin: 10,
+  // },
+  // cardDescription: {
+  //   fontSize: 16,
+  //   marginHorizontal: 10,
+  // },
 })
 
 export default Engagements
