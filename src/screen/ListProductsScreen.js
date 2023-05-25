@@ -11,6 +11,7 @@ import {
 } from "native-base";
 import CustomCardItem from "../Components/CustomCardProduct";
 import CustomButton from "../Components/CustomButton";
+import Loader from "../Components/loader";
 
 const checkNew = (item) => {
   const today = new Date();
@@ -25,8 +26,11 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [products, setProducts] = useState([]);
   const [menus, setMenus] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [selectedStep, setSelectedStep] = useState(0);
 
+  const [selectedStep, setSelectedStep] = useState(0);
+  const [lastStep, setLastStep] = useState(false);
+
+  console.log("selectedStep", selectedStep);
   const { name } = route.params;
 
   useEffect(() => {
@@ -99,14 +103,13 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     navigation.navigate("ProductScreen", { productId });
   };
 
-  const filteredSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
+  const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
 
   const handleStepContinue = () => {
-    if (selectedStep < filteredSteps.length - 1) {
+    if (selectedStep < totalSteps.length - 1) {
       setSelectedStep((prevStep) => prevStep + 1);
     } else {
-      // Handle the completion of all steps
-      console.log("All steps completed");
+      setLastStep(true);
     }
   };
 
@@ -117,9 +120,8 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   };
 
   const filteredProducts = products.filter(
-    (product) => product.productCategory.name === filteredSteps[selectedStep]
+    (product) => product.productCategory.name === totalSteps[selectedStep]
   );
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.intro}>
@@ -181,14 +183,27 @@ const ListProductsScreen = ({ route, navigation, props }) => {
             <CustomCardItem key={product.id} product={product} />
           ))}
           <View style={styles.navigationButtons}>
-            {selectedStep > 0 && <CustomButton onPress={handleStepBack} />}
-            {selectedStep < filteredSteps.length - 1 && (
-              <CustomButton onPress={handleStepContinue} />
+            {selectedStep > 0 && (
+              <CustomButton onPress={handleStepBack} textButton="retour" />
+            )}
+            {selectedStep < totalSteps.length - 1 ? (
+              <CustomButton
+                onPress={handleStepContinue}
+                textButton={"Continuer"}
+              />
+            ) : (
+              <CustomButton
+                onPress={handleStepContinue}
+                textButton={"Valider"}
+              />
             )}
           </View>
         </>
       ) : (
-        <Text>Pas chargé</Text>
+        <>
+          <Text>en attente de produit</Text>
+          <Loader />
+        </>
       )}
     </ScrollView>
   );

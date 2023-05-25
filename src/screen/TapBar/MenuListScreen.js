@@ -28,6 +28,7 @@ const MenuList = () => {
         <List.Item
           title="Mon profil"
           onPress={() => handleMenuItemPress("MyAccount")}
+          style={{ backgroundColor: "#eaeaea", color: "#F8A500" }}
         />
         <List.Item
           title="Ma fidélité"
