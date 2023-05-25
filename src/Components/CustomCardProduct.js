@@ -3,21 +3,24 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Box } from "native-base";
 
-const CustomCardItem = ({ product }) => {
+const CustomCardItem = ({ product, smallCard }) => {
   //const { id, name, description, categorie } = props.data.item;
   const navigation = useNavigation();
 
   return (
     <>
       <TouchableOpacity onPress={() => handleProductClick(product.id)}>
-        <Box style={styles.carte} key={product.id}>
+        <Box
+          style={[styles.carte, smallCard && styles.smallCarte]}
+          key={product.id}
+        >
           <View style={styles.cardText}>
             <Text style={styles.titre}>{product.name}</Text>
             <Text style={styles.contenu}>{product.description}</Text>
           </View>
           <View style={styles.cardImage}>
             <Image
-              alt="photo d'une entrée"
+              alt="photo d'un plat"
               source={{
                 uri: `https://api-gyozilla.onrender.com/${product.image}`,
               }}
@@ -37,6 +40,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginLeft: 5,
     marginRight: 5,
+  },
+  smallCarte: {
+    width: "30%", // Ajustez la largeur en fonction de vos besoins
   },
   row: {
     flexDirection: "row",

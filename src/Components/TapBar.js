@@ -8,7 +8,6 @@ import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
-import StackNewsNavigator from "../navigation/StackNewsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,41 +26,41 @@ export default BottomNav = () => {
             if (focused) {
               iconName = "home-outline";
               newSize = 35;
-              newColor = "#faeccb";
+              newColor = "#F8A500";
             } else {
               iconName = "home";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "La carte") {
             if (focused) {
               iconName = "noodles";
               newSize = 35;
-              newColor = "#faeccb";
+              newColor = "#F8A500";
             } else {
               iconName = "noodles";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "GeoLoc") {
             if (focused) {
               iconName = "map-marker-multiple-outline";
               newSize = 35;
-              newColor = "#faeccb";
+              newColor = "#F8A500";
             } else {
               iconName = "map-marker-multiple";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "Menu") {
             if (focused) {
               iconName = "format-list-bulleted";
               newSize = 35;
-              newColor = "#faeccb";
+              newColor = "#F8A500";
             } else {
               iconName = "format-list-bulleted";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           }
 
@@ -74,15 +73,13 @@ export default BottomNav = () => {
             />
           );
         },
-        tabBarActiveTintColor: "#faeccb",
-        tabBarInactiveTintColor: "black",
-        tabBarActiveBackgroundColor: "#77614c",
-        tabBarInactiveBackgroundColor: "#77614c",
+        tabBarActiveTintColor: "#F8A500",
+        tabBarInactiveTintColor: "#5F8D85",
       })}
     >
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={StackNewsNavigator}
+        component={Home}
         name="Accueil"
       />
       <Tab.Screen
