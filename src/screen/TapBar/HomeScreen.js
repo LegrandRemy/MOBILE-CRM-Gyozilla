@@ -4,11 +4,9 @@ import { Box, Heading, Text, AspectRatio } from "native-base";
 import ListHomeImgBG from "../../Components/ListHomeImgBG";
 import SearchHomeInput from "../../Components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
-import RedirectTo from "../../Components/RedirectTo";
-import { useNavigation } from "@react-navigation/native";
+import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
 
 const Home = () => {
-const navigation = useNavigation()
 const [lastNews, setLastNews] = useState();
 
   useEffect(() => {
@@ -21,28 +19,6 @@ const [lastNews, setLastNews] = useState();
         setLastNews([]);
       });
   }, []);
-
-  console.log(lastNews);
-
-  const handlePress = () => {
-    if (lastNews && lastNews.id) {
-      navigation.navigate('OneNews', { id: lastNews.id });
-    }
-  };
-
-  const renderNewsCarouselItem = ({ item }) => (
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-    <View key={item.id} style={{ width: 200, height: 200, marginRight: 30 }}>
-      <Image
-        source={{uri: `https://api-gyozilla.onrender.com/${item.image}`}}
-        style={{ flex: 1, minWidth: 150, maxHeight: 150, minHeight: 150, marginTop:10}}
-        resizeMode="cover"
-      />
-      <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-    </View>
-    </TouchableHighlight>
-
-  );
 
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
@@ -57,7 +33,7 @@ const [lastNews, setLastNews] = useState();
           <Image
             borderRadius={10}
             source={{
-              uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+              uri: "https://burgerkingfrance.twic.pics/img/animations/09a755b2-d7d0-4cc2-bf8f-3772b87e34cc_?twic=v1/focus=auto/cover=1600x700",
             }}
             alt="image"
           />
@@ -68,14 +44,7 @@ const [lastNews, setLastNews] = useState();
           Chaud devant !
         </Heading>
         <Text color="black">Découvrez les actualités Gyozilla®</Text>
-        <FlatList
-          data={lastNews}
-          renderItem={renderNewsCarouselItem}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id.toString()} 
-        />
+        <FlatListNewsCarousel propsData={lastNews}/>
         <Heading color="black" width={250} fontSize={18} marginTop={20}>
           Une petite ou une grosse faim ? &#127836;
         </Heading>

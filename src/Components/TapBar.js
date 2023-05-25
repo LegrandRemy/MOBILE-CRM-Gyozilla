@@ -8,6 +8,7 @@ import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
+import StackNewsNavigator from "../navigation/StackNewsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -79,7 +80,7 @@ export default BottomNav = () => {
     >
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={Home}
+        component={StackNewsNavigator}
         name="Accueil"
       />
       <Tab.Screen

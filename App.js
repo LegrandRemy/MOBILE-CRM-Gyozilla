@@ -30,7 +30,6 @@ export default function App() {
       <NativeBaseProvider>
         <StatusBar translucent={false} style="light"></StatusBar>
         <NavigationContainer>
-        <StackNewsNavigator/>
           {!load ? <Loader></Loader> : <BottomNav></BottomNav>}
         </NavigationContainer>
       </NativeBaseProvider>

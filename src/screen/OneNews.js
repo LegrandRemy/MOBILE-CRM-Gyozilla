@@ -6,7 +6,7 @@ import { Image } from 'native-base';
 
 const OneNews = () => {
     const route = useRoute();
-    const id = route.params;
+    const { id }= route.params;
     const [news, setNews] = useState();
 
     useEffect(() => {
@@ -18,18 +18,17 @@ const OneNews = () => {
             .catch((error) => {
                 setNews([]);
             });
-        }, [id]);
-
-
+        }, []);
     return (
         <View>
-            <Text>Titre: {news.name}</Text>
+            <Text>Titre: {news?.name}</Text>
             <Image
-                source={{uri: `https://api-gyozilla.onrender.com/${news.image}`}}
+                source={{uri: `https://api-gyozilla.onrender.com/${news?.image}`}}
                 style={{ flex: 1, minWidth: 150, maxHeight: 150, minHeight: 150, marginTop:10}}
                 resizeMode="cover"
+                alt="Image de l'actualité"
             />
-            <Text>Contenu: {news.description}</Text>
+            <Text>Contenu: {news?.description}</Text>
         </View>
     )
 }
