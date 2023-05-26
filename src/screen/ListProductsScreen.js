@@ -32,7 +32,8 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [lastStep, setLastStep] = useState(false);
 
   const { name } = route.params;
-
+  console.log("route", route);
+  console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
@@ -126,10 +127,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.intro}>
-        <Text>
-          Savourez nos meilleurs plats avec un accompagnement au choix et une
-          boisson!
-        </Text>
+        <Text style={styles.title}>{route.params.title}</Text>
       </View>
       {name === "Menus" && !isFiltered ? (
         <View>
@@ -195,9 +193,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   intro: {
-    marginBottom: 15,
-    marginLeft: 5,
-    marginRight: 5,
+    backgroundColor: "#faeccb",
+    alignItems: "center",
+    margin: 30,
+    padding: 10,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 30,
   },
   navigationButtons: {
     flexDirection: "row",

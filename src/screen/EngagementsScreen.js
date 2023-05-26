@@ -1,6 +1,6 @@
-import React from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import Card from '../Components/Card'
+import React from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import Card from "../Components/Card";
 import {
   Box,
   AspectRatio,
@@ -9,11 +9,11 @@ import {
   Heading,
   HStack,
   Image,
-} from 'native-base'
-const team = require('../../assets/example.jpg')
-const plats = require('../../assets/plats.jpg')
-const boissons = require('../../assets/boissons.jpg')
-const desserts = require('../../assets/desserts.jpg')
+} from "native-base";
+const team = require("../../assets/example.jpg");
+const plats = require("../../assets/plats.jpg");
+const boissons = require("../../assets/boissons.jpg");
+const desserts = require("../../assets/desserts.jpg");
 
 const Engagements = () => {
   return (
@@ -82,15 +82,15 @@ const Engagements = () => {
           borderColor="coolGray.200"
           borderWidth="1"
           _dark={{
-            borderColor: 'coolGray.600',
-            backgroundColor: 'gray.700',
+            borderColor: "coolGray.600",
+            backgroundColor: "gray.700",
           }}
           _web={{
             shadow: 2,
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: 'gray.50',
+            backgroundColor: "gray.50",
           }}
         >
           <Box />
@@ -98,8 +98,8 @@ const Engagements = () => {
             <AspectRatio w="100%" height={200} ratio={16 / 9}>
               <Image
                 height={200}
-                width={'100%'}
-                resizeMode={'cover'}
+                width={"100%"}
+                resizeMode={"cover"}
                 source={plats}
               />
             </AspectRatio>
@@ -131,15 +131,15 @@ const Engagements = () => {
           borderColor="coolGray.200"
           borderWidth="1"
           _dark={{
-            borderColor: 'coolGray.600',
-            backgroundColor: 'gray.700',
+            borderColor: "coolGray.600",
+            backgroundColor: "gray.700",
           }}
           _web={{
             shadow: 2,
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: 'gray.50',
+            backgroundColor: "gray.50",
           }}
         >
           <Box>
@@ -147,8 +147,8 @@ const Engagements = () => {
               <Image
                 height={200}
                 source={boissons}
-                width={'100%'}
-                resizeMode={'cover'}
+                width={"100%"}
+                resizeMode={"cover"}
               />
             </AspectRatio>
           </Box>
@@ -174,15 +174,15 @@ const Engagements = () => {
           borderColor="coolGray.200"
           borderWidth="1"
           _dark={{
-            borderColor: 'coolGray.600',
-            backgroundColor: 'gray.700',
+            borderColor: "coolGray.600",
+            backgroundColor: "gray.700",
           }}
           _web={{
             shadow: 2,
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: 'gray.50',
+            backgroundColor: "gray.50",
           }}
         >
           <Box>
@@ -190,8 +190,8 @@ const Engagements = () => {
               <Image
                 height={200}
                 source={desserts}
-                width={'100%'}
-                resizeMode={'cover'}
+                width={"100%"}
+                resizeMode={"cover"}
               />
             </AspectRatio>
           </Box>
@@ -210,8 +210,8 @@ const Engagements = () => {
         </Box>
       </Box>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -220,41 +220,41 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 25,
-    color: 'red',
+    color: "red",
     borderWidth: 1,
-    borderColor: '#F8A500',
-    backgroundColor: 'black',
+    borderColor: "#F8A500",
+    backgroundColor: "black",
     padding: 10,
-    color: '#F8A500',
+    color: "#F8A500",
   },
   subtitle: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 20,
-    color: '#F8A500',
+    color: "#F8A500",
   },
   section: {
     marginVertical: 15,
   },
   sectionTitle: {
     fontSize: 18,
-    color: '#739B94',
+    color: "#739B94",
     marginVertical: 10,
   },
   sectionText: {
     fontSize: 16,
   },
   imageContainer: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
-    resizeMode: 'cover',
+    resizeMode: "cover",
   },
   text: {
     fontSize: 16,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   heading: {
-    color: '#739B94',
+    color: "#739B94",
   },
   // cardsContainer: {
   //   flexDirection: 'row',
@@ -289,6 +289,6 @@ const styles = StyleSheet.create({
   //   fontSize: 16,
   //   marginHorizontal: 10,
   // },
-})
+});
 
-export default Engagements
+export default Engagements;
