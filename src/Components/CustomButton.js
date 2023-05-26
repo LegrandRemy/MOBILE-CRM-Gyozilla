@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
 const CustomButton = (props) => {
-  console.log("props", props.textButton);
   return (
     <TouchableOpacity
       onPress={props.onPress}
