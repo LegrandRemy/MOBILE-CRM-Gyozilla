@@ -50,7 +50,12 @@ const MenuList = () => {
       >
         <List.Item
           title="Nouveautés"
-          onPress={() => handleMenuItemPress("ListProducts", { name: "News" })}
+          onPress={() =>
+            handleMenuItemPress("ListProducts", {
+              name: "News",
+              title: "NOUVEAUTES",
+            })
+          }
         />
         <List.Item
           title="Menus"

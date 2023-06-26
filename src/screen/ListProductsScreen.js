@@ -5,7 +5,9 @@ import {
   AspectRatio,
   Box,
   Button,
+  Checkbox,
   Heading,
+  Radio,
   ScrollView,
   Stack,
 } from "native-base";
@@ -124,13 +126,15 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const filteredProducts = products.filter(
     (product) => product.productCategory.name === totalSteps[selectedStep]
   );
+  const dataToShow = isMenuClicked ? filteredProducts : products;
+
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.intro}>
+      <View style={styles.cardTitle}>
         <Text style={styles.title}>{route.params.title}</Text>
       </View>
       {name === "Menus" && !isFiltered ? (
-        <View>
+        <View style={styles.cardContainer}>
           {menus.map((menu) => (
             <CustomCardProduct
               menu={menu}
@@ -141,21 +145,36 @@ const ListProductsScreen = ({ route, navigation, props }) => {
         </View>
       ) : isFiltered ? (
         <>
-          {isMenuClicked
-            ? filteredProducts.map((product) => (
-                <CustomCardProduct
-                  key={product.id}
-                  product={product}
-                  //onClick={handleProductClick}
-                />
-              ))
-            : products.map((product) => (
-                <CustomCardProduct
-                  key={product.id}
-                  product={product}
-                  //onClick={handleProductClick}
-                />
-              ))}
+          <Radio.Group
+            name="myRadioGroup"
+            accessibilityLabel="favorite number"
+            aria-label="product"
+          >
+            <View style={styles.cardContainer}>
+              {isMenuClicked
+                ? filteredProducts.map((product) => (
+                    <View key={product.id} style={styles.box}>
+                      <CustomCardProduct
+                        key={product.id}
+                        product={product}
+                        // onClick={handleProductClick}
+                      />
+                      <Radio
+                        my={1}
+                        label={`product-${product.id}`}
+                        aria-label={`product-${product.id}`}
+                      ></Radio>
+                    </View>
+                  ))
+                : products.map((product) => (
+                    <CustomCardProduct
+                      key={product.id}
+                      product={product}
+                      // onClick={handleProductClick}
+                    />
+                  ))}
+            </View>
+          </Radio.Group>
           {isMenuClicked && (
             <View style={styles.navigationButtons}>
               {selectedStep > 0 && (
@@ -188,11 +207,21 @@ const ListProductsScreen = ({ route, navigation, props }) => {
 export default ListProductsScreen;
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    width: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingHorizontal: 10,
+  },
+  box: {
+    flexDirection: "column",
+    width: "100%",
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
-  intro: {
+  cardTitle: {
     backgroundColor: "#faeccb",
     alignItems: "center",
     margin: 30,
