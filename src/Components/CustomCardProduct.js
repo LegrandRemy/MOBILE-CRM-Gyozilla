@@ -1,28 +1,24 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Box } from "native-base";
+import { AspectRatio, Box, Heading, Stack } from "native-base";
 
-const CustomCardItem = ({ product, smallCard }) => {
-  //const { id, name, description, categorie } = props.data.item;
+const CustomCardProduct = ({ product, onClick, menu }) => {
   const navigation = useNavigation();
 
   return (
     <>
-      <TouchableOpacity onPress={() => handleProductClick(product.id)}>
-        <Box
-          style={[styles.carte, smallCard && styles.smallCarte]}
-          key={product.id}
-        >
-          <View style={styles.cardText}>
-            <Text style={styles.titre}>{product.name}</Text>
-            <Text style={styles.contenu}>{product.description}</Text>
-          </View>
+      <TouchableOpacity onPress={onClick}>
+        <Box style={styles.card} key={product ? product.id : menu.id}>
+          <Text style={styles.title}>{product ? product.name : menu.name}</Text>
+          {/* <Text style={styles.contenu}>{product.description}</Text> */}
           <View style={styles.cardImage}>
             <Image
               alt="photo d'un plat"
               source={{
-                uri: `https://api-gyozilla.onrender.com/${product.image}`,
+                uri: product
+                  ? `https://api-gyozilla.onrender.com/${product.image}`
+                  : `https://api-gyozilla.onrender.com/${menu.image}`,
               }}
               style={styles.image}
             />
@@ -33,31 +29,14 @@ const CustomCardItem = ({ product, smallCard }) => {
   );
 };
 
-export default CustomCardItem;
+export default CustomCardProduct;
 
 const styles = StyleSheet.create({
-  intro: {
-    marginBottom: 15,
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  smallCarte: {
-    width: "30%", // Ajustez la largeur en fonction de vos besoins
-  },
-  row: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  cardText: { flex: 1 },
-  cardImage: {
-    flex: 2,
-  },
-  carte: {
+  card: {
     width: 350,
-    height: 250,
+    height: 150,
     backgroundColor: "white",
     padding: 1,
-    margin: 6,
     borderRadius: 5,
     shadowColor: "black",
     shadowOpacity: 0.2,
@@ -65,17 +44,17 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  titre: {
+  cardImage: {
+    flex: 2,
+  },
+  title: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5,
   },
-  contenu: {
-    fontSize: 16,
-  },
   image: {
-    width: "100%",
-    height: "100%",
+    width: "80%",
+    height: "80%",
     alignSelf: "center",
     resizeMode: "contain",
   },

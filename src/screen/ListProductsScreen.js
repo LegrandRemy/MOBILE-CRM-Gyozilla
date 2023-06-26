@@ -9,7 +9,7 @@ import {
   ScrollView,
   Stack,
 } from "native-base";
-import CustomCardItem from "../Components/CustomCardProduct";
+import CustomCardProduct from "../Components/CustomCardProduct";
 import CustomButton from "../Components/CustomButton";
 import Loader from "../Components/loader";
 
@@ -26,13 +26,14 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [products, setProducts] = useState([]);
   const [menus, setMenus] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const [selectedStep, setSelectedStep] = useState(0);
   const [lastStep, setLastStep] = useState(false);
 
-  console.log("selectedStep", selectedStep);
   const { name } = route.params;
-
+  console.log("route", route);
+  console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
@@ -97,10 +98,11 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     setProducts(products.filter((product) => product.id_menus === menuId));
     setIsFiltered(true);
     setSelectedStep(0);
+    setIsMenuClicked(true);
   };
 
   const handleProductClick = (productId) => {
-    navigation.navigate("ProductScreen", { productId });
+    navigation.navigate("ProductDetailsScreen", { productId });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
@@ -125,79 +127,53 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.intro}>
-        <Text>
-          Savourez nos meilleurs plats avec un accompagnement au choix et une
-          boisson!
-        </Text>
+        <Text style={styles.title}>{route.params.title}</Text>
       </View>
       {name === "Menus" && !isFiltered ? (
         <View>
           {menus.map((menu) => (
-            <TouchableOpacity
+            <CustomCardProduct
+              menu={menu}
               key={menu.id}
-              onPress={() => handleMenuClick(menu.id)}
-            >
-              <Box alignItems="center">
-                <Box
-                  maxW="80"
-                  rounded="lg"
-                  overflow="hidden"
-                  borderColor="coolGray.200"
-                  borderWidth="1"
-                  _dark={{
-                    borderColor: "coolGray.600",
-                    backgroundColor: "gray.700",
-                  }}
-                  _web={{
-                    shadow: 2,
-                    borderWidth: 0,
-                  }}
-                  _light={{
-                    backgroundColor: "gray.500",
-                  }}
-                >
-                  <Box></Box>
-                  <Stack p="4" space={3}>
-                    <Stack space={2}>
-                      <Heading size="md" ml="-1">
-                        {menu.name}
-                      </Heading>
-                    </Stack>
-                    <AspectRatio w="100%" ratio={16 / 9}>
-                      <Image
-                        source={{
-                          uri: `https://api-gyozilla.onrender.com/${menu.image}`,
-                        }}
-                        alt="image"
-                      />
-                    </AspectRatio>
-                  </Stack>
-                </Box>
-              </Box>
-            </TouchableOpacity>
+              onClick={() => handleMenuClick(menu.id)}
+            />
           ))}
         </View>
       ) : isFiltered ? (
         <>
-          {filteredProducts.map((product) => (
-            <CustomCardItem key={product.id} product={product} />
-          ))}
-          <View style={styles.navigationButtons}>
-            {selectedStep > 0 && (
-              <CustomButton onPress={handleStepBack} textButton="retour" />
-            )}
-            {selectedStep < totalSteps.length - 1 ? (
-              <CustomButton
-                onPress={handleStepContinue}
-                textButton={"Continuer"}
-              />
-            ) : (
-              <CustomButton
-                onPress={handleStepContinue}
-                textButton={"Valider"}
-              />
-            )}
-          </View>
+          {isMenuClicked
+            ? filteredProducts.map((product) => (
+                <CustomCardProduct
+                  key={product.id}
+                  product={product}
+                  //onClick={handleProductClick}
+                />
+              ))
+            : products.map((product) => (
+                <CustomCardProduct
+                  key={product.id}
+                  product={product}
+                  //onClick={handleProductClick}
+                />
+              ))}
+          {isMenuClicked && (
+            <View style={styles.navigationButtons}>
+              {selectedStep > 0 && (
+                <CustomButton onPress={handleStepBack} textButton="retour" />
+              )}
+              {selectedStep < totalSteps.length - 1 ? (
+                <CustomButton
+                  onPress={() => handleStepContinue()}
+                  textButton={"Continuer"}
+                />
+              ) : (
+                <CustomButton
+                  onPress={() => handleStepContinue()}
+                  textButton={"Valider"}
+                />
+              )}
+            </View>
+          )}
         </>
       ) : (
         <>
@@ -217,9 +193,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   intro: {
-    marginBottom: 15,
-    marginLeft: 5,
-    marginRight: 5,
+    backgroundColor: "#faeccb",
+    alignItems: "center",
+    margin: 30,
+    padding: 10,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 30,
   },
   navigationButtons: {
     flexDirection: "row",

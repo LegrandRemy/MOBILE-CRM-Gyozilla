@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import OneNews from '../screen/OneNews';
 import Home from '../screen/TapBar/HomeScreen';
+import LastProductsHome from '../screen/LastProductsHome';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,13 @@ const StackNewsNavigator = () => {
             component={OneNews} 
             options={({ route }) => ({
                 title: `OneNews ${route.params?.id}`,
+                })}
+            />
+            <Stack.Screen 
+            name="LastProduct" 
+            component={LastProductsHome} 
+            options={({ route }) => ({
+                title: `LastProduct ${route.params?.id}`,
                 })}
             />
         </Stack.Navigator>

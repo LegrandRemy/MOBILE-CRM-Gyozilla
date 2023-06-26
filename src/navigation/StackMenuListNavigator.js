@@ -19,10 +19,7 @@ const StackNavigator = () => {
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
       <Stack.Screen name="ListProducts" component={ListProducts}></Stack.Screen>
       <Stack.Screen name="Contactez-nous" component={ContactUs}></Stack.Screen>
-      <Stack.Screen
-        name="Nos engagements"
-        component={Engagements}
-      ></Stack.Screen>
+      <Stack.Screen name="Engagements" component={Engagements}></Stack.Screen>
     </Stack.Navigator>
   );
 };

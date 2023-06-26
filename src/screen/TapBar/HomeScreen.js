@@ -1,17 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Image, ScrollView } from "react-native";
-import { Box, Heading, Text, AspectRatio } from "native-base";
+import { Image, ScrollView, TouchableHighlight } from "react-native";
+import {
+  Box,
+  Heading,
+  Text,
+  AspectRatio,
+  Skeleton,
+  FlatList,
+} from "native-base";
 import ListHomeImgBG from "../../Components/ListHomeImgBG";
 import SearchHomeInput from "../../Components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
 import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
+import LastProductBannerHome from "../../Components/LastProductBannerHome";
 
 const Home = () => {
-const [lastNews, setLastNews] = useState();
+  const [lastNews, setLastNews] = useState();
+  const [lastProducts, setLastProducts] = useState();
+  console.log("lastProducts", lastProducts);
+  useEffect(() => {
+    instanceAxios
+      .get("products/lastProduct")
+      .then((res) => {
+        setLastProducts(res.data);
+      })
+      .catch((error) => {
+        setLastProducts([]);
+      });
+  }, []);
 
   useEffect(() => {
     instanceAxios
-    .get("lastnews")
+      .get("lastnews")
       .then((res) => {
         setLastNews(res.data);
       })
@@ -28,23 +48,37 @@ const [lastNews, setLastNews] = useState();
           En ce moment
         </Heading>
       </Box>
+      {/* {(lastProducts)?
+      <TouchableHighlight onPress={}>
+        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
+          <AspectRatio w="90%" ratio={16 / 9}>
+            <Image
+              borderRadius={10}
+              source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
+              alt="image"
+            />
+          </AspectRatio>
+        </Box>
+      </TouchableHighlight>
+
+      :
       <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-        <AspectRatio w="90%" ratio={16 / 9}>
-          <Image
-            borderRadius={10}
-            source={{
-              uri: "https://burgerkingfrance.twic.pics/img/animations/09a755b2-d7d0-4cc2-bf8f-3772b87e34cc_?twic=v1/focus=auto/cover=1600x700",
-            }}
-            alt="image"
-          />
-        </AspectRatio>
+          <Skeleton borderRadius={10} width={"90%"} height={200}/>
       </Box>
+      } */}
+      <FlatList
+        horizontal={true}
+        data={lastProducts}
+        key={(item) => item.id}
+        renderItem={(item) => <LastProductBannerHome item={item} />}
+      />
+      {/* <LastProductBannerHome item={lastNews} /> */}
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
-          Chaud devant !
+          Chaud devant !!!!!
         </Heading>
         <Text color="black">Découvrez les actualités Gyozilla®</Text>
-        <FlatListNewsCarousel propsData={lastNews}/>
+        <FlatListNewsCarousel propsData={lastNews} />
         <Heading color="black" width={250} fontSize={18} marginTop={20}>
           Une petite ou une grosse faim ? &#127836;
         </Heading>
