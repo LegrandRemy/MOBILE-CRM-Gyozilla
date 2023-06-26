@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Checkbox,
+  FormControl,
   Heading,
   Radio,
   ScrollView,
@@ -33,9 +34,12 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [selectedStep, setSelectedStep] = useState(0);
   const [lastStep, setLastStep] = useState(false);
 
+  const [selectedItemFromMenu, setSelectedItemFromMenu] = useState([]);
+  const [selectedItem, setSelectedItem] = useState("");
+
   const { name } = route.params;
-  console.log("route", route);
-  console.log("name", name);
+  // console.log("route", route);
+  // console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
@@ -112,10 +116,16 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const handleStepContinue = () => {
     if (selectedStep < totalSteps.length - 1) {
       setSelectedStep((prevStep) => prevStep + 1);
+      let selected = [...selectedItemFromMenu];
+      selected[selectedStep] = selectedItem;
+
+      setSelectedItemFromMenu(selected);
     } else {
       setLastStep(true);
     }
   };
+  // console.log("selectedItemFromMenu", selectedItemFromMenu);
+  // console.log("selectedStep", selectedStep);
 
   const handleStepBack = () => {
     if (selectedStep > 0) {
@@ -127,6 +137,12 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     (product) => product.productCategory.name === totalSteps[selectedStep]
   );
   const dataToShow = isMenuClicked ? filteredProducts : products;
+  console.log(
+    "selectedItemFromMenu[selectedStep]",
+    selectedItemFromMenu[selectedStep - 1]
+  );
+  console.log("selectedItemFromMenu", selectedItemFromMenu);
+  console.log("selectedStep", selectedStep);
 
   return (
     <ScrollView style={styles.container}>
@@ -140,41 +156,68 @@ const ListProductsScreen = ({ route, navigation, props }) => {
               menu={menu}
               key={menu.id}
               onClick={() => handleMenuClick(menu.id)}
+              customStyle={{ padding: 5 }}
             />
           ))}
         </View>
       ) : isFiltered ? (
         <>
-          <Radio.Group
-            name="myRadioGroup"
-            accessibilityLabel="favorite number"
-            aria-label="product"
-          >
+          {isMenuClicked ? (
             <View style={styles.cardContainer}>
-              {isMenuClicked
-                ? filteredProducts.map((product) => (
-                    <View key={product.id} style={styles.box}>
+              <Radio.Group
+                name="myRadioGroup"
+                accessibilityLabel="favorite number"
+                aria-label="product"
+                onChange={(value) => {
+                  setSelectedItem(value);
+                }}
+                value={selectedItemFromMenu[selectedStep] || selectedItem}
+              >
+                <View
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {filteredProducts.map((product) => (
+                    <View
+                      key={product.id}
+                      style={{
+                        width: "50%",
+                        alignItems: "center",
+                      }}
+                    >
                       <CustomCardProduct
-                        key={product.id}
                         product={product}
                         // onClick={handleProductClick}
+                        customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
                         my={1}
-                        label={`product-${product.id}`}
+                        accessibilityLabel={`product-${product.id}`}
                         aria-label={`product-${product.id}`}
+                        value={product.id}
                       ></Radio>
                     </View>
-                  ))
-                : products.map((product) => (
-                    <CustomCardProduct
-                      key={product.id}
-                      product={product}
-                      // onClick={handleProductClick}
-                    />
                   ))}
+                </View>
+              </Radio.Group>
             </View>
-          </Radio.Group>
+          ) : (
+            <View style={styles.cardContainer}>
+              {products.map((product) => (
+                <CustomCardProduct
+                  customStyle={{ padding: 5 }}
+                  key={product.id}
+                  product={product}
+                  // onClick={handleProductClick}
+                />
+              ))}
+            </View>
+          )}
+
           {isMenuClicked && (
             <View style={styles.navigationButtons}>
               {selectedStep > 0 && (
@@ -207,6 +250,10 @@ const ListProductsScreen = ({ route, navigation, props }) => {
 export default ListProductsScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
   cardContainer: {
     width: "100%",
     flexDirection: "row",
@@ -216,10 +263,6 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: "column",
     width: "100%",
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
   },
   cardTitle: {
     backgroundColor: "#faeccb",

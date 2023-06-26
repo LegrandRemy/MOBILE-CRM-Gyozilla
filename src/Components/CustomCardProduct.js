@@ -11,13 +11,13 @@ import {
   Radio,
 } from "native-base";
 
-const CustomCardProduct = ({ product, onClick, menu }) => {
+const CustomCardProduct = ({ product, onClick, menu, customStyle }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       onPress={onClick}
-      style={{ width: "50%", height: 200, marginBottom: 10 }}
+      style={[{ width: "50%", height: 200, marginBottom: 10 }, customStyle]}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -64,7 +64,6 @@ const CustomCardProduct = ({ product, onClick, menu }) => {
             </AspectRatio>
           </Box>
         </Box>
-        <Radio my={1} label={`product`} aria-label={`product`}></Radio>
       </HStack>
     </TouchableOpacity>
   );
