@@ -8,11 +8,11 @@ import {
   Skeleton,
   FlatList,
 } from "native-base";
-import ListHomeImgBG from "../../Components/ListHomeImgBG";
-import SearchHomeInput from "../../Components/SearchHomeInput";
+import ListHomeImgBG from "../../components/ListHomeImgBG";
+import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
-import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
-import LastProductBannerHome from "../../Components/LastProductBannerHome";
+import FlatListNewsCarousel from "../../components/FlatListNewsCarousel";
+import LastProductBannerHome from "../../components/LastProductBannerHome";
 
 const Home = () => {
   const [lastNews, setLastNews] = useState();
