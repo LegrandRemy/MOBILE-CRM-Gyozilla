@@ -152,6 +152,7 @@ const UserForm = () => {
                 color="black"
                 fontSize="md"
                 value={signInEmail}
+                type="email"
                 onChangeText={(value) => setSignInEmail(value)}
               />
               {!isSignIn && signInEmail && !validateEmail(signInEmail) && (
@@ -285,6 +286,7 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Email"
+                type="email"
                 color="black"
                 fontSize="md"
                 value={signUpEmail}
