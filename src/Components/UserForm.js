@@ -14,34 +14,41 @@ import {
   Modal,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import validateEmail from "../utils/validateEmail";
-import validatePassword from "../utils/validatePassword";
+import { validateEmail, validatePassword } from "../utils/FormValidation";
 import { useToast } from "native-base";
+import { login } from "../utils/api-call/loginRegister";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const UserForm = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [signInEmail, setSignInEmail] = useState("");
+  const [signUpEmail, setSignUpEmail] = useState("");
+  const [signInPassword, setSignInPassword] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toast = useToast();
+  const navigation = useNavigation();
 
   const handleSignUp = () => {
-    if (email) {
-      if (!validateEmail(email)) {
+    if (signUpEmail) {
+      if (!validateEmail(signUpEmail)) {
         setEmailError("Email invalide");
       } else {
         setEmailError("");
       }
     }
 
-    if (password) {
-      if (!validatePassword(password)) {
+    if (signUpPassword) {
+      if (!validatePassword(signUpPassword)) {
         setPasswordError(
           "Le mot de passe doit contenir une minuscule, une majuscule, un chiffre et un caractère spécial"
         );
@@ -53,7 +60,42 @@ const UserForm = () => {
   };
 
   const handleSignIn = () => {
-    // Votre logique de connexion
+    login({ email: signInEmail, password: signInPassword }).then((response) => {
+      if (response.data.message === "Authentification réussi") {
+        // AsyncStorage.setItem( "token", "myValue", (err) => {
+        //   if(err) {
+        //     console.log(err)
+        //   }
+        //   console.log("User saved")
+        // }).catch((err) => {
+        //   console.log("error is: " + err)
+        // })
+
+        toast.show({
+          title: "Succès",
+          description: "Vous vous êtes bien connecté.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          backgroundColor: "#008000",
+          placement: "top",
+        });
+
+        setTimeout(() => {
+          setToken(response.data.token);
+        }, 3000);
+      } else {
+        toast.show({
+          title: "Erreur",
+          description: "Le compte n'existe pas.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          backgroundColor: "#FF0000",
+          placement: "top",
+        });
+      }
+    });
   };
 
   const handleResetPassword = () => {
@@ -68,6 +110,8 @@ const UserForm = () => {
       status: "success",
       duration: 3000,
       isClosable: true,
+      backgroundColor: "#008000",
+      placement: "top",
     });
   };
 
@@ -81,7 +125,9 @@ const UserForm = () => {
         {isSignIn ? (
           <>
             <FormControl
-              isInvalid={!isSignIn && email && !validateEmail(email)}
+              isInvalid={
+                !isSignIn && signInEmail && !validateEmail(signInEmail)
+              }
             >
               <FormControl.Label
                 _text={{
@@ -95,11 +141,12 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Email"
+                color="black"
                 fontSize="md"
-                value={email}
-                onChangeText={(value) => setEmail(value)}
+                value={signInEmail}
+                onChangeText={(value) => setSignInEmail(value)}
               />
-              {!isSignIn && email && !validateEmail(email) && (
+              {!isSignIn && signInEmail && !validateEmail(signInEmail) && (
                 <FormControl.ErrorMessage
                   leftIcon={
                     <Icon
@@ -115,7 +162,9 @@ const UserForm = () => {
               )}
             </FormControl>
             <FormControl
-              isInvalid={!isSignIn && password && !validatePassword(password)}
+              isInvalid={
+                !isSignIn && signInPassword && !validatePassword(signInPassword)
+              }
             >
               <FormControl.Label
                 _text={{
@@ -126,29 +175,51 @@ const UserForm = () => {
               >
                 Mot de passe
               </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Mot de passe"
-                fontSize="md"
-                value={password}
-                onChangeText={(value) => setPassword(value)}
-                type="password"
-              />
-              {!isSignIn && password && !validatePassword(password) && (
-                <FormControl.ErrorMessage
-                  leftIcon={
+              <HStack space={2}>
+                <Input
+                  width={"100%"}
+                  variant="underlined"
+                  placeholder="Mot de passe"
+                  color="black"
+                  fontSize="md"
+                  value={signInPassword}
+                  onChangeText={(value) => setSignInPassword(value)}
+                  type={isPasswordVisible ? "text" : "password"}
+                  position={"relative"}
+                />
+                <IconButton
+                  width={50}
+                  variant="unstyled"
+                  position={"absolute"}
+                  right={0}
+                  icon={
                     <Icon
                       as={MaterialIcons}
-                      name="error"
-                      size={5}
-                      color="red.500"
+                      name={isPasswordVisible ? "visibility-off" : "visibility"}
+                      size={8}
+                      color="coolGray.600"
                     />
                   }
-                >
-                  Le mot de passe doit contenir au moins une minuscule, une
-                  majuscule, un chiffre et un caractère spécial.
-                </FormControl.ErrorMessage>
-              )}
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              </HStack>
+              {!isSignIn &&
+                signInPassword &&
+                !validatePassword(signInPassword) && (
+                  <FormControl.ErrorMessage
+                    leftIcon={
+                      <Icon
+                        as={MaterialIcons}
+                        name="error"
+                        size={5}
+                        color="red.500"
+                      />
+                    }
+                  >
+                    Le mot de passe doit contenir au moins une minuscule, une
+                    majuscule, un chiffre et un caractère spécial.
+                  </FormControl.ErrorMessage>
+                )}
             </FormControl>
           </>
         ) : (
@@ -166,6 +237,7 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Prénom"
+                color="black"
                 fontSize="md"
                 value={firstName}
                 onChangeText={(value) => setFirstName(value)}
@@ -185,13 +257,14 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Nom"
+                color="black"
                 fontSize="md"
                 value={lastName}
                 onChangeText={(value) => setLastName(value)}
               />
             </FormControl>
 
-            <FormControl isInvalid={!isSignIn && !validateEmail(email)}>
+            <FormControl isInvalid={!isSignIn && !validateEmail(signUpEmail)}>
               <FormControl.Label
                 _text={{
                   color: "coolGray.800",
@@ -204,11 +277,12 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Email"
+                color="black"
                 fontSize="md"
-                value={email}
-                onChangeText={setEmail}
+                value={signUpEmail}
+                onChangeText={setSignUpEmail}
               />
-              {!isSignIn && email && !validateEmail(email) && (
+              {!isSignIn && signUpEmail && !validateEmail(signUpEmail) && (
                 <FormControl.ErrorMessage
                   leftIcon={
                     <Icon
@@ -224,7 +298,9 @@ const UserForm = () => {
               )}
             </FormControl>
 
-            <FormControl isInvalid={!isSignIn && !validatePassword(password)}>
+            <FormControl
+              isInvalid={!isSignIn && !validatePassword(signUpPassword)}
+            >
               <FormControl.Label
                 _text={{
                   color: "coolGray.800",
@@ -234,29 +310,51 @@ const UserForm = () => {
               >
                 Mot de passe
               </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Mot de passe"
-                fontSize="md"
-                value={password}
-                onChangeText={setPassword}
-                type="password"
-              />
-              {!isSignIn && password && !validatePassword(password) && (
-                <FormControl.ErrorMessage
-                  leftIcon={
+              <HStack space={2}>
+                <Input
+                  width={"100%"}
+                  variant="underlined"
+                  placeholder="Mot de passe"
+                  color="black"
+                  fontSize="md"
+                  value={signUpPassword}
+                  onChangeText={setSignUpPassword}
+                  type={isPasswordVisible ? "text" : "password"}
+                  position={"relative"}
+                />
+                <IconButton
+                  width={50}
+                  variant="unstyled"
+                  position={"absolute"}
+                  right={0}
+                  icon={
                     <Icon
                       as={MaterialIcons}
-                      name="error"
-                      size={5}
-                      color="red.500"
+                      name={isPasswordVisible ? "visibility-off" : "visibility"}
+                      size={8}
+                      color="coolGray.600"
                     />
                   }
-                >
-                  Le mot de passe doit contenir au moins une minuscule, une
-                  majuscule, un chiffre et un caractère spécial.
-                </FormControl.ErrorMessage>
-              )}
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              </HStack>
+              {!isSignIn &&
+                signUpPassword &&
+                !validatePassword(signUpPassword) && (
+                  <FormControl.ErrorMessage
+                    leftIcon={
+                      <Icon
+                        as={MaterialIcons}
+                        name="error"
+                        size={5}
+                        color="red.500"
+                      />
+                    }
+                  >
+                    Le mot de passe doit contenir au moins une minuscule, une
+                    majuscule, un chiffre et un caractère spécial.
+                  </FormControl.ErrorMessage>
+                )}
             </FormControl>
           </>
         )}
@@ -267,11 +365,11 @@ const UserForm = () => {
           onPress={isSignIn ? handleSignIn : handleSignUp}
           disabled={
             isSignIn
-              ? !validateEmail(email) || !validatePassword(password)
+              ? !signInEmail || !signInPassword
               : !firstName ||
                 !lastName ||
-                !validateEmail(email) ||
-                !validatePassword(password)
+                !validateEmail(signUpEmail) ||
+                !validatePassword(signUpPassword)
           }
         >
           {isSignIn ? "Se connecter" : "S'inscrire"}

@@ -33,11 +33,14 @@ const theme = extendTheme({
         borderRadius: DefaultTheme.roundness,
       },
     },
-  },
+  }, 
 });
 
 export default function App() {
   const [load, setLoad] = useState(false);
+  const [token, setToken] = useState("")
+  
+
   const inter = () => {
     if (!load) {
       setLoad(true);
