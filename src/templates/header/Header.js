@@ -82,7 +82,7 @@ const Header = () => {
               }}
             >
               <Menu.Item onPress={handleLogOut}>Déconnexion</Menu.Item>
-              <Menu.Item onPress={handlePress("HomeDashBoard")}>
+              <Menu.Item onPress={() => handlePress("HomeDashBoard")}>
                 Dashboard
               </Menu.Item>
             </Menu>

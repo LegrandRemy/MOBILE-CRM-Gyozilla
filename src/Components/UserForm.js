@@ -19,6 +19,10 @@ import { useToast } from "native-base";
 import { login } from "../utils/api-call/loginRegister";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import jwtDecode from "jwt-decode";
+import { UserContext } from "../utils/context/UserContext";
+import { useContext } from "react";
+import { useEffect } from "react";
 
 const UserForm = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -37,6 +41,8 @@ const UserForm = () => {
 
   const toast = useToast();
   const navigation = useNavigation();
+
+  const { user, setUser, isLogged, setIsLogged } = useContext(UserContext);
 
   const handleSignUp = () => {
     if (signUpEmail) {
@@ -62,15 +68,6 @@ const UserForm = () => {
   const handleSignIn = () => {
     login({ email: signInEmail, password: signInPassword }).then((response) => {
       if (response.data.message === "Authentification réussi") {
-        // AsyncStorage.setItem( "token", "myValue", (err) => {
-        //   if(err) {
-        //     console.log(err)
-        //   }
-        //   console.log("User saved")
-        // }).catch((err) => {
-        //   console.log("error is: " + err)
-        // })
-
         toast.show({
           title: "Succès",
           description: "Vous vous êtes bien connecté.",
@@ -82,7 +79,14 @@ const UserForm = () => {
         });
 
         setTimeout(() => {
-          setToken(response.data.token);
+          AsyncStorage.setItem("@token", response.data.token)
+            .then(() => {
+              const userDecoded = jwtDecode(response.data.token);
+
+              setUser(userDecoded);
+              setIsLogged(true);
+            })
+            .catch((err) => console.error("Error in saving token", err));
         }, 3000);
       } else {
         toast.show({
@@ -114,6 +118,10 @@ const UserForm = () => {
       placement: "top",
     });
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, []);
 
   return (
     <Center flex={1} px="5">
