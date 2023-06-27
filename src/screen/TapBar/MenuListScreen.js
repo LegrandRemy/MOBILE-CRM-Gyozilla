@@ -180,7 +180,7 @@ const MenuList = ({ route, props }) => {
         <CustomCardRestaurantMenu
           title="Boissons"
           src={{ uri: `https://api-gyozilla.onrender.com/image/boissons.jpg` }}
-          onPress={() =>
+          onClick={() =>
             handleMenuItemPress("ListProducts", {
               name: "Drinks",
               title: "BOISSONS",
