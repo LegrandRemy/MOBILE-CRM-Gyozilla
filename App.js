@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import { NativeBaseProvider } from "native-base";
 import { UserContext } from './src/utils/context/UserContext';
 import { useEffect } from 'react';
 import StackDashBoardNavigator from './src/navigation/StackDashBoardNavigator';
@@ -44,17 +43,21 @@ const theme = extendTheme({
 });
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
 
 
   useEffect(()=>{
-    const token = AsyncStorage.getItem('@token');
-    if (token) {
-      const userDecoded = jwtDecode(token);
-      setUser(userDecoded);
-      setIsLogged(true)
+    try {
+      const token = AsyncStorage.getItem('@token');
+      if (token && !isLogged) {
+        const userDecoded = jwtDecode(token);
+        setUser(userDecoded);
+        setIsLogged(true)
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, [isLogged]);
 
@@ -71,16 +74,16 @@ export default function App() {
       <UserContext.Provider 
         value={{
             user: user, 
-            setUser : setUser, 
-            isLogged : isLogged, 
-            setIsLogged :setIsLogged, 
+            setUser: setUser, 
+            isLogged: isLogged, 
+            setIsLogged: setIsLogged, 
         }}>
         <NativeBaseProvider>
             <StatusBar translucent={false} style="light"></StatusBar>
             <NavigationContainer>
             {!load 
                 ? <Loader /> 
-                : user.role 
+                : user && user.role
                   ? <StackDashBoardNavigator />
                   : <RootStackNavigator />
               }

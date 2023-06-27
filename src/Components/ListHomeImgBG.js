@@ -1,18 +1,18 @@
-import { View, Text, ImageBackground } from 'react-native'
+import { Text, ImageBackground } from 'react-native'
 import React from 'react'
 
-const ListHomeImgBG = ({props}) => {
+const ListHomeImgBG = ({lastNews}) => {
     return (
         <>
-        {props.map((prop) => (
-            <ImageBackground key={prop.id} style={{
+        {lastNews?.map((item) => (
+            <ImageBackground key={item.id} style={{
                 width:150,
                 height:150,
                 padding:10,
                 marginHorizontal: 5,
                 marginVertical: 5,
-            }} source={{uri: `https://api-gyozilla.onrender.com/${prop.image}`}} resizeMode="contain" >
-                <Text style={{fontWeight:"600"}}>{prop.name}</Text>
+            }} source={{uri: `https://api-gyozilla.onrender.com/${item.image}`}} resizeMode="contain" >
+                <Text style={{fontWeight:"600"}}>{item.name}</Text>
             </ImageBackground>
         ))}
         </>

@@ -1,12 +1,13 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import OneNews from '../screen/OneNews';
 import Home from '../screen/TapBar/HomeScreen';
 import LastProductsHome from '../screen/LastProductsHome';
+import OneNews from '../screen/OneNews';
+
+
 
 const Stack = createStackNavigator();
-
-const StackNewsNavigator = () => {
+const StackHomeScreen = () => {
     return (
         <Stack.Navigator screenOptions={{header: ()=>null}}>
             <Stack.Screen 
@@ -21,14 +22,14 @@ const StackNewsNavigator = () => {
                 })}
             />
             <Stack.Screen 
-            name="LastProduct" 
+            name="LastProductsHome" 
             component={LastProductsHome} 
             options={({ route }) => ({
-                title: `LastProduct ${route.params?.id}`,
+                title: `LastProductsHome ${route.params?.id}`,
                 })}
             />
         </Stack.Navigator>
     )
 }
 
-export default StackNewsNavigator
+export default StackHomeScreen

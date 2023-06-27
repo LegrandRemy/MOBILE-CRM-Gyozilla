@@ -33,7 +33,7 @@ const Header = () => {
                             </Pressable>;
                     }}>
                         <Menu.Item onPress={handleLogOut} >Déconnexion</Menu.Item>
-                        <Menu.Item onPress={handlePress("HomeDashBoard")} >Dashboard</Menu.Item>
+                        <Menu.Item onPress={()=>handlePress("HomeDashBoard")} >Dashboard</Menu.Item>
                     </Menu>
                 </Box>
                 
@@ -74,7 +74,7 @@ const Header = () => {
               color="#faeccb"
             />
           }
-          onPress={handlePress("LoginRegister")}
+          onPress={()=>handlePress("LoginRegister")}
         />
       </Box>
         }
