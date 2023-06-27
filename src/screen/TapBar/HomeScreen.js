@@ -59,7 +59,7 @@ useEffect(() => {
           <Skeleton borderRadius={10} width={"90%"} height={200}/>
       </Box>
       } */}
-      <LastProductBannerHome item={lastNews} />
+      <LastProductBannerHome item={lastProducts} />
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
           Chaud devant !
