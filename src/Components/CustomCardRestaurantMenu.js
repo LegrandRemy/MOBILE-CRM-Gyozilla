@@ -11,12 +11,12 @@ import {
   Radio,
 } from "native-base";
 
-const CustomCardRestaurantMenu = ({ product, onClick, menu, src, title }) => {
+const CustomCardRestaurantMenu = ({ product, onPress, menu, src, title }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      onPress={onClick}
+      onPress={onPress}
       style={{ width: "50%", height: 200, marginBottom: 10, padding: 5 }}
     >
       <HStack space={2} height={"100%"}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { Radio, ScrollView } from "native-base";
+import { Radio, ScrollView, useNavigation } from "native-base";
 
 import { instanceAxios } from "../utils/interceptor";
 
@@ -99,7 +99,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   };
 
   const handleDetailsProductClick = (productId) => {
-    navigation.navigate("ProductDetailsScreen", { productId: productId });
+    navigation.navigate("ProductDetailsScreen", { productId });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
@@ -151,7 +151,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
             <CustomCardProduct
               menu={menu}
               key={menu.id}
-              onClick={() => handleMenuClick(menu.id)}
+              onPress={() => handleMenuClick(menu.id)}
               customStyle={{ padding: 5 }}
             />
           ))}
@@ -187,7 +187,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                     >
                       <CustomCardProduct
                         product={product}
-                        onClick={handleDetailsProductClick}
+                        onPress={handleDetailsProductClick}
                         customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
@@ -208,7 +208,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                   customStyle={{ padding: 5 }}
                   key={product.id}
                   product={product}
-                  onClick={handleDetailsProductClick}
+                  onPress={handleDetailsProductClick}
                 />
               ))}
             </View>
