@@ -11,6 +11,7 @@ import Header from "../templates/header/Header";
 import MenuList from "../screen/TapBar/MenuListScreen";
 import ListProductsScreen from "../screen/ListProductsScreen";
 import StackRestaurantMenuNavigator from "../navigation/StackRestaurantMenu";
+import StackNewsNavigator from "../navigation/StackNewsNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -81,16 +82,10 @@ export default BottomNav = () => {
     >
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={Home}
+        component={StackNewsNavigator}
         name="Accueil"
       />
 
-      {/* <Tab.Screen
-        options={{ header: () => <Header /> }}
-        component={MenuList}
-        initialParams={{ name: "La carte" }}
-        name="La cartee"
-      /> */}
       <Tab.Screen
         options={{ header: () => <Header /> }}
         component={StackRestaurantMenuNavigator}

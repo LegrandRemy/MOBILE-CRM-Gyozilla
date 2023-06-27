@@ -5,7 +5,8 @@ import CustomCardDetailsProduct from "../Components/CustomCardDetailsProduct";
 const ProductDetailsScreen = () => {
   return (
     <View>
-      <CustomCardDetailsProduct>ProductDetailsScreen</CustomCardDetailsProduct>
+      <Text>toto</Text>
+      {/* <CustomCardDetailsProduct>ProductDetailsScreen</CustomCardDetailsProduct> */}
     </View>
   );
 };

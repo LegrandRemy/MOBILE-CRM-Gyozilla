@@ -99,7 +99,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   };
 
   const handleDetailsProductClick = (productId) => {
-    navigation.navigate("ProductDetailsScreen", { productId });
+    navigation.navigate("ProductDetailsScreen", { productId: productId });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
