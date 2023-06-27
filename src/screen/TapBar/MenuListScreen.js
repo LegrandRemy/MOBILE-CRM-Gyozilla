@@ -98,6 +98,7 @@ const MenuList = () => {
           }
         />
       </List.Accordion>
+      
       <Divider />
 
       <List.Item
@@ -110,6 +111,7 @@ const MenuList = () => {
         onPress={() => handleMenuItemPress("Engagements")}
         style={{ backgroundColor: "#eaeaea" }}
       />
+
     </View>
   );
 };

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -6,6 +7,12 @@ import { useState } from "react";
 import Loader from "./src/components/loader";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { UserContext } from './src/utils/context/UserContext';
+import { useEffect } from 'react';
+import StackDashBoardNavigator from './src/navigation/StackDashBoardNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
+
 
 const theme = extendTheme({
   colors: {
@@ -37,9 +44,23 @@ const theme = extendTheme({
 });
 
 export default function App() {
+  const [user, setUser] = useState();
+  const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
-  const [token, setToken] = useState("")
   
+  useEffect(()=>{
+    try {
+      const token = AsyncStorage.getItem('@token');
+      if (token) {
+        const userDecoded = jwtDecode(token);
+        setUser(userDecoded);
+        setIsLogged(true)
+      }
+    }
+    catch(err) {
+      console.log("Canno't get token")
+    }
+  }, [isLogged]);
 
   const inter = () => {
     if (!load) {
@@ -47,15 +68,29 @@ export default function App() {
     }
   };
   setTimeout(inter, 4000);
+
   return (
-    <NativeBaseProvider theme={theme}>
-      <PaperProvider>
-        <StatusBar translucent={false} style="light"></StatusBar>
-        <NavigationContainer>
-          {!load ? <Loader></Loader> : <RootStackNavigator />}
-        </NavigationContainer>
-      </PaperProvider>
-    </NativeBaseProvider>
+    <PaperProvider>
+      <UserContext.Provider 
+        value={{
+            user: user, 
+            setUser : setUser, 
+            isLogged : isLogged, 
+            setIsLogged :setIsLogged, 
+        }}>
+        <NativeBaseProvider theme={theme}>
+            <StatusBar translucent={false} style="light"></StatusBar>
+            <NavigationContainer>
+              {!load 
+                ? <Loader /> 
+                : (user && user.role)
+                  ? <StackDashBoardNavigator />
+                  : <RootStackNavigator />
+              }
+            </NavigationContainer>
+          </NativeBaseProvider>
+        </UserContext.Provider>
+    </PaperProvider>  
   );
 }
 

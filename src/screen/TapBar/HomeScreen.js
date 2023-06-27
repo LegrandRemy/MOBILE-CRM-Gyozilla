@@ -66,13 +66,7 @@ const Home = () => {
           <Skeleton borderRadius={10} width={"90%"} height={200}/>
       </Box>
       } */}
-      <FlatList
-        horizontal={true}
-        data={lastProducts}
-        key={(item) => item.id}
-        renderItem={(item) => <LastProductBannerHome item={item} />}
-      />
-      {/* <LastProductBannerHome item={lastNews} /> */}
+      {/* <LastProductBannerrHome item={lastProducts} /> */}
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
           Chaud devant !!!!!
