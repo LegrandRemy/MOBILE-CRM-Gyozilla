@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Radio, ScrollView } from "native-base";
+
 import { instanceAxios } from "../utils/interceptor";
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  Heading,
-  Radio,
-  ScrollView,
-  Stack,
-} from "native-base";
+
 import CustomCardProduct from "../Components/CustomCardProduct";
 import CustomButton from "../Components/CustomButton";
 import Loader from "../Components/loader";
+import GoBackButton from "../Components/GoBackButton";
 
 const checkNew = (item) => {
   const today = new Date();
@@ -38,8 +31,6 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [selectedItem, setSelectedItem] = useState("");
 
   const { name } = route.params;
-  // console.log("route", route);
-  // console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
@@ -61,7 +52,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   }, [name]);
 
   useEffect(() => {
-    if (products.length !== 0 && !isFiltered) {
+    if (products.length !== 0 && !isFiltered && name) {
       let filteredProducts = [];
       switch (name) {
         case "Menus":
@@ -107,7 +98,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     setIsMenuClicked(true);
   };
 
-  const handleProductClick = (productId) => {
+  const handleDetailsProductClick = (productId) => {
     navigation.navigate("ProductDetailsScreen", { productId });
   };
 
@@ -137,6 +128,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     (product) => product.productCategory.name === totalSteps[selectedStep]
   );
   const dataToShow = isMenuClicked ? filteredProducts : products;
+
   console.log(
     "selectedItemFromMenu[selectedStep]",
     selectedItemFromMenu[selectedStep - 1]
@@ -144,8 +136,12 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   console.log("selectedItemFromMenu", selectedItemFromMenu);
   console.log("selectedStep", selectedStep);
 
+  // const goBack = () => {
+  //   navigation.goBack();
+  // };
   return (
     <ScrollView style={styles.container}>
+      <GoBackButton customStyleGoBack={{}} />
       <View style={styles.cardTitle}>
         <Text style={styles.title}>{route.params.title}</Text>
       </View>
@@ -191,7 +187,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                     >
                       <CustomCardProduct
                         product={product}
-                        // onClick={handleProductClick}
+                        onClick={handleDetailsProductClick}
                         customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
@@ -212,7 +208,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                   customStyle={{ padding: 5 }}
                   key={product.id}
                   product={product}
-                  // onClick={handleProductClick}
+                  onClick={handleDetailsProductClick}
                 />
               ))}
             </View>
@@ -267,7 +263,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     backgroundColor: "#faeccb",
     alignItems: "center",
-    margin: 30,
+    marginBottom: 30,
+    marginHorizontal: 30,
     padding: 10,
     borderRadius: 10,
   },

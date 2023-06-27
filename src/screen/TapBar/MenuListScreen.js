@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { List, Divider, Collapse, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
-const MenuList = () => {
+const MenuList = ({ route }) => {
   const navigation = useNavigation();
 
   const [expanded, setExpanded] = useState("");
@@ -17,7 +17,7 @@ const MenuList = () => {
     setExpanded(expanded === accordionId ? "" : accordionId);
   };
 
-  return (
+  return route.name !== "Menu" ? (
     <View>
       <List.Accordion
         title="Mon compte"
@@ -116,6 +116,68 @@ const MenuList = () => {
         style={{ backgroundColor: "#eaeaea" }}
       />
     </View>
+  ) : (
+    <List.Accordion
+      title="La carte"
+      expanded={expanded === "RestaurantMenu"}
+      onPress={() => handleAccordion("RestaurantMenu")}
+      style={{ backgroundColor: "#eaeaea" }}
+    >
+      <List.Item
+        title="Nouveautés"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "News",
+            title: "NOUVEAUTES",
+          })
+        }
+      />
+      <List.Item
+        title="Menus"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "Menus",
+            title: "MENU",
+          })
+        }
+      />
+      <List.Item
+        title="Entrées"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "Starter",
+            title: "ENTREES",
+          })
+        }
+      />
+      <List.Item
+        title="Plats"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "Dishes",
+            title: "PLATS",
+          })
+        }
+      />
+      <List.Item
+        title="Desserts"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "Desserts",
+            title: "DESSERTS",
+          })
+        }
+      />
+      <List.Item
+        title="Boissons"
+        onPress={() =>
+          handleMenuItemPress("ListProducts", {
+            name: "Drinks",
+            title: "BOISSONS",
+          })
+        }
+      />
+    </List.Accordion>
   );
 };
 

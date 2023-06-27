@@ -8,6 +8,9 @@ import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
+import MenuList from "../screen/TapBar/MenuListScreen";
+import ListProductsScreen from "../screen/ListProductsScreen";
+import StackRestaurantMenuNavigator from "../navigation/StackRestaurantMenu";
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +67,6 @@ export default BottomNav = () => {
             }
           }
 
-          // You can return any component that you like here!
           return (
             <MaterialCommunityIcons
               name={iconName}
@@ -82,11 +84,19 @@ export default BottomNav = () => {
         component={Home}
         name="Accueil"
       />
+
+      {/* <Tab.Screen
+        options={{ header: () => <Header /> }}
+        component={MenuList}
+        initialParams={{ name: "La carte" }}
+        name="La cartee"
+      /> */}
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={RestaurantMenu}
+        component={StackRestaurantMenuNavigator}
         name="La carte"
       />
+
       <Tab.Screen
         options={{ header: () => <Header /> }}
         component={Geoloc}
