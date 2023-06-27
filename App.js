@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -39,28 +39,13 @@ const theme = extendTheme({
         borderRadius: DefaultTheme.roundness,
       },
     },
-  }, 
+  },
 });
 
 export default function App() {
   const [user, setUser] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
-
-
-  useEffect(()=>{
-    try {
-      const token = AsyncStorage.getItem('@token');
-      if (token && !isLogged) {
-        const userDecoded = jwtDecode(token);
-        setUser(userDecoded);
-        setIsLogged(true)
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [isLogged]);
-
 
   const inter = () => {
     if (!load) {
@@ -70,26 +55,29 @@ export default function App() {
   setTimeout(inter, 4000);
 
   return (
-    <PaperProvider theme={theme}>
-      <UserContext.Provider 
-        value={{
-            user: user, 
-            setUser: setUser, 
-            isLogged: isLogged, 
-            setIsLogged: setIsLogged, 
-        }}>
-        <NativeBaseProvider>
-            <StatusBar translucent={false} style="light"></StatusBar>
-            <NavigationContainer>
-            {!load 
-                ? <Loader /> 
-                : user && user.role
-                  ? <StackDashBoardNavigator />
-                  : <RootStackNavigator />
-              }
-            </NavigationContainer>
-          </NativeBaseProvider>
+    <PaperProvider>
+      <NativeBaseProvider theme={theme}>
+        <UserContext.Provider
+          value={{
+            user: user,
+            setUser: setUser,
+            isLogged: isLogged,
+            setIsLogged: setIsLogged,
+          }}
+        >
+          <StatusBar translucent={false} style="light"></StatusBar>
+          <NavigationContainer>
+            {!load ? (
+              <Loader />
+            // ) : (user && user.role) ? (
+              ) : (user) ? (
+              <StackDashBoardNavigator />
+            ) : (
+              <RootStackNavigator />
+            )}
+          </NavigationContainer>
         </UserContext.Provider>
+      </NativeBaseProvider>
     </PaperProvider>
   );
 }

@@ -10,10 +10,15 @@ import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
 import FlatListNewsCarousel from "../../components/FlatListNewsCarousel";
 import LastProductBannerHome from "../../components/LastProductBannerHome";
+import { useContext } from "react";
+import { UserContext } from "../../utils/context/UserContext";
 
 const Home = () => {
   const [lastNews, setLastNews] = useState();
-  const [lastProducts, setLastProducts] = useState();
+  const [lastProducts, setLastProducts] = useState([]);
+
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     instanceAxios
       .get("products/lastProduct")
