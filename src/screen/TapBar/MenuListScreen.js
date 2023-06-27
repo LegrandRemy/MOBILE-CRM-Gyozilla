@@ -9,6 +9,7 @@ const MenuList = () => {
   const [expanded, setExpanded] = useState("");
 
   const handleMenuItemPress = (screenName, data) => {
+    console.log("handleMenuItemPress", screenName);
     navigation.navigate(screenName, data);
   };
 
@@ -27,6 +28,7 @@ const MenuList = () => {
         <List.Item
           title="Mon profil"
           onPress={() => handleMenuItemPress("MyAccount")}
+          style={{ backgroundColor: "#eaeaea", color: "#F8A500" }}
         />
         <List.Item
           title="Ma fidélité"
@@ -49,39 +51,55 @@ const MenuList = () => {
         <List.Item
           title="Nouveautés"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "NewsScreen" })
+            handleMenuItemPress("ListProducts", {
+              name: "News",
+              title: "NOUVEAUTES",
+            })
           }
         />
         <List.Item
           title="Menus"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "MenusScreen" })
+            handleMenuItemPress("ListProducts", {
+              name: "Menus",
+              title: "MENU",
+            })
           }
         />
         <List.Item
           title="Entrées"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "StarterScreen" })
+            handleMenuItemPress("ListProducts", {
+              name: "Starter",
+              title: "ENTREES",
+            })
           }
         />
         <List.Item
           title="Plats"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "DishesScreen" })
+            handleMenuItemPress("ListProducts", {
+              name: "Dishes",
+              title: "PLATS",
+            })
           }
         />
         <List.Item
           title="Desserts"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", {
-              name: "DessertsScreen",
+            handleMenuItemPress("ListProducts", {
+              name: "Desserts",
+              title: "DESSERTS",
             })
           }
         />
         <List.Item
           title="Boissons"
           onPress={() =>
-            handleMenuItemPress("ListProductsScreen", { name: "DrinksScreen" })
+            handleMenuItemPress("ListProducts", {
+              name: "Drinks",
+              title: "BOISSONS",
+            })
           }
         />
       </List.Accordion>

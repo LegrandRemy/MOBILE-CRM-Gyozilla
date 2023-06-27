@@ -18,6 +18,8 @@ export default BottomNav = () => {
       shifting={true}
       sceneAnimationEnabled={false}
       screenOptions={({ route }) => ({
+        // tabBarStyle: { height: 50 },
+        // tabBarStyle: { paddingTop: 1, marginBottom: 5, paddingBottom: 5,  },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let newSize;
@@ -30,7 +32,7 @@ export default BottomNav = () => {
             } else {
               iconName = "home";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "La carte") {
             if (focused) {
@@ -40,7 +42,7 @@ export default BottomNav = () => {
             } else {
               iconName = "noodles";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "GeoLoc") {
             if (focused) {
@@ -50,7 +52,7 @@ export default BottomNav = () => {
             } else {
               iconName = "map-marker-multiple";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           } else if (route.name === "Menu") {
             if (focused) {
@@ -60,7 +62,7 @@ export default BottomNav = () => {
             } else {
               iconName = "format-list-bulleted";
               newSize = 25;
-              newColor = "black";
+              newColor = "#5F8D85";
             }
           }
 
@@ -74,7 +76,7 @@ export default BottomNav = () => {
           );
         },
         tabBarActiveTintColor: "#F8A500",
-        tabBarInactiveTintColor: "gray",
+        tabBarInactiveTintColor: "#5F8D85",
       })}
     >
       <Tab.Screen

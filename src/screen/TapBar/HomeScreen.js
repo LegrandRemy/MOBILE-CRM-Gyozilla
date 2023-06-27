@@ -1,38 +1,44 @@
-import React from "react";
-import { Image, ScrollView, View, FlatList } from "react-native";
-import { Box, Heading, Text, AspectRatio } from "native-base";
+import React, { useEffect, useState } from "react";
+import { Image, ScrollView, TouchableHighlight } from "react-native";
+import {
+  Box,
+  Heading,
+  Text,
+  AspectRatio,
+  Skeleton,
+  FlatList,
+} from "native-base";
 import ListHomeImgBG from "../../Components/ListHomeImgBG";
 import SearchHomeInput from "../../Components/SearchHomeInput";
+import { instanceAxios } from "../../utils/interceptor";
+import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
+import LastProductBannerHome from "../../Components/LastProductBannerHome";
 
 const Home = () => {
-  const carouselData = [
-    {
-      id: "1",
-      title: "C'est dans la boite !",
-      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
-    },
-    {
-      id: "2",
-      title: "Ça croustille !",
-      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
-    },
-    {
-      id: "3",
-      title: "Non mais tu bacon !",
-      image: require("../../../assets/27682cfc-a16f-4f86-86b3-2d579acf42f7_.webp"),
-    },
-  ];
+  const [lastNews, setLastNews] = useState();
+  const [lastProducts, setLastProducts] = useState();
+  console.log("lastProducts", lastProducts);
+  useEffect(() => {
+    instanceAxios
+      .get("products/lastProduct")
+      .then((res) => {
+        setLastProducts(res.data);
+      })
+      .catch((error) => {
+        setLastProducts([]);
+      });
+  }, []);
 
-  const renderNewsCarouselItem = ({ item }) => (
-    <View style={{ width: 200, height: 200, marginRight: 30 }}>
-      <Image
-        source={item.image}
-        style={{ flex: 1, width: 200, height: 200 }}
-        resizeMode="contain"
-      />
-      <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
-    </View>
-  );
+  useEffect(() => {
+    instanceAxios
+      .get("lastnews")
+      .then((res) => {
+        setLastNews(res.data);
+      })
+      .catch((error) => {
+        setLastNews([]);
+      });
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
@@ -42,30 +48,37 @@ const Home = () => {
           En ce moment
         </Heading>
       </Box>
+      {/* {(lastProducts)?
+      <TouchableHighlight onPress={}>
+        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
+          <AspectRatio w="90%" ratio={16 / 9}>
+            <Image
+              borderRadius={10}
+              source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
+              alt="image"
+            />
+          </AspectRatio>
+        </Box>
+      </TouchableHighlight>
+
+      :
       <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-        <AspectRatio w="90%" ratio={16 / 9}>
-          <Image
-            borderRadius={10}
-            source={{
-              uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
-            }}
-            alt="image"
-          />
-        </AspectRatio>
+          <Skeleton borderRadius={10} width={"90%"} height={200}/>
       </Box>
+      } */}
+      <FlatList
+        horizontal={true}
+        data={lastProducts}
+        key={(item) => item.id}
+        renderItem={(item) => <LastProductBannerHome item={item} />}
+      />
+      {/* <LastProductBannerHome item={lastNews} /> */}
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
-          Chaud devant !
+          Chaud devant !!!!!
         </Heading>
         <Text color="black">Découvrez les actualités Gyozilla®</Text>
-        <FlatList
-          data={carouselData}
-          renderItem={renderNewsCarouselItem}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-        />
+        <FlatListNewsCarousel propsData={lastNews} />
         <Heading color="black" width={250} fontSize={18} marginTop={20}>
           Une petite ou une grosse faim ? &#127836;
         </Heading>
@@ -77,7 +90,7 @@ const Home = () => {
           marginTop={10}
           marginBottom={10}
         >
-          <ListHomeImgBG props={carouselData} />
+          {/* <ListHomeImgBG props={products} /> */}
         </Box>
       </Box>
     </ScrollView>
