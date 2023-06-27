@@ -9,6 +9,9 @@ import {
 } from 'react-native'
 import { Button } from 'native-base'
 import ContactForm from '../Components/ContactForm'
+import { Formik } from 'formik'
+import { sendMail } from '../utils/ApiCall'
+
 const screenWidth = Dimensions.get('window').width
 
 const Contact = () => {
@@ -21,22 +24,30 @@ const Contact = () => {
         </Text>
         {/* <Image source={logo} style={styles.logo} /> */}
       </View>
-      {/* <View style={styles.inputContainer}>
-        <View style={styles.inputRow}>
-          <TextInput style={styles.input} placeholder="Nom" />
-          <TextInput style={styles.input} placeholder="Email" />
-        </View>
-        <TextInput
-          style={styles.inputMultiline}
-          multiline
-          numberOfLines={5}
-          placeholder="Votre message"
-        />
-        <Button color={'#F8A500'} onPress={() => console.log('hello world')}>
-          Envoyer
-        </Button>
-      </View> */}
-      <ContactForm></ContactForm>
+      <Formik
+        enableReinitialize
+        initialValues={{
+          lastname: '',
+          email: '',
+          message: '',
+        }}
+        onSubmit={(values) => {
+          console.log(values)
+          sendMail(values)
+        }}
+      >
+        {({ values, handleSubmit, handleChange }) => {
+          return (
+            <ContactForm
+              values={values}
+              handleSubmit={handleSubmit}
+              handleChangeLastname={handleChange('lastname')}
+              handleChangeEmail={handleChange('email')}
+              handleChangeMessage={handleChange('message')}
+            ></ContactForm>
+          )
+        }}
+      </Formik>
     </View>
   )
 }
