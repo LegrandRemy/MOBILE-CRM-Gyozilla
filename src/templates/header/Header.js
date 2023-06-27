@@ -34,7 +34,8 @@ const Header = () => {
 
   return (
     <>
-      {user && user.role ? (
+      {/* {user && user.role ? ( */}
+      {user ? (
         <Box
           style={{
             paddingTop: 20,

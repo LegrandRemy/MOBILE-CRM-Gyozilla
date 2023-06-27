@@ -69,7 +69,8 @@ export default function App() {
           <NavigationContainer>
             {!load ? (
               <Loader />
-            ) : (user && user.role) ? (
+            // ) : (user && user.role) ? (
+              ) : (user) ? (
               <StackDashBoardNavigator />
             ) : (
               <RootStackNavigator />
