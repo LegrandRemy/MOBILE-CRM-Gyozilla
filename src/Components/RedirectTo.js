@@ -1,9 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const RedirectTo = (propsNameScreen, propsIdItem) => {
-    const navigation = useNavigation()
-    
-    navigation.navigate(`${propsNameScreen}`, { id: `${propsIdItem}` });
-}
+  const navigation = useNavigation();
 
-export default RedirectTo
+  navigation.navigate(`${propsNameScreen}`, { id: `${propsIdItem}` });
+};
+
+export default RedirectTo;

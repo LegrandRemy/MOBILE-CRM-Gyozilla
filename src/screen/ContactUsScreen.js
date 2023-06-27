@@ -1,12 +1,94 @@
-import { View, Text } from "react-native";
-import React from "react";
+import React from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from 'react-native'
+import { Button } from 'native-base'
+import ContactForm from '../components/ContactForm'
+const screenWidth = Dimensions.get('window').width
 
-const ContactezNous = () => {
+const Contact = () => {
   return (
-    <View>
-      <Text>Contactez-nous</Text>
+    <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>Une question ? Une remarque ?</Text>
+        <Text style={styles.subtitle}>
+          Joignez-nous tout type de demande via le formulaire ci-dessous.
+        </Text>
+        {/* <Image source={logo} style={styles.logo} /> */}
+      </View>
+      {/* <View style={styles.inputContainer}>
+        <View style={styles.inputRow}>
+          <TextInput style={styles.input} placeholder="Nom" />
+          <TextInput style={styles.input} placeholder="Email" />
+        </View>
+        <TextInput
+          style={styles.inputMultiline}
+          multiline
+          numberOfLines={5}
+          placeholder="Votre message"
+        />
+        <Button color={'#F8A500'} onPress={() => console.log('hello world')}>
+          Envoyer
+        </Button>
+      </View> */}
+      <ContactForm></ContactForm>
     </View>
-  );
-};
+  )
+}
 
-export default ContactezNous;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    padding: 20,
+  },
+  textContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingVertical: 10,
+    color: '#F8A500',
+  },
+  subtitle: {
+    color: '#739B94',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+
+  //   inputContainer: {
+  //     width: '90%',
+  //     alignItems: 'center',
+  //   },
+  //   inputRow: {
+  //     justifyContent: 'space-between',
+  //     marginBottom: 50,
+  //     width: screenWidth < 700 ? '100%' : 500,
+  //   },
+  //   input: {
+  //     borderWidth: 1,
+  //     borderColor: '#739B94',
+  //     padding: 10,
+  //     width: '100%',
+  //     height: 50,
+  //     marginVertical: 5,
+  //   },
+  //   inputMultiline: {
+  //     borderWidth: 1,
+  //     borderColor: '#739B94',
+  //     padding: 10,
+  //     width: '100%',
+  //     height: 150,
+  //     textAlignVertical: 'top',
+  //     marginBottom: 20,
+  //   },
+})
+
+export default Contact

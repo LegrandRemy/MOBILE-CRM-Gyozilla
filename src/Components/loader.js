@@ -1,19 +1,20 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
+import GifImage from "@lowkey/react-native-gif";
 
-const loader = () => {
+const Loader = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#faeccb" }}>
-      <Image
-        source={require("../../assets/logo_gyozilla.png")}
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <GifImage
+        source={require("../../assets/noodles.gif")}
         style={{
-          width: "50%",
-          height: "50%",
+          alignItems: "center",
+          width: "70%",
+          height: "70%",
           resizeMode: "contain",
         }}
       />
     </View>
   );
 };
-
-export default loader;
+export default Loader;

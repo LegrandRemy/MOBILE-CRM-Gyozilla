@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableHighlight } from "react-native";
-import { Box, Heading, Text, AspectRatio, Skeleton } from "native-base";
-import ListHomeImgBG from "../../Components/ListHomeImgBG";
-import SearchHomeInput from "../../Components/SearchHomeInput";
+import {
+  Box,
+  Heading,
+  Text,
+  AspectRatio,
+  Skeleton,
+  FlatList,
+} from "native-base";
+import ListHomeImgBG from "../../components/ListHomeImgBG";
+import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
-import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
-import LastProductBannerHome from "../../Components/LastProductBannerHome";
+import FlatListNewsCarousel from "../../components/FlatListNewsCarousel";
+import LastProductBannerHome from "../../components/LastProductBannerHome";
 
 const Home = () => {
-const [lastNews, setLastNews] = useState();
-const [lastProducts, setLastProducts] = useState();
-
-useEffect(() => {
-  instanceAxios
-  .get("products/lastProduct")
-    .then((res) => {
-      setLastProducts(res.data);
-    })
-    .catch((error) => {
-      setLastProducts([]);
-    });
-}, []);
+  const [lastNews, setLastNews] = useState();
+  const [lastProducts, setLastProducts] = useState();
+  console.log("lastProducts", lastProducts);
+  useEffect(() => {
+    instanceAxios
+      .get("products/lastProduct")
+      .then((res) => {
+        setLastProducts(res.data);
+      })
+      .catch((error) => {
+        setLastProducts([]);
+      });
+  }, []);
 
   useEffect(() => {
     instanceAxios
-    .get("lastnews")
+      .get("lastnews")
       .then((res) => {
         setLastNews(res.data);
       })
@@ -62,10 +69,10 @@ useEffect(() => {
       <LastProductBannerHome item={lastProducts} />
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
-          Chaud devant !
+          Chaud devant !!!!!
         </Heading>
         <Text color="black">Découvrez les actualités Gyozilla®</Text>
-        <FlatListNewsCarousel propsData={lastNews}/>
+        <FlatListNewsCarousel propsData={lastNews} />
         <Heading color="black" width={250} fontSize={18} marginTop={20}>
           Une petite ou une grosse faim ? &#127836;
         </Heading>
