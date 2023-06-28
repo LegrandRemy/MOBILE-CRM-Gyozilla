@@ -151,6 +151,7 @@ const UserForm = () => {
                 placeholder="Email"
                 color="black"
                 fontSize="md"
+                type="email"
                 value={signInEmail}
                 onChangeText={(value) => setSignInEmail(value)}
               />

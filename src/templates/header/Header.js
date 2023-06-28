@@ -22,9 +22,9 @@ const Header = () => {
 
     return (
         <>
-        { user && user.role ? 
-            <Box style={{paddingTop: 20, flexDirection:"row", justifyContent: "space-between", alignItems:"center", width: '100%', height:70, backgroundColor:"#1d292b"}}>
-                <Image source={require("../../../assets/logo_gyozilla.png")} alt='Logo' style={{marginLeft: 10, width:"25%", height:100}}/>
+        { user ? 
+            <Box style={{paddingTop: 20, flexDirection:"row", justifyContent: "space-between", alignItems:"center", width: '100%', height:100, backgroundColor:"#1d292b"}}>
+                <Image marginTop={10} source={require("../../../assets/logo_gyozilla.png")} alt='Logo' style={{marginLeft: 10, width:"25%", height:100}}/>
                 <Box marginRight={4} style={{ flexDirection:"row", justifyContent: "center",alignItems:"center"}}>
                     <Text style={{color:"white"}}>{user.lastname} {user.firstname}</Text>
                     <Menu w="140" trigger={triggerProps => {
