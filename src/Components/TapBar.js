@@ -1,16 +1,11 @@
 import * as React from "react";
-import Home from "../screen/TapBar/HomeScreen";
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import RestaurantMenu from "../screen/TapBar/RestaurantMenuScreen";
 import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
-import MenuList from "../screen/TapBar/MenuListScreen";
-import ListProductsScreen from "../screen/ListProductsScreen";
 import StackRestaurantMenuNavigator from "../navigation/StackRestaurantMenu";
-import StackNewsNavigator from "../navigation/StackNewsNavigator";
 import StackHomeScreen from "../navigation/StackHomeScreen";
 
 const Tab = createBottomTabNavigator();

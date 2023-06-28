@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import {
   Button,
   Input,
   Center,
   VStack,
   HStack,
-  Box,
   FormControl,
   Heading,
   Icon,
@@ -22,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 import jwtDecode from "jwt-decode";
 import { UserContext } from "../utils/context/UserContext";
 import { useContext } from "react";
-import { useEffect } from "react";
 
 const UserForm = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -67,7 +65,6 @@ const UserForm = () => {
 
   const handleSignIn = () => {
     login({ email: signInEmail, password: signInPassword }).then((response) => {
-      console.log("coucou")
       if (response.data.message === "Authentification réussi") {
         toast.show({
           title: "Succès",
@@ -154,7 +151,6 @@ const UserForm = () => {
                 fontSize="md"
                 type="email"
                 value={signInEmail}
-                type="email"
                 onChangeText={(value) => setSignInEmail(value)}
               />
               {!isSignIn && signInEmail && !validateEmail(signInEmail) && (

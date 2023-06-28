@@ -11,7 +11,7 @@ const LastProductBannerHome = ({ item }) => {
   };
   return (
     <>
-      {item && item[0].image ? (
+      {item && item[0]?.image ? (
         <TouchableOpacity
           onPress={() => handlePress(item.id)}
           underlayColor="transparent"

@@ -5,42 +5,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
 import { UserContext } from './src/utils/context/UserContext';
-import { useEffect } from 'react';
 import StackDashBoardNavigator from './src/navigation/StackDashBoardNavigator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
 import Loader from "./src/components/loader";
-import { extendTheme, NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 
-const theme = extendTheme({
+const theme = {
+  ...DefaultTheme,
   colors: {
-    primary: {
-      500: "#F8A500",
-    },
-    secondary: {
-      500: "#CDE8E7",
-    },
-    greengyozilla: {
-      500: "#5F8D85",
-    },
+    ...DefaultTheme.colors,
+    primary: "#F8A500",
+    secondary: "#CDE8E7",
   },
-  config: {
-    initialColorMode: "dark",
-  },
-  components: {
-    Button: {
-      baseStyle: {
-        borderRadius: DefaultTheme.roundness,
-      },
-    },
-    Input: {
-      baseStyle: {
-        borderRadius: DefaultTheme.roundness,
-      },
-    },
-  },
-});
+  roundness: 10,
+};
 
 export default function App() {
   const [user, setUser] = useState([]);
@@ -54,9 +32,11 @@ export default function App() {
   };
   setTimeout(inter, 4000);
 
+  console.log(user)
+
   return (
-    <PaperProvider>
-      <NativeBaseProvider theme={theme}>
+    <PaperProvider theme={theme}>
+      <NativeBaseProvider>
         <UserContext.Provider
           value={{
             user: user,
