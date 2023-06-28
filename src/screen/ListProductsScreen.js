@@ -4,10 +4,10 @@ import { Radio, ScrollView, useNavigation } from "native-base";
 
 import { instanceAxios } from "../utils/interceptor";
 
-import CustomCardProduct from "../Components/CustomCardProduct";
-import CustomButton from "../Components/CustomButton";
-import Loader from "../Components/loader";
-import GoBackButton from "../Components/GoBackButton";
+import CustomCardProduct from "../components/CustomCardProduct";
+import CustomButton from "../components/CustomButton";
+import Loader from "../components/loader";
+import GoBackButton from "../components/GoBackButton";
 
 const checkNew = (item) => {
   const today = new Date();

@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import CustomCardDetailsProduct from "../Components/CustomCardDetailsProduct";
+import CustomCardDetailsProduct from "../components/CustomCardDetailsProduct";
 
 const ProductDetailsScreen = () => {
   return (
