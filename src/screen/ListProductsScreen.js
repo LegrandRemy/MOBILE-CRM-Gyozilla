@@ -187,7 +187,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                     >
                       <CustomCardProduct
                         product={product}
-                        onPress={handleDetailsProductClick}
+                        onPress={() => handleDetailsProductClick(product.id)}
                         customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
@@ -208,7 +208,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                   customStyle={{ padding: 5 }}
                   key={product.id}
                   product={product}
-                  onPress={handleDetailsProductClick}
+                  onPress={() => handleDetailsProductClick(product.id)}
                 />
               ))}
             </View>
