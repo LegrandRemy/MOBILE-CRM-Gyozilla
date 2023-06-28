@@ -42,50 +42,53 @@ const Home = () => {
         <Heading color="#faeccb" fontSize={18} marginLeft={4} marginTop={4}>
           En ce moment
         </Heading>
+        <FlatList
+          horizontal={true}
+          data={lastProducts}
+          key={(item) => item.id}
+          renderItem={(item) => <LastProductBannerHome item={item} />}
+        />
+        <LastProductBannerHome item={lastProducts} />
       </Box>
-      {/* {(lastProducts)?
-      <TouchableHighlight onPress={}>
-        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <AspectRatio w="90%" ratio={16 / 9}>
-            <Image
-              borderRadius={10}
-              source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
-              alt="image"
-            />
-          </AspectRatio>
-        </Box>
-      </TouchableHighlight>
-
-      :
-      <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <Skeleton borderRadius={10} width={"90%"} height={200}/>
-      </Box>
-      } */}
-      <FlatList
-        horizontal={true}
-        data={lastProducts}
-        key={(item) => item.id}
-        renderItem={(item) => <LastProductBannerHome item={item} />}
-      />
-      {/* <LastProductBannerHome item={lastNews} /> */}
-      <Box backgroundColor={'blue'} marginLeft={4} padding={4}>
-        <Heading color="black" fontSize={18} marginTop={4}>
+      <Box
+        backgroundColor={'#5F8D85'}
+        paddingLeft={4}
+        paddingTop={5}
+        paddingBottom={8}
+      >
+        <Heading color="#faeccb" fontSize={18} marginTop={4} marginBottom={2}>
           Chaud devant !!!!!
         </Heading>
-        <Text color="black">Découvrez les actualités Gyozilla®</Text>
+        <Text>Découvrez les dernières actualités Gyozilla®</Text>
         <FlatListNewsCarousel propsData={lastNews} />
-        <Heading color="black" width={250} fontSize={18} marginTop={20}>
+      </Box>
+      <Box
+        backgroundColor={'#77614c'}
+        justifyContent={'center'}
+        paddingBottom={6}
+        paddingLeft={4}
+      >
+        <Heading
+          color="#faeccb"
+          width={250}
+          fontSize={18}
+          marginTop={7}
+          marginBottom={4}
+        >
           Une petite ou une grosse faim ? &#127836;
         </Heading>
         <Box
-          flexDirection={'row'}
+          display={'flex'}
           flexWrap={'wrap'}
-          marginRight={4}
-          justifyContent={'center'}
-          marginTop={10}
-          marginBottom={10}
+          flexDirection={'row'}
+          marginBottom={0}
+          paddingLeft={0}
+          paddingBottom={0}
+          borderRadius={10}
+          width={380}
+          height={'auto'}
         >
-          <ListHomeImgBG toto={lastNews} />
+          <ListHomeImgBG lastNews={lastNews} />
         </Box>
       </Box>
     </ScrollView>

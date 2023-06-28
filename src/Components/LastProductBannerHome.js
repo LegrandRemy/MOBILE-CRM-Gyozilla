@@ -15,18 +15,20 @@ const LastProductBannerHome = ({ item }) => {
         <TouchableOpacity
           onPress={() => handlePress(item.id)}
           underlayColor="transparent"
-          style={{ justifyContent: 'center' }}
+          style={{ alignItems: 'center' }}
         >
           <Image
             width={380}
-            height={400}
+            height={380}
             borderRadius={10}
-            source={{uri: `https://api-gyozilla.onrender.com/${item[0].image}`}}
-            alt="image"
+            source={{
+              uri: `https://api-gyozilla.onrender.com/${item[0].image}`,
+            }}
+            alt="en ce moment"
           />
         </TouchableOpacity>
       ) : (
-        <Box alignItems={'center'} marginY={-8} marginBottom={3}>
+        <Box alignItems={'center'} marginY={-188} marginBottom={3}>
           <Skeleton borderRadius={10} width={'90%'} height={200} />
         </Box>
       )}
