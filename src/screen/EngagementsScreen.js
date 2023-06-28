@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import Card from "../Components/Card";
+import Card from "../components/Card";
 import {
   Box,
   AspectRatio,

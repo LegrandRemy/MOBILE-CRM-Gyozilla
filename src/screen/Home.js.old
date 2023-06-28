@@ -7,8 +7,8 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { Box, Heading, Text, AspectRatio } from "native-base";
-import ListHomeImgBG from "../Components/ListHomeImgBG";
-import SearchHomeInput from "../Components/SearchHomeInput";
+import ListHomeImgBG from "../components/ListHomeImgBG";
+import SearchHomeInput from "../components/SearchHomeInput";
 import { getAllProducts } from "../utils/api-call/getAllProducts";
 
 const Home = () => {

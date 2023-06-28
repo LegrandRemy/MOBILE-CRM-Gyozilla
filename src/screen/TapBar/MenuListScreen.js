@@ -106,6 +106,7 @@ const MenuList = ({ route, props }) => {
           }
         />
       </List.Accordion>
+      
       <Divider />
 
       <List.Item
@@ -118,6 +119,7 @@ const MenuList = ({ route, props }) => {
         onPress={() => handleMenuItemPress("Engagements")}
         style={{ backgroundColor: "#eaeaea" }}
       />
+
     </View>
   ) : (
     <ScrollView>

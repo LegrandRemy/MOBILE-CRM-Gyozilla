@@ -8,16 +8,20 @@ import {
   Skeleton,
   FlatList,
 } from "native-base";
-import ListHomeImgBG from "../../Components/ListHomeImgBG";
-import SearchHomeInput from "../../Components/SearchHomeInput";
+import ListHomeImgBG from "../../components/ListHomeImgBG";
+import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
-import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
-import LastProductBannerHome from "../../Components/LastProductBannerHome";
+import FlatListNewsCarousel from "../../components/FlatListNewsCarousel";
+import LastProductBannerHome from "../../components/LastProductBannerHome";
+import { useContext } from "react";
+import { UserContext } from "../../utils/context/UserContext";
 
 const Home = () => {
   const [lastNews, setLastNews] = useState();
-  const [lastProducts, setLastProducts] = useState();
-  console.log("lastProducts", lastProducts);
+  const [lastProducts, setLastProducts] = useState([]);
+
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     instanceAxios
       .get("products/lastProduct")
@@ -40,6 +44,10 @@ const Home = () => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
+
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <Box paddingBottom={10} backgroundColor={"#77614c"}>
@@ -48,31 +56,29 @@ const Home = () => {
           En ce moment
         </Heading>
       </Box>
+
       {/* {(lastProducts)?
-      <TouchableHighlight onPress={}>
-        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <AspectRatio w="90%" ratio={16 / 9}>
-            <Image
-              borderRadius={10}
-              source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
-              alt="image"
-            />
-          </AspectRatio>
-        </Box>
-      </TouchableHighlight>
+       <TouchableHighlight onPress={}>
+         <Box alignItems={"center"} marginY={-8} marginBottom={3}>
+           <AspectRatio w="90%" ratio={16 / 9}>
+             <Image 
+               borderRadius={10}
+               source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
+               alt="image"
+             />
+           </AspectRatio> 
+        </Box> 
+       </TouchableHighlight> 
 
       :
-      <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <Skeleton borderRadius={10} width={"90%"} height={200}/>
-      </Box>
+      //  <Box alignItems={"center"} marginY={-8} marginBottom={3}>
+      //      <Skeleton borderRadius={10} width={"90%"} height={200}/>
+      // </Box>
+      //   <LastProductBannerHome item={lastProducts} />
+        //  :
+       "" 
       } */}
-      <FlatList
-        horizontal={true}
-        data={lastProducts}
-        key={(item) => item.id}
-        renderItem={(item) => <LastProductBannerHome item={item} />}
-      />
-      {/* <LastProductBannerHome item={lastNews} /> */}
+
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
           Chaud devant !!!!!
