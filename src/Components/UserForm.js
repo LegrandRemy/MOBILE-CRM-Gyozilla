@@ -82,9 +82,9 @@ const UserForm = () => {
           AsyncStorage.setItem("@token", response.data.token)
             .then(() => {
               const userDecoded = jwtDecode(response.data.token);
-
               setUser(userDecoded);
               setIsLogged(true);
+              navigation.navigate("Main", {"user": user})
             })
             .catch((err) => console.error("Error in saving token", err));
         }, 3000);
@@ -119,9 +119,9 @@ const UserForm = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <Center flex={1} px="5">

@@ -44,6 +44,10 @@ const Home = () => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
+
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <Box paddingBottom={10} backgroundColor={"#77614c"}>
