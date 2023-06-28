@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import {
   Button,
   Input,
   Center,
   VStack,
   HStack,
-  Box,
   FormControl,
   Heading,
   Icon,
@@ -22,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 import jwtDecode from "jwt-decode";
 import { UserContext } from "../utils/context/UserContext";
 import { useContext } from "react";
-import { useEffect } from "react";
 
 const UserForm = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -72,7 +70,7 @@ const UserForm = () => {
           title: "Succès",
           description: "Vous vous êtes bien connecté.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#008000",
           placement: "top",
@@ -82,18 +80,18 @@ const UserForm = () => {
           AsyncStorage.setItem("@token", response.data.token)
             .then(() => {
               const userDecoded = jwtDecode(response.data.token);
-
               setUser(userDecoded);
               setIsLogged(true);
+              navigation.navigate("Main", {"user": user})
             })
             .catch((err) => console.error("Error in saving token", err));
-        }, 3000);
+        }, 2000);
       } else {
         toast.show({
           title: "Erreur",
           description: "Le compte n'existe pas.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#FF0000",
           placement: "top",
@@ -119,9 +117,9 @@ const UserForm = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <Center flex={1} px="5">
@@ -286,6 +284,7 @@ const UserForm = () => {
               <Input
                 variant="underlined"
                 placeholder="Email"
+                type="email"
                 color="black"
                 fontSize="md"
                 value={signUpEmail}

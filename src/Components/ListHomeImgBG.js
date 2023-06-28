@@ -1,32 +1,24 @@
 import { View, Text, ImageBackground, Box, Image } from 'react-native'
 import React from 'react'
 
-const ListHomeImgBG = ({ toto }) => {
+const ListHomeImgBG = ({ lastNews }) => {
   return (
     <>
-      {toto?.map((item) => (
-        <Box
+      {lastNews?.map((item) => (
+        <ImageBackground
           key={item.id}
           style={{
-            width: 160,
-            height: 200,
+            width: 150,
+            height: 150,
             padding: 10,
-            marginHorizontal: 10,
-            backgroundColor: 'white',
-            borderRadius: 8,
-            justifyContent: 'center',
+            marginHorizontal: 5,
+            marginVertical: 5,
           }}
+          source={{ uri: `https://api-gyozilla.onrender.com/${item.image}` }}
+          resizeMode="contain"
         >
-          <Image
-            style={{ width: 120, height: 120, marginBottom: 10 }}
-            source={{ uri: `https://api-gyozilla.onrender.com/${item.image}` }}
-            resizeMode="contain"
-          />
-
-          <Text style={{ fontWeight: '600', textAlign: 'center' }}>
-            {item.name}
-          </Text>
-        </Box>
+          <Text style={{ fontWeight: '600' }}>{item.name}</Text>
+        </ImageBackground>
       ))}
     </>
   )

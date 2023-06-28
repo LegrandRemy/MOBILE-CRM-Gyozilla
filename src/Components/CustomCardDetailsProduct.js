@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Box } from "react-native-design-utility";
 import { ToastAndroid } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import CartContext from "../../utils/context/CartContext";
+// import CartContext from "../../utils/context/CartContext";
 
 import AddCardIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import AddIcon from "react-native-vector-icons/MaterialIcons";
-import RemoveIcon from "react-native-vector-icons/MaterialIcons";
+import AddIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import RemoveIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Box } from "native-base";
 
 const CustomCardDetailsProduct = ({
   id,
@@ -46,7 +46,7 @@ const CustomCardDetailsProduct = ({
   }
 
   const [quantity, setQuantity] = useState(1);
-  const { updateCartItems } = useContext(CartContext);
+  // const { updateCartItems } = useContext(CartContext);
   const navigation = useNavigation();
   const [productList, setProductList] = useState([]);
 
@@ -89,7 +89,8 @@ const CustomCardDetailsProduct = ({
   };
 
   return (
-    <>
+    <View>
+      <Text>TOTO</Text>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => {
@@ -187,7 +188,7 @@ const CustomCardDetailsProduct = ({
           </Box>
         )}
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 

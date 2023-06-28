@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, TouchableHighlight } from 'react-native'
-import {
-  Box,
-  Heading,
-  Text,
-  AspectRatio,
-  Skeleton,
-  FlatList,
-} from 'native-base'
-import ListHomeImgBG from '../../Components/ListHomeImgBG'
-import SearchHomeInput from '../../Components/SearchHomeInput'
+import { Box, Heading, Text, FlatList } from 'native-base'
+import ListHomeImgBG from '../../components/ListHomeImgBG'
+import SearchHomeInput from '../../components/SearchHomeInput'
 import { instanceAxios } from '../../utils/interceptor'
-import FlatListNewsCarousel from '../../Components/FlatListNewsCarousel'
-import LastProductBannerHome from '../../Components/LastProductBannerHome'
+import FlatListNewsCarousel from '../../components/FlatListNewsCarousel'
+import LastProductBannerHome from '../../components/LastProductBannerHome'
+import { useContext } from 'react'
+import { UserContext } from '../../utils/context/UserContext'
 
 const Home = () => {
   const [lastNews, setLastNews] = useState()

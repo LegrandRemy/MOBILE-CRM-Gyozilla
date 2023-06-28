@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native'
 import { Button } from 'native-base'
+import { Formik } from 'formik'
 import ContactForm from '../components/ContactForm'
 const screenWidth = Dimensions.get('window').width
 
