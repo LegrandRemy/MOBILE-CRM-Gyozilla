@@ -67,12 +67,13 @@ const UserForm = () => {
 
   const handleSignIn = () => {
     login({ email: signInEmail, password: signInPassword }).then((response) => {
+      console.log("coucou")
       if (response.data.message === "Authentification réussi") {
         toast.show({
           title: "Succès",
           description: "Vous vous êtes bien connecté.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#008000",
           placement: "top",
@@ -87,13 +88,13 @@ const UserForm = () => {
               navigation.navigate("Main", {"user": user})
             })
             .catch((err) => console.error("Error in saving token", err));
-        }, 3000);
+        }, 2000);
       } else {
         toast.show({
           title: "Erreur",
           description: "Le compte n'existe pas.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#FF0000",
           placement: "top",
