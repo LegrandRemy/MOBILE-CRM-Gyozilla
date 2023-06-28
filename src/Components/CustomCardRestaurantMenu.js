@@ -11,13 +11,13 @@ import {
   Radio,
 } from "native-base";
 
-const CustomCardProduct = ({ product, onClick, menu, customStyle }) => {
+const CustomCardRestaurantMenu = ({ product, onClick, menu, src, title }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       onPress={onClick}
-      style={[{ width: "50%", height: 200, marginBottom: 10 }, customStyle]}
+      style={{ width: "50%", height: 200, marginBottom: 10, padding: 5 }}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -47,20 +47,12 @@ const CustomCardProduct = ({ product, onClick, menu, customStyle }) => {
             bgColor="#5F8D85"
           >
             <Heading size="sm" ml="-1">
-              {product ? product.name : menu.name}
+              {title}
             </Heading>
           </Stack>
           <Box>
             <AspectRatio w="100%">
-              <Image
-                resizeMode="cover"
-                source={{
-                  uri: product
-                    ? `https://api-gyozilla.onrender.com/${product.image}`
-                    : `https://api-gyozilla.onrender.com/${menu.image}`,
-                }}
-                alt="image"
-              />
+              <Image resizeMode="cover" source={src} alt="image" />
             </AspectRatio>
           </Box>
         </Box>
@@ -68,4 +60,4 @@ const CustomCardProduct = ({ product, onClick, menu, customStyle }) => {
     </TouchableOpacity>
   );
 };
-export default CustomCardProduct;
+export default CustomCardRestaurantMenu;

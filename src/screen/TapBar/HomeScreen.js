@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Image, ScrollView, TouchableHighlight } from "react-native";
+import React, { useEffect, useState } from 'react'
+import { Image, ScrollView, TouchableHighlight } from 'react-native'
 import {
   Box,
   Heading,
@@ -7,42 +7,42 @@ import {
   AspectRatio,
   Skeleton,
   FlatList,
-} from "native-base";
-import ListHomeImgBG from "../../Components/ListHomeImgBG";
-import SearchHomeInput from "../../Components/SearchHomeInput";
-import { instanceAxios } from "../../utils/interceptor";
-import FlatListNewsCarousel from "../../Components/FlatListNewsCarousel";
-import LastProductBannerHome from "../../Components/LastProductBannerHome";
+} from 'native-base'
+import ListHomeImgBG from '../../Components/ListHomeImgBG'
+import SearchHomeInput from '../../Components/SearchHomeInput'
+import { instanceAxios } from '../../utils/interceptor'
+import FlatListNewsCarousel from '../../Components/FlatListNewsCarousel'
+import LastProductBannerHome from '../../Components/LastProductBannerHome'
 
 const Home = () => {
-  const [lastNews, setLastNews] = useState();
-  const [lastProducts, setLastProducts] = useState();
-  console.log("lastProducts", lastProducts);
+  const [lastNews, setLastNews] = useState()
+  const [lastProducts, setLastProducts] = useState()
+  console.log('lastProducts', lastProducts)
   useEffect(() => {
     instanceAxios
-      .get("products/lastProduct")
+      .get('products/lastProduct')
       .then((res) => {
-        setLastProducts(res.data);
+        setLastProducts(res.data)
       })
       .catch((error) => {
-        setLastProducts([]);
-      });
-  }, []);
+        setLastProducts([])
+      })
+  }, [])
 
   useEffect(() => {
     instanceAxios
-      .get("lastnews")
+      .get('lastnews')
       .then((res) => {
-        setLastNews(res.data);
+        setLastNews(res.data)
       })
       .catch((error) => {
-        setLastNews([]);
-      });
-  }, []);
+        setLastNews([])
+      })
+  }, [])
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
-      <Box paddingBottom={10} backgroundColor={"#77614c"}>
+    <ScrollView style={{ backgroundColor: 'white' }}>
+      <Box paddingBottom={10} backgroundColor={'#77614c'}>
         <SearchHomeInput />
         <Heading color="#faeccb" fontSize={18} marginLeft={4} marginTop={4}>
           En ce moment
@@ -73,7 +73,7 @@ const Home = () => {
         renderItem={(item) => <LastProductBannerHome item={item} />}
       />
       {/* <LastProductBannerHome item={lastNews} /> */}
-      <Box backgroundColor={"blue"} marginLeft={4}>
+      <Box backgroundColor={'blue'} marginLeft={4} padding={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
           Chaud devant !!!!!
         </Heading>
@@ -83,18 +83,18 @@ const Home = () => {
           Une petite ou une grosse faim ? &#127836;
         </Heading>
         <Box
-          flexDirection={"row"}
-          flexWrap={"wrap"}
+          flexDirection={'row'}
+          flexWrap={'wrap'}
           marginRight={4}
-          justifyContent={"center"}
+          justifyContent={'center'}
           marginTop={10}
           marginBottom={10}
         >
-          {/* <ListHomeImgBG props={products} /> */}
+          <ListHomeImgBG toto={lastNews} />
         </Box>
       </Box>
     </ScrollView>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
