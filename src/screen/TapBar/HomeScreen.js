@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableHighlight } from "react-native";
-import {
-  Box,
-  Heading,
-  Text,
-  AspectRatio,
-  Skeleton,
-  FlatList,
-} from "native-base";
+import { Box, Heading, Text } from "native-base";
 import ListHomeImgBG from "../../components/ListHomeImgBG";
 import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
@@ -43,11 +36,6 @@ const Home = () => {
         setLastNews([]);
       });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <Box paddingBottom={10} backgroundColor={"#77614c"}>
@@ -56,29 +44,7 @@ const Home = () => {
           En ce moment
         </Heading>
       </Box>
-
-      {/* {(lastProducts)?
-       <TouchableHighlight onPress={}>
-         <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-           <AspectRatio w="90%" ratio={16 / 9}>
-             <Image 
-               borderRadius={10}
-               source={{uri: `https://api-gyozilla.onrender.com/${lastProducts?.image}`}}
-               alt="image"
-             />
-           </AspectRatio> 
-        </Box> 
-       </TouchableHighlight> 
-
-      :
-      //  <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-      //      <Skeleton borderRadius={10} width={"90%"} height={200}/>
-      // </Box>
-      //   <LastProductBannerHome item={lastProducts} />
-        //  :
-       "" 
-      } */}
-
+      <LastProductBannerHome item={lastProducts} />
       <Box backgroundColor={"blue"} marginLeft={4}>
         <Heading color="black" fontSize={18} marginTop={4}>
           Chaud devant !!!!!
@@ -96,7 +62,7 @@ const Home = () => {
           marginTop={10}
           marginBottom={10}
         >
-          {/* <ListHomeImgBG props={products} /> */}
+          <ListHomeImgBG lastNews={lastNews} />
         </Box>
       </Box>
     </ScrollView>

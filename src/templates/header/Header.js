@@ -25,16 +25,12 @@ const Header = () => {
   };
 
   const handlePress = (screenName) => {
-    if (screenName === "HomeDashBoard") {
-      navigation.navigate("HomeDashBoard");
-    } else {
-      navigation.navigate("LoginRegister");
-    }
+    navigation.navigate(screenName);
   };
 
   return (
     <>
-      {user && user.role ? (
+      {user ? (
         <Box
           style={{
             paddingTop: 20,
@@ -42,11 +38,12 @@ const Header = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            height: 70,
+            height: 100,
             backgroundColor: "#1d292b",
           }}
         >
           <Image
+            marginTop={10}
             source={require("../../../assets/logo_gyozilla.png")}
             alt="Logo"
             style={{ marginLeft: 10, width: "25%", height: 100 }}
@@ -119,12 +116,12 @@ const Header = () => {
             icon={
               <Icon
                 as={MaterialCommunityIcons}
-                onPress={() => handlePress("LoginRegister")}
                 name="account"
                 size="xl"
                 color="#faeccb"
               />
             }
+            onPress={() => handlePress("LoginRegister")}
           />
         </Box>
       )}

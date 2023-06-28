@@ -4,25 +4,23 @@ import { useNavigation } from "@react-navigation/native";
 import { AspectRatio, Box, Image, Skeleton } from "native-base";
 
 const LastProductBannerHome = ({ item }) => {
-  console.log("item", item);
   const navigation = useNavigation();
+
   const handlePress = (id) => {
-    navigation.navigate("LastProduct", { id: id });
+    navigation.navigate("LastProductsHome", { id: id });
   };
   return (
     <>
-      {item ? (
+      {item && item[0].image ? (
         <TouchableOpacity
-          onPress={() => handlePress(item.item.id)}
+          onPress={() => handlePress(item.id)}
           underlayColor="transparent"
         >
           <Image
             width={150}
             height={150}
             borderRadius={10}
-            source={{
-              uri: `https://api-gyozilla.onrender.com/${item.item.image}`,
-            }}
+            source={{uri: `https://api-gyozilla.onrender.com/${item[0].image}`}}
             alt="image"
           />
         </TouchableOpacity>

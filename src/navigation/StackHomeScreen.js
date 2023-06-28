@@ -5,8 +5,7 @@ import Home from "../screen/TapBar/HomeScreen";
 import LastProductsHome from "../screen/LastProductsHome";
 
 const Stack = createStackNavigator();
-
-const StackNewsNavigator = () => {
+const StackHomeScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ header: () => null }}>
       <Stack.Screen name="Home" component={Home} />
@@ -18,14 +17,14 @@ const StackNewsNavigator = () => {
         })}
       />
       <Stack.Screen
-        name="LastProduct"
+        name="LastProductsHome"
         component={LastProductsHome}
         options={({ route }) => ({
-          title: `LastProduct ${route.params?.id}`,
+          title: `LastProductsHome ${route.params?.id}`,
         })}
       />
     </Stack.Navigator>
   );
 };
 
-export default StackNewsNavigator;
+export default StackHomeScreen;
