@@ -10,6 +10,7 @@ import {
   HStack,
   Radio,
 } from "native-base";
+import { REACT_APP_URL_API } from '@env'
 
 const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
   const navigation = useNavigation();
@@ -56,8 +57,8 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
                 resizeMode="cover"
                 source={{
                   uri: product
-                    ? `https://api-gyozilla.onrender.com/${product.image}`
-                    : `https://api-gyozilla.onrender.com/${menu.image}`,
+                    ? `${REACT_APP_URL_API}${product.image}`
+                    : `${REACT_APP_URL_API}${menu.image}`,
                 }}
                 alt="image"
               />

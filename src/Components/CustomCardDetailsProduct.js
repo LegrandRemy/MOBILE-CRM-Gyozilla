@@ -9,6 +9,7 @@ import AddCardIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import AddIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import RemoveIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Box } from "native-base";
+import { REACT_APP_URL_API } from '@env'
 
 const CustomCardDetailsProduct = ({
   id,
@@ -42,7 +43,7 @@ const CustomCardDetailsProduct = ({
 }) => {
   let dbImage = "";
   if (image !== undefined) {
-    dbImage = "https://api-gyozilla.onrender.com/" + image;
+    dbImage = REACT_APP_URL_API + image;
   }
 
   const [quantity, setQuantity] = useState(1);
