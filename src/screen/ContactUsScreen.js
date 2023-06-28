@@ -8,10 +8,7 @@ import {
   Dimensions,
 } from 'react-native'
 import { Button } from 'native-base'
-import ContactForm from '../Components/ContactForm'
-import { Formik } from 'formik'
-import { sendMail } from '../utils/ApiCall'
-
+import ContactForm from '../components/ContactForm'
 const screenWidth = Dimensions.get('window').width
 
 const Contact = () => {

@@ -11,9 +11,9 @@ const LastProductBannerHome = ({ item }) => {
   }
   return (
     <>
-      {item ? (
+      {item && item[0].image ? (
         <TouchableOpacity
-          onPress={() => handlePress(item.item.id)}
+          onPress={() => handlePress(item.id)}
           underlayColor="transparent"
           style={{ justifyContent: 'center' }}
         >
@@ -21,9 +21,7 @@ const LastProductBannerHome = ({ item }) => {
             width={380}
             height={400}
             borderRadius={10}
-            source={{
-              uri: `https://api-gyozilla.onrender.com/${item.item.image}`,
-            }}
+            source={{uri: `https://api-gyozilla.onrender.com/${item[0].image}`}}
             alt="image"
           />
         </TouchableOpacity>
