@@ -4,14 +4,14 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
+import { UserContext } from './src/utils/context/UserContext';
+import { useEffect } from 'react';
+import StackDashBoardNavigator from './src/navigation/StackDashBoardNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 import Loader from "./src/components/loader";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
-import { UserContext } from "./src/utils/context/UserContext";
-import { useEffect } from "react";
-import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import jwtDecode from "jwt-decode";
 
 const theme = extendTheme({
   colors: {
@@ -43,7 +43,7 @@ const theme = extendTheme({
 });
 
 export default function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
 

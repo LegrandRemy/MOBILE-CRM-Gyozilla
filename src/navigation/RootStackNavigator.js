@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import StackLoginRegister from "./StackLoginRegister";
-import BottomNav from "../components/TapBar";
 import Header from "../templates/header/Header";
+import BottomNav from "../components/TapBar"
 
 const RootStack = createNativeStackNavigator();
 

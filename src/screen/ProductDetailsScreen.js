@@ -1,10 +1,11 @@
 import { View, Text } from "react-native";
 import React from "react";
+import CustomCardDetailsProduct from "../components/CustomCardDetailsProduct";
 
 const ProductDetailsScreen = () => {
   return (
     <View>
-      <Text>ProductDetailsScreen</Text>
+      <CustomCardDetailsProduct>ProductDetailsScreen</CustomCardDetailsProduct>
     </View>
   );
 };
