@@ -1,15 +1,32 @@
-import { View, Text, ImageBackground, Image } from 'react-native'
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableHighlight,
+} from 'react-native'
 import React from 'react'
 import { Box } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
-const ListHomeImgBG = ({ lastNews }) => {
-  return lastNews?.map((item) => (
+const ListHomeImgBG = ({ lastProducts }) => {
+  const navigation = useNavigation()
+
+  const handlePress = (id) => {
+    navigation.navigate('ProductDetailsScreen', { id: id })
+  }
+  return lastProducts?.map((item) => (
+    // <TouchableHighlight
+    //   onPress={() => handlePress(item.id)}
+    //   underlayColor="transparent"
+    // >
     <Box
       display={'flex'}
       flexWrap={'wrap'}
       flexDirection={'column'}
       width={'48%'}
       margin={0.5}
+      marginTop={3}
       backgroundColor={'#CDE8E7'}
       justifyContent={'center'}
       padding={0}
@@ -41,6 +58,7 @@ const ListHomeImgBG = ({ lastNews }) => {
         resizeMode="contain"
       ></ImageBackground>
     </Box>
+    // </TouchableHighlight>
   ))
 }
 

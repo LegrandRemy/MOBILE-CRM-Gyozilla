@@ -57,7 +57,7 @@ const Home = () => {
         paddingBottom={8}
       >
         <Heading color="#faeccb" fontSize={18} marginTop={4} marginBottom={2}>
-          Chaud devant !!!!!
+          Ca se passe près de chez vous
         </Heading>
         <Text>Découvrez les dernières actualités Gyozilla®</Text>
         <FlatListNewsCarousel propsData={lastNews} />
@@ -75,7 +75,7 @@ const Home = () => {
           marginTop={7}
           marginBottom={4}
         >
-          Une petite ou une grosse faim ? &#127836;
+          Quel type de gourmand êtes-vous? &#127836;
         </Heading>
         <Box
           display={'flex'}
@@ -88,7 +88,7 @@ const Home = () => {
           width={380}
           height={'auto'}
         >
-          <ListHomeImgBG lastNews={lastNews} />
+          <ListHomeImgBG lastProducts={lastProducts} />
         </Box>
       </Box>
     </ScrollView>
