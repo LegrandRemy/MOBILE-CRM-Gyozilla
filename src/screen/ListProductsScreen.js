@@ -32,8 +32,6 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [lastStep, setLastStep] = useState(false);
 
   const { name } = route.params;
-  console.log("route", route);
-  console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
