@@ -1,5 +1,6 @@
 import { Text, ImageBackground } from 'react-native'
 import React from 'react'
+import { REACT_APP_URL_API } from '@env'
 
 const ListHomeImgBG = ({lastNews}) => {
     return (
@@ -11,7 +12,7 @@ const ListHomeImgBG = ({lastNews}) => {
                 padding:10,
                 marginHorizontal: 5,
                 marginVertical: 5,
-            }} source={{uri: `https://api-gyozilla.onrender.com/${item.image}`}} resizeMode="contain" >
+            }} source={{uri: `${REACT_APP_URL_API}${item.image}`}} resizeMode="contain" >
                 <Text style={{fontWeight:"600"}}>{item.name}</Text>
             </ImageBackground>
         ))}

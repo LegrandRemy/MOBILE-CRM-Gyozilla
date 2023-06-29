@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
 import { instanceAxios } from '../utils/interceptor';
 import { Image } from 'native-base';
+import { REACT_APP_URL_API } from '@env'
 
 const OneNews = () => {
     const route = useRoute();
@@ -23,7 +24,7 @@ const OneNews = () => {
         <View>
             <Text>Titre: {news?.name}</Text>
             <Image
-                source={{uri: `https://api-gyozilla.onrender.com/${news?.image}`}}
+                source={{uri: `${REACT_APP_URL_API}${news?.image}`}}
                 style={{ flex: 1, minWidth: 150, maxHeight: 150, minHeight: 150, marginTop:10}}
                 resizeMode="cover"
                 alt="Image de l'actualité"

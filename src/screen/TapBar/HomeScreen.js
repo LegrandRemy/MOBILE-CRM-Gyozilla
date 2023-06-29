@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableHighlight } from "react-native";
-import {
-  Box,
-  Heading,
-  Text,
-} from "native-base";
+import { Box, Heading, Text } from "native-base";
 import ListHomeImgBG from "../../components/ListHomeImgBG";
 import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";

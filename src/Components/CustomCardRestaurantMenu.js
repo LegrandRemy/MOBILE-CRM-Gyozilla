@@ -10,15 +10,14 @@ import {
   HStack,
   Radio,
 } from "native-base";
-import { REACT_APP_URL_API } from '@env'
 
-const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
+const CustomCardRestaurantMenu = ({ product, onPress, menu, src, title }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[{ width: "50%", height: 200, marginBottom: 10 }, customStyle]}
+      style={{ width: "50%", height: 200, marginBottom: 10, padding: 5 }}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -48,20 +47,12 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
             bgColor="#5F8D85"
           >
             <Heading size="sm" ml="-1">
-              {product ? product.name : menu.name}
+              {title}
             </Heading>
           </Stack>
           <Box>
             <AspectRatio w="100%">
-              <Image
-                resizeMode="cover"
-                source={{
-                  uri: product
-                    ? `${REACT_APP_URL_API}${product.image}`
-                    : `${REACT_APP_URL_API}${menu.image}`,
-                }}
-                alt="image"
-              />
+              <Image resizeMode="cover" source={src} alt="image" />
             </AspectRatio>
           </Box>
         </Box>
@@ -69,4 +60,4 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
     </TouchableOpacity>
   );
 };
-export default CustomCardProduct;
+export default CustomCardRestaurantMenu;

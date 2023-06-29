@@ -1,18 +1,14 @@
-
 import * as React from "react";
-import Home from "../screen/TapBar/HomeScreen";
 import "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import RestaurantMenu from "../screen/TapBar/RestaurantMenuScreen";
 import Geoloc from "../screen/TapBar/GeolocScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
 import Header from "../templates/header/Header";
+import StackRestaurantMenuNavigator from "../navigation/StackRestaurantMenu";
 import StackHomeScreen from "../navigation/StackHomeScreen";
 
-
 const Tab = createBottomTabNavigator();
-
 
 const BottomNav = () => {
   return (
@@ -69,7 +65,6 @@ const BottomNav = () => {
             }
           }
 
-          // You can return any component that you like here!
           return (
             <MaterialCommunityIcons
               name={iconName}
@@ -87,11 +82,13 @@ const BottomNav = () => {
         component={StackHomeScreen}
         name="Accueil"
       />
+
       <Tab.Screen
         options={{ header: () => <Header /> }}
-        component={RestaurantMenu}
+        component={StackRestaurantMenuNavigator}
         name="La carte"
       />
+
       <Tab.Screen
         options={{ header: () => <Header /> }}
         component={Geoloc}
@@ -104,6 +101,6 @@ const BottomNav = () => {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default BottomNav;
