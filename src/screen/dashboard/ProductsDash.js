@@ -6,40 +6,30 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Alert, FlatList, Image, ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { deleteProductById } from '../../utils/api-call/deleteProductById';
+import ModalEditDash from '../../components/ModalEditDash';
 
 const ProductsDash = () => {
+  const [modalVisible,setModalVisible] = useState(false)
   const navigation = useNavigation();
   const [page, setPage] = useState(0);
   const [numberOfItemsPerPageList] = useState([9,15,20]);
   const [itemsPerPage, onItemsPerPageChange] = useState(
     numberOfItemsPerPageList[0]
   );
+  
+  const openModal = ()=>{
+    setModalVisible(true)
+  }
+
+  const closeModal = ()=>{
+    setModalVisible(false)
+  }
 
   const [products, setProducts] = useState();
-
-
-
-
-  // const alertDelete = ()=>{
-  //   Alert.alert('Supression du produit', 'Voulez-vous vraiment ce produit ?', [
-  //     {
-  //       text: 'Annuler',
-  //       style: 'cancel',
-  //     },
-  //     {
-  //       text: 'Oui',
-  //       onPress: () => console.log('OK Pressed')
-  //     },
-  //   ])
-  // }
-
-
 
   const handlePress = (id)=>{
     navigation.navigate('CrudProduct', {id: id});
   }
-
-
 
   useEffect(()=>{
     getAllProducts()
@@ -50,20 +40,33 @@ const ProductsDash = () => {
     })
   }, [])
 
-  const handleDelete = (id)=>{
 
+
+  const handleDelete = (id)=>{
     try {
       deleteProductById(id)
       .then((res)=>{
-        console.log(res);
-        // if (res.status === 200) {
-        //   const updatedProducts = products.filter((item) => item.id !== id);
-        //   setProducts(updatedProducts);
-        // }
+        if (res.status === 200) {
+          const updatedProducts = products.filter((item) => item.id !== id);
+          setProducts(updatedProducts);
+        }
       })
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const alertDelete = (id)=>{
+    Alert.alert('Supression du produit', 'Voulez-vous vraiment ce produit ?', [
+      {
+        text: 'Annuler',
+        style: 'cancel',
+      },
+      {
+        text: 'Oui',
+        onPress: () => handleDelete(id)
+      },
+    ])
   }
 
   const from = page * itemsPerPage;
@@ -75,8 +78,18 @@ const ProductsDash = () => {
 
   return (
     <ScrollView>
+      <ModalEditDash
+      visible={modalVisible}
+      closeModal={closeModal}
+      />
       <View style={{width: '100%', alignItems: 'flex-end'}}>
-      <Icon as={MaterialCommunityIcons} name="plus" size={"xl"} color="black" marginTop={4} marginRight={4} />
+      <Icon 
+      onPress={()=>openModal()}
+      as={MaterialCommunityIcons} 
+      name="plus" size={"xl"} 
+      color="black" 
+      marginTop={4} 
+      marginRight={4} />
       </View>
       
       <DataTable>
@@ -99,7 +112,7 @@ const ProductsDash = () => {
               </DataTable.Cell>
               <DataTable.Cell 
               style={{justifyContent:'center'}}
-              onPress={()=>handleDelete(item.id)}>
+              onPress={()=>alertDelete(item.id)}>
                 <Icon as={MaterialCommunityIcons} name="delete" size={"md"} color="black" />
               </DataTable.Cell>
             </DataTable.Row>
