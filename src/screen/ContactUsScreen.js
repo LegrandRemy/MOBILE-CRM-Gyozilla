@@ -6,47 +6,53 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  ScrollView,
 } from 'react-native'
-import { Button } from 'native-base'
 import { Formik } from 'formik'
 import ContactForm from '../components/ContactForm'
 const screenWidth = Dimensions.get('window').width
 
 const Contact = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>Une question ? Une remarque ?</Text>
-        <Text style={styles.subtitle}>
-          Joignez-nous tout type de demande via le formulaire ci-dessous.
-        </Text>
-        {/* <Image source={logo} style={styles.logo} /> */}
+    <ScrollView
+      style={{
+        paddingVertical: 60,
+      }}
+    >
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>Une question ? Une remarque ?</Text>
+          <Text style={styles.subtitle}>
+            Joignez-nous tout type de demande via le formulaire ci-dessous.
+          </Text>
+          {/* <Image source={logo} style={styles.logo} /> */}
+        </View>
+        <Formik
+          enableReinitialize
+          initialValues={{
+            lastname: '',
+            email: '',
+            message: '',
+          }}
+          onSubmit={(values) => {
+            console.log(values)
+            sendMail(values)
+          }}
+        >
+          {({ values, handleSubmit, handleChange }) => {
+            return (
+              <ContactForm
+                values={values}
+                handleSubmit={handleSubmit}
+                handleChangeLastname={handleChange('lastname')}
+                handleChangeEmail={handleChange('email')}
+                handleChangeMessage={handleChange('message')}
+              ></ContactForm>
+            )
+          }}
+        </Formik>
       </View>
-      <Formik
-        enableReinitialize
-        initialValues={{
-          lastname: '',
-          email: '',
-          message: '',
-        }}
-        onSubmit={(values) => {
-          console.log(values)
-          sendMail(values)
-        }}
-      >
-        {({ values, handleSubmit, handleChange }) => {
-          return (
-            <ContactForm
-              values={values}
-              handleSubmit={handleSubmit}
-              handleChangeLastname={handleChange('lastname')}
-              handleChangeEmail={handleChange('email')}
-              handleChangeMessage={handleChange('message')}
-            ></ContactForm>
-          )
-        }}
-      </Formik>
-    </View>
+    </ScrollView>
   )
 }
 

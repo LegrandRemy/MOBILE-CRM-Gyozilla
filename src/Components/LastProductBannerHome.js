@@ -7,7 +7,7 @@ const LastProductBannerHome = ({ item }) => {
   console.log('item', item)
   const navigation = useNavigation()
   const handlePress = (id) => {
-    navigation.navigate('LastProduct', { id: id })
+    navigation.navigate('LastProductsHome', { id: id })
   }
   return (
     <>
