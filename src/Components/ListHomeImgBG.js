@@ -1,23 +1,68 @@
-import { Text, ImageBackground } from 'react-native'
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableHighlight,
+} from 'react-native'
 import React from 'react'
-import { REACT_APP_URL_API } from '@env'
+import { Box } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
 
-const ListHomeImgBG = ({lastNews}) => {
+const ListHomeImgBG = ({ lastProducts }) => {
+  const navigation = useNavigation()
+
+  const handlePress = (id) => {
+    navigation.navigate('ProductDetailsScreen', { id: id })
+  }
+  return lastProducts?.map((item) => {
+    console.log(item)
     return (
-        <>
-        {lastNews?.map((item) => (
-            <ImageBackground key={item.id} style={{
-                width:150,
-                height:150,
-                padding:10,
-                marginHorizontal: 5,
-                marginVertical: 5,
-            }} source={{uri: `${REACT_APP_URL_API}${item.image}`}} resizeMode="contain" >
-                <Text style={{fontWeight:"600"}}>{item.name}</Text>
-            </ImageBackground>
-        ))}
-        </>
+      // <TouchableHighlight
+      //   onPress={() => handlePress(item.id)}
+      //   underlayColor="transparent"
+      // >
+      <Box
+        display={'flex'}
+        flexWrap={'wrap'}
+        flexDirection={'column'}
+        width={'48%'}
+        margin={0.5}
+        marginTop={3}
+        backgroundColor={'#5F8D85'}
+        justifyContent={'center'}
+        padding={0}
+        paddingBottom={0}
+        borderRadius={6}
+        // width={380}
+        // height={380}
+      >
+        <Text
+          style={{
+            fontWeight: 'bold',
+            marginTop: 15,
+            textAlign: 'center',
+            width: '100%',
+            paddingBottom: 2,
+          }}
+        >
+          {item.name}
+        </Text>
+        <ImageBackground
+          key={item.id}
+          style={{
+            width: '100%',
+            height: 150,
+          }}
+          source={{
+            uri: `https://api-gyozilla.onrender.com/${item.image}`,
+          }}
+          resizeMode="contain"
+        ></ImageBackground>
+      </Box>
+      // </TouchableHighlight>
     )
+  })
 }
 
 export default ListHomeImgBG

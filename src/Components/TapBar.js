@@ -1,14 +1,14 @@
-import * as React from "react";
-import "react-native-gesture-handler";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Geoloc from "../screen/TapBar/GeolocScreen";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import StackMenuListNavigator from "../navigation/StackMenuListNavigator";
-import Header from "../templates/header/Header";
-import StackRestaurantMenuNavigator from "../navigation/StackRestaurantMenu";
-import StackHomeScreen from "../navigation/StackHomeScreen";
+import * as React from 'react'
+import 'react-native-gesture-handler'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import Geoloc from '../screen/TapBar/GeolocScreen'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import StackMenuListNavigator from '../navigation/StackMenuListNavigator'
+import Header from '../templates/header/Header'
+import StackRestaurantMenuNavigator from '../navigation/StackRestaurantMenu'
+import StackHomeScreen from '../navigation/StackHomeScreen'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const BottomNav = () => {
   return (
@@ -20,48 +20,48 @@ const BottomNav = () => {
         // tabBarStyle: { height: 50 },
         // tabBarStyle: { paddingTop: 1, marginBottom: 5, paddingBottom: 5,  },
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-          let newSize;
-          let newColor;
-          if (route.name === "Accueil") {
+          let iconName
+          let newSize
+          let newColor
+          if (route.name === 'Accueil') {
             if (focused) {
-              iconName = "home-outline";
-              newSize = 35;
-              newColor = "#F8A500";
+              iconName = 'home-outline'
+              newSize = 35
+              newColor = '#F8A500'
             } else {
-              iconName = "home";
-              newSize = 25;
-              newColor = "#5F8D85";
+              iconName = 'home'
+              newSize = 25
+              newColor = '#5F8D85'
             }
-          } else if (route.name === "La carte") {
+          } else if (route.name === 'La carte') {
             if (focused) {
-              iconName = "noodles";
-              newSize = 35;
-              newColor = "#F8A500";
+              iconName = 'noodles'
+              newSize = 35
+              newColor = '#F8A500'
             } else {
-              iconName = "noodles";
-              newSize = 25;
-              newColor = "#5F8D85";
+              iconName = 'noodles'
+              newSize = 25
+              newColor = '#5F8D85'
             }
-          } else if (route.name === "GeoLoc") {
+          } else if (route.name === 'GeoLoc') {
             if (focused) {
-              iconName = "map-marker-multiple-outline";
-              newSize = 35;
-              newColor = "#F8A500";
+              iconName = 'map-marker-multiple-outline'
+              newSize = 35
+              newColor = '#F8A500'
             } else {
-              iconName = "map-marker-multiple";
-              newSize = 25;
-              newColor = "#5F8D85";
+              iconName = 'map-marker-multiple'
+              newSize = 25
+              newColor = '#5F8D85'
             }
-          } else if (route.name === "Menu") {
+          } else if (route.name === 'Menu') {
             if (focused) {
-              iconName = "format-list-bulleted";
-              newSize = 35;
-              newColor = "#F8A500";
+              iconName = 'format-list-bulleted'
+              newSize = 35
+              newColor = '#F8A500'
             } else {
-              iconName = "format-list-bulleted";
-              newSize = 25;
-              newColor = "#5F8D85";
+              iconName = 'format-list-bulleted'
+              newSize = 25
+              newColor = '#5F8D85'
             }
           }
 
@@ -71,10 +71,10 @@ const BottomNav = () => {
               size={newSize}
               color={newColor}
             />
-          );
+          )
         },
-        tabBarActiveTintColor: "#F8A500",
-        tabBarInactiveTintColor: "#5F8D85",
+        tabBarActiveTintColor: '#F8A500',
+        tabBarInactiveTintColor: '#5F8D85',
       })}
     >
       <Tab.Screen
@@ -100,7 +100,7 @@ const BottomNav = () => {
         name="Menu"
       />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
-export default BottomNav;
+export default BottomNav

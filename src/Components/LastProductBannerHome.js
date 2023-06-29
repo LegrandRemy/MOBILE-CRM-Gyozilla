@@ -1,37 +1,38 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { AspectRatio, Box, Image, Skeleton } from "native-base";
-import { REACT_APP_URL_API } from "@env";
+import { View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { AspectRatio, Box, Image, Skeleton } from 'native-base'
 
 const LastProductBannerHome = ({ item }) => {
-  const navigation = useNavigation();
-
-  const handlePress = (id) => {
-    navigation.navigate("LastProductsHome", { id: id });
-  };
+  const navigation = useNavigation()
+  const handlePress = (item) => {
+    navigation.navigate('LastProductsHome', { item: item })
+  }
   return (
     <>
       {item && item[0]?.image ? (
         <TouchableOpacity
-          onPress={() => handlePress(item.id)}
+          onPress={() => handlePress(item)}
           underlayColor="transparent"
+          style={{ alignItems: 'center' }}
         >
           <Image
-            width={150}
-            height={150}
+            width={380}
+            height={300}
             borderRadius={10}
-            source={{ uri: `${REACT_APP_URL_API}${item[0].image}` }}
-            alt="image"
+            source={{
+              uri: `https://api-gyozilla.onrender.com/${item[0].image}`,
+            }}
+            alt="en ce moment"
           />
         </TouchableOpacity>
       ) : (
-        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <Skeleton borderRadius={10} width={"90%"} height={200} />
+        <Box alignItems={'center'} marginY={-188} marginBottom={3}>
+          <Skeleton borderRadius={10} width={'90%'} height={200} />
         </Box>
       )}
     </>
-  );
-};
+  )
+}
 
-export default LastProductBannerHome;
+export default LastProductBannerHome

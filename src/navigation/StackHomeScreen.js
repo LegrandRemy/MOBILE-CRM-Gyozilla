@@ -1,10 +1,10 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import OneNews from "../screen/OneNews";
-import Home from "../screen/TapBar/HomeScreen";
-import LastProductsHome from "../screen/LastProductsHome";
+import React from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import OneNews from '../screen/OneNews'
+import Home from '../screen/TapBar/HomeScreen'
+import LastProductsHome from '../screen/LastProductsHome'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 const StackHomeScreen = () => {
   return (
     <Stack.Navigator screenOptions={{ header: () => null }}>
@@ -24,7 +24,7 @@ const StackHomeScreen = () => {
         })}
       />
     </Stack.Navigator>
-  );
-};
+  )
+}
 
-export default StackHomeScreen;
+export default StackHomeScreen

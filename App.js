@@ -17,23 +17,23 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: "#F8A500",
-    secondary: "#CDE8E7",
+    primary: '#F8A500',
+    secondary: '#CDE8E7',
   },
   roundness: 10,
-};
+}
 
 export default function App() {
-  const [user, setUser] = useState([]);
-  const [isLogged, setIsLogged] = useState(false);
-  const [load, setLoad] = useState(false);
+  const [user, setUser] = useState([])
+  const [isLogged, setIsLogged] = useState(false)
+  const [load, setLoad] = useState(false)
 
   const inter = () => {
     if (!load) {
-      setLoad(true);
+      setLoad(true)
     }
-  };
-  setTimeout(inter, 4000);
+  }
+  setTimeout(inter, 4000)
 
   console.log(user);
 
@@ -61,14 +61,14 @@ export default function App() {
         </UserContext.Provider>
       </NativeBaseProvider>
     </PaperProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-});
+})
