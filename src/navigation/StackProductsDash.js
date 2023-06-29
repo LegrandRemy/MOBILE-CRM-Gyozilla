@@ -1,19 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
-import HomeDashBoard from '../screen/dashboard/HomeDashBoard';
 import Header from '../templates/header/Header';
-import ProductsDash from '../screen/dashboard/ProductsDash';
 import CrudProduct from '../screen/dashboard/CrudProduct';
+import ProductsDash from '../screen/dashboard/ProductsDash';
 
 const Stack = createStackNavigator();
 
-const StackDashBoardNavigator = () => {
+const StackProductsDash = () => {
     return (
-        <Stack.Navigator screenOptions={{header: () => <Header />}}>
-            <Stack.Screen 
-                name="HomeDashBoard" 
-                component={HomeDashBoard} 
-            />
+        <Stack.Navigator screenOptions={{header: ()=><Header/>}}>
             <Stack.Screen
             name='ProductsDash'
             component={ProductsDash}
@@ -29,4 +24,4 @@ const StackDashBoardNavigator = () => {
     )
 }
 
-export default StackDashBoardNavigator
+export default StackProductsDash
