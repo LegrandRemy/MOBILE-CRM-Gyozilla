@@ -12,7 +12,7 @@ const MenuList = ({ route, props }) => {
   const [expanded, setExpanded] = useState("");
 
   const handleMenuItemPress = (screenName, data) => {
-    console.log("handleMenuItemPress", screenName);
+    // console.log("handleMenuItemPress", screenName);
     navigation.navigate(screenName, data);
   };
 

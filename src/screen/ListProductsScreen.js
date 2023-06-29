@@ -28,14 +28,15 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [lastStep, setLastStep] = useState(false);
 
   const [selectedItemFromMenu, setSelectedItemFromMenu] = useState([]);
-  const [selectedItem, setSelectedItem] = useState("");
 
   const { name } = route.params;
+
   useEffect(() => {
     instanceAxios
       .get("/products")
       .then((response) => {
         setProducts(response.data);
+        //console.log("response.data", response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -89,7 +90,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
       }
       setProducts(filteredProducts);
     }
-  }, [products]);
+  }, [products, selectedStep]);
 
   const handleMenuClick = (menuId) => {
     setProducts(products.filter((product) => product.id_menus === menuId));
@@ -99,7 +100,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   };
 
   const handleDetailsProductClick = (productId) => {
-    navigation.navigate("ProductDetailsScreen", { productId });
+    navigation.navigate("ProductDetailsScreen", { productId: productId });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
@@ -107,16 +108,12 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const handleStepContinue = () => {
     if (selectedStep < totalSteps.length - 1) {
       setSelectedStep((prevStep) => prevStep + 1);
-      let selected = [...selectedItemFromMenu];
-      selected[selectedStep] = selectedItem;
-
-      setSelectedItemFromMenu(selected);
     } else {
       setLastStep(true);
     }
   };
-  // console.log("selectedItemFromMenu", selectedItemFromMenu);
-  // console.log("selectedStep", selectedStep);
+  console.log("selectedItemFromMenu", selectedItemFromMenu);
+  console.log("selectedStep", selectedStep);
 
   const handleStepBack = () => {
     if (selectedStep > 0) {
@@ -129,16 +126,6 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   );
   const dataToShow = isMenuClicked ? filteredProducts : products;
 
-  console.log(
-    "selectedItemFromMenu[selectedStep]",
-    selectedItemFromMenu[selectedStep - 1]
-  );
-  console.log("selectedItemFromMenu", selectedItemFromMenu);
-  console.log("selectedStep", selectedStep);
-
-  // const goBack = () => {
-  //   navigation.goBack();
-  // };
   return (
     <ScrollView style={styles.container}>
       <GoBackButton customStyleGoBack={{}} />
@@ -165,9 +152,11 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                 accessibilityLabel="favorite number"
                 aria-label="product"
                 onChange={(value) => {
-                  setSelectedItem(value);
+                  let selected = [...selectedItemFromMenu];
+                  selected[selectedStep] = value;
+                  setSelectedItemFromMenu(selected);
                 }}
-                value={selectedItemFromMenu[selectedStep] || selectedItem}
+                value={selectedItemFromMenu[selectedStep] || null}
               >
                 <View
                   style={{

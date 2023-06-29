@@ -1,5 +1,5 @@
-import instance from "../interceptor";
+import { instanceAxios } from "../interceptor";
 
 export const getAllProducts = async () => {
-    return await instance.get(`products`)
-}
+  return await instanceAxios.get(`products`);
+};
