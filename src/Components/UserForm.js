@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import {
   Button,
   Input,
   Center,
   VStack,
   HStack,
-  Box,
   FormControl,
   Heading,
   Icon,
@@ -16,13 +15,12 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { validateEmail, validatePassword } from "../utils/FormValidation";
 import { useToast } from "native-base";
-import { login } from "../utils/api-call/loginRegister";
+import { login, signUp, isUserExist } from "../utils/api-call/loginRegister";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import jwtDecode from "jwt-decode";
 import { UserContext } from "../utils/context/UserContext";
 import { useContext } from "react";
-import { useEffect } from "react";
 
 const UserForm = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -44,7 +42,7 @@ const UserForm = () => {
 
   const { user, setUser, isLogged, setIsLogged } = useContext(UserContext);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (signUpEmail) {
       if (!validateEmail(signUpEmail)) {
         setEmailError("Email invalide");
@@ -62,7 +60,62 @@ const UserForm = () => {
         setPasswordError("");
       }
     }
-    // Reste du code pour l'inscription...
+
+    if (!emailError && !passwordError) {
+      try {
+        const response = await isUserExist(signUpEmail);
+        if (response.data.message === "Utilisateur trouvé") {
+          toast.show({
+            title: "Erreur",
+            description: "Cette adresse mail est déjà utilisée.",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            backgroundColor: "#FF0000",
+            placement: "top",
+          });
+          return;
+        }
+      } catch (err) {
+        console.log(err);
+        return;
+      }
+
+      try {
+        const response = await signUp({
+          firstname: firstName,
+          lastname: lastName,
+          email: signUpEmail,
+          password: signUpPassword,
+        });
+        if (response) {
+          toast.show({
+            title: "Succès",
+            description:
+              "Votre compte a bien été créé.\nVeillez l'activer par le mail qui vous a été envoyé.",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            backgroundColor: "#008000",
+            placement: "top",
+          });
+          // setTimeout(() => {
+          // navigation.navigate("Main");
+          // }, 2000);
+        }
+      } catch (err) {
+        console.log(err)
+        toast.show({
+          title: "Erreur",
+          description: "Le compte n'a pas pu être créé",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          backgroundColor: "#FF0000",
+          placement: "top",
+        });
+      }
+    }
   };
 
   const handleSignIn = () => {
@@ -72,7 +125,7 @@ const UserForm = () => {
           title: "Succès",
           description: "Vous vous êtes bien connecté.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#008000",
           placement: "top",
@@ -84,16 +137,16 @@ const UserForm = () => {
               const userDecoded = jwtDecode(response.data.token);
               setUser(userDecoded);
               setIsLogged(true);
-              navigation.navigate("Main", {"user": user})
+              navigation.navigate("Main", { user: user });
             })
             .catch((err) => console.error("Error in saving token", err));
-        }, 3000);
+        }, 2000);
       } else {
         toast.show({
           title: "Erreur",
           description: "Le compte n'existe pas.",
           status: "success",
-          duration: 3000,
+          duration: 2000,
           isClosable: true,
           backgroundColor: "#FF0000",
           placement: "top",
@@ -153,7 +206,6 @@ const UserForm = () => {
                 fontSize="md"
                 type="email"
                 value={signInEmail}
-                type="email"
                 onChangeText={(value) => setSignInEmail(value)}
               />
               {!isSignIn && signInEmail && !validateEmail(signInEmail) && (

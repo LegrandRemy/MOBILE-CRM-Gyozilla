@@ -10,10 +10,10 @@ import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwtDecode from "jwt-decode";
 import Loader from "./src/components/loader";
-import { extendTheme, NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, extendTheme } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 
-const theme = extendTheme({
+const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
@@ -21,19 +21,7 @@ const theme = extendTheme({
     secondary: "#CDE8E7",
   },
   roundness: 10,
-  components: {
-    Radio: {
-      baseStyle: {
-        _control: {
-          _checked: {
-            bg: "#F8A500", // Couleur du cercle lorsqu'il est cochée
-            borderColor: "#F8A500", // Couleur de la bordure lorsqu'il est cochée
-          },
-        },
-      },
-    },
-  },
-});
+};
 
 export default function App() {
   const [user, setUser] = useState([]);
@@ -46,6 +34,8 @@ export default function App() {
     }
   };
   setTimeout(inter, 4000);
+
+  console.log(user);
 
   return (
     <PaperProvider theme={theme}>

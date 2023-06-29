@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Box, Card, ScrollView } from "native-base";
 import CustomCardProduct from "../../components/CustomCardProduct";
 import CustomCardRestaurantMenu from "../../components/CustomCardRestaurantMenu";
+import { REACT_APP_URL_API } from '@env'
 
 const MenuList = ({ route, props }) => {
   const navigation = useNavigation();
@@ -126,7 +127,7 @@ const MenuList = ({ route, props }) => {
         <CustomCardRestaurantMenu
           title="Nouveautés"
           src={{
-            uri: `https://api-gyozilla.onrender.com/image/nouveautes.jpg`,
+            uri: `${REACT_APP_URL_API}image/nouveautes.jpg`,
           }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
@@ -138,7 +139,7 @@ const MenuList = ({ route, props }) => {
         <CustomCardRestaurantMenu
           title="Menus"
           src={{
-            uri: `https://api-gyozilla.onrender.com/image/badge-nouveautes.png`,
+            uri: `${REACT_APP_URL_API}image/badge-nouveautes.png`,
           }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
@@ -149,7 +150,7 @@ const MenuList = ({ route, props }) => {
         />
         <CustomCardRestaurantMenu
           title="Entrées"
-          src={{ uri: `https://api-gyozilla.onrender.com/image/entrees.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/entrees.jpg` }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
               name: "Starter",
@@ -159,7 +160,7 @@ const MenuList = ({ route, props }) => {
         />
         <CustomCardRestaurantMenu
           title="Plats"
-          src={{ uri: `https://api-gyozilla.onrender.com/image/plats.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/plats.jpg` }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
               name: "Dishes",
@@ -170,7 +171,7 @@ const MenuList = ({ route, props }) => {
 
         <CustomCardRestaurantMenu
           title="Desserts"
-          src={{ uri: `https://api-gyozilla.onrender.com/image/desserts.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/desserts.jpg` }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
               name: "Desserts",
@@ -180,7 +181,7 @@ const MenuList = ({ route, props }) => {
         />
         <CustomCardRestaurantMenu
           title="Boissons"
-          src={{ uri: `https://api-gyozilla.onrender.com/image/boissons.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/boissons.jpg` }}
           onPress={() =>
             handleMenuItemPress("ListProducts", {
               name: "Drinks",

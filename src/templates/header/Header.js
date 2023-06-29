@@ -6,7 +6,6 @@ import {
   IconButton,
   Menu,
   Pressable,
-  ChevronDownIcon,
 } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useContext } from "react";
@@ -30,7 +29,7 @@ const Header = () => {
 
   return (
     <>
-      {user ? (
+      {user && user.role ? (
         <Box
           style={{
             paddingTop: 20,
