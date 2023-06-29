@@ -31,7 +31,9 @@ const FlatListNewsCarousel = ({ propsData }) => {
           resizeMode="cover"
           alt="Image des actualités"
         />
-        <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>
+        <Text style={{ fontWeight: 'bold', color: '#5F8D85' }}>
+          {item.name}
+        </Text>
       </View>
     </TouchableHighlight>
   )

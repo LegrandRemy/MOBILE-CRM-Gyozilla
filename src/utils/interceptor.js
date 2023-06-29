@@ -30,7 +30,6 @@ instanceAxios.interceptors.request.use(
 
 instanceAxios.interceptors.response.use(
   async (res) => {
-    console.log(res)
     if (res.data.token) {
       await AsyncStorage.setItem('@token', res.data.token)
     }

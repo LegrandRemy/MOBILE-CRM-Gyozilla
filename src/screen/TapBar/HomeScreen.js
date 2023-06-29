@@ -12,7 +12,7 @@ import { UserContext } from '../../utils/context/UserContext'
 const Home = () => {
   const [lastNews, setLastNews] = useState()
   const [lastProducts, setLastProducts] = useState()
-  console.log('lastProducts', lastProducts)
+  const [randomProducts, setRandomProducts] = useState()
   useEffect(() => {
     instanceAxios
       .get('products/lastProduct')
@@ -22,6 +22,16 @@ const Home = () => {
       .catch((error) => {
         setLastProducts([])
       })
+    instanceAxios.get('products').then((res) => {
+      let data = []
+      do {
+        let random = Math.round(Math.random() * res.data.length)
+        if (!data.includes(res.data[random])) {
+          data.push(res.data[random])
+        }
+      } while (data.length < 4)
+      setRandomProducts(data)
+    })
   }, [])
 
   useEffect(() => {
@@ -37,9 +47,9 @@ const Home = () => {
 
   return (
     <ScrollView style={{ backgroundColor: 'white' }}>
-      <Box paddingBottom={10} backgroundColor={'#77614c'}>
+      <Box paddingBottom={10} backgroundColor={'white'}>
         <SearchHomeInput />
-        <Heading color="#faeccb" fontSize={18} marginLeft={4} marginTop={4}>
+        <Heading color="#F8A500" fontSize={18} marginLeft={4} marginTop={4}>
           En ce moment
         </Heading>
         <FlatList
@@ -51,25 +61,25 @@ const Home = () => {
         <LastProductBannerHome item={lastProducts} />
       </Box>
       <Box
-        backgroundColor={'#5F8D85'}
+        backgroundColor={'white'}
         paddingLeft={4}
         paddingTop={5}
         paddingBottom={8}
       >
-        <Heading color="#faeccb" fontSize={18} marginTop={4} marginBottom={2}>
+        <Heading color="#F8A500" fontSize={18} marginTop={0} marginBottom={2}>
           Ca se passe près de chez vous
         </Heading>
         <Text>Découvrez les dernières actualités Gyozilla®</Text>
         <FlatListNewsCarousel propsData={lastNews} />
       </Box>
       <Box
-        backgroundColor={'#77614c'}
+        backgroundColor={'white'}
         justifyContent={'center'}
         paddingBottom={6}
         paddingLeft={4}
       >
         <Heading
-          color="#faeccb"
+          color="#F8A500"
           width={250}
           fontSize={18}
           marginTop={7}
@@ -88,7 +98,7 @@ const Home = () => {
           width={380}
           height={'auto'}
         >
-          <ListHomeImgBG lastProducts={lastProducts} />
+          <ListHomeImgBG lastProducts={randomProducts} />
         </Box>
       </Box>
     </ScrollView>
