@@ -4,8 +4,11 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import { UserContext } from './src/utils/context/UserContext';
-import StackDashBoardNavigator from './src/navigation/StackDashBoardNavigator';
+import { UserContext } from "./src/utils/context/UserContext";
+import { useEffect } from "react";
+import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from "jwt-decode";
 import Loader from "./src/components/loader";
 import { NativeBaseProvider, extendTheme } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
@@ -32,7 +35,7 @@ export default function App() {
   };
   setTimeout(inter, 4000);
 
-  console.log(user)
+  console.log(user);
 
   return (
     <PaperProvider theme={theme}>
@@ -49,7 +52,7 @@ export default function App() {
           <NavigationContainer>
             {!load ? (
               <Loader />
-            ) : (user && user.role ) ? (
+            ) : user && user.role ? (
               <StackDashBoardNavigator />
             ) : (
               <RootStackNavigator />

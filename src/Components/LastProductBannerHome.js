@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AspectRatio, Box, Image, Skeleton } from "native-base";
-import { REACT_APP_URL_API } from '@env'
+import { REACT_APP_URL_API } from "@env";
 
 const LastProductBannerHome = ({ item }) => {
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ const LastProductBannerHome = ({ item }) => {
             width={150}
             height={150}
             borderRadius={10}
-            source={{uri: `${REACT_APP_URL_API}${item[0].image}`}}
+            source={{ uri: `${REACT_APP_URL_API}${item[0].image}` }}
             alt="image"
           />
         </TouchableOpacity>

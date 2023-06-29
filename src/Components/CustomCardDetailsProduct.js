@@ -1,55 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { ToastAndroid } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-// import CartContext from "../../utils/context/CartContext";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  HStack,
+  Heading,
+  Stack,
+  VStack,
+} from "native-base";
+import CustomButton from "./CustomButton";
+import GoBackButton from "./GoBackButton";
 
-import AddCardIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import AddIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import RemoveIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { Box } from "native-base";
-import { REACT_APP_URL_API } from '@env'
-
-const CustomCardDetailsProduct = ({
-  id,
-  title,
-  name,
-  description,
-  image,
-  price,
-  id_product_categories,
-  id_menus,
-  buttonCardText,
-  onButtonCardClick,
-  width,
-  height,
-  border,
-  backgroundColor,
-  backgroundColorContent,
-  backgroundSize,
-  widthContent,
-  heightContent,
-  heightActions,
-  widthActions,
-  backgroundColorActions,
-  justifyContentCard,
-  alignItemsCard,
-  styleTitle,
-  styleParagraph,
-  variantButton,
-  isProduct,
-  zIndex,
-}) => {
-  let dbImage = "";
-  if (image !== undefined) {
-    dbImage = REACT_APP_URL_API + image;
-  }
-
+const CustomCardDetailsProduct = ({ productDetails }) => {
   const [quantity, setQuantity] = useState(1);
-  // const { updateCartItems } = useContext(CartContext);
+  const [totalPrice, setTotalPrice] = useState(productDetails.price);
+  //const { updateCartItems } = useContext(CartContext);
+
   const navigation = useNavigation();
-  const [productList, setProductList] = useState([]);
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
@@ -61,111 +31,73 @@ const CustomCardDetailsProduct = ({
     }
   };
 
-  const addToCart = () => {
-    const product = {
-      id: id,
-      name: name,
-      image: image,
-      price: price,
-      quantity,
-    };
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || {};
-
-    if (cart[product.id]) {
-      cart[product.id].quantity += quantity;
-    } else {
-      cart[product.id] = product;
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartItems();
-
-    ToastAndroid.show(
-      `${quantity} ${name} ${
-        quantity === 1 ? "a bien été ajouté" : "ont bien été ajoutés"
-      } au panier`,
-      ToastAndroid.SHORT
-    );
-  };
+  console.log("image", productDetails.image);
+  console.log("product", productDetails);
 
   return (
     <View>
-      <Text>TOTO</Text>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => {
-          if (!isProduct) {
-            onButtonCardClick();
-          }
-        }}
-        style={[
-          styles.cardProduct,
-          {
-            width: width,
-            height: height,
-            backgroundColor: backgroundColor,
-            zIndex: zIndex,
-          },
-        ]}
-      >
-        <Box
-          style={{
-            width: widthContent,
-            height: heightContent,
-            backgroundColor: backgroundColorContent,
-            padding: 0,
-          }}
-        >
-          {title && (
-            <Box
-              style={[
-                styles.titleContainer,
-                {
-                  width: "100%",
-                  height: "fit-content",
-                },
-              ]}
-            >
-              <Text style={styles.title}>{title}</Text>
-            </Box>
-          )}
-        </Box>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={[
-            styles.cardImage,
-            {
-              width: "100%",
-              height: heightContent,
-              padding: 0,
-              backgroundImage: `url(${dbImage})`,
-              backgroundSize: backgroundSize,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-            },
-          ]}
-          onPress={() => {
-            if (isProduct) {
-              const newProduct = {
-                id: id,
-                name: name,
-                description: description,
-                price: price,
-                image: image,
-                category: id_product_categories,
-                menu: id_menus,
-              };
-              const newProductList = [...productList, newProduct];
-              setProductList(newProductList);
-              navigation.navigate("Product", {
-                productList: newProductList,
-              });
-            }
-          }}
-        ></TouchableOpacity>
+      <GoBackButton />
 
-        {isProduct && (
+      <Box style={{ width: "100%", marginBottom: 10 }}>
+        <Stack
+          p="2"
+          alignItems="center"
+          justifyContent="center"
+          height={55}
+          space={2}
+          bgColor="#5F8D85"
+        >
+          <Heading size="sm" ml="-1">
+            {productDetails.name}
+          </Heading>
+        </Stack>
+        <AspectRatio w="100%">
+          <Image
+            resizeMode="cover"
+            style={{
+              flex: 1,
+              minWidth: 150,
+              maxHeight: 150,
+              minHeight: 150,
+              marginTop: 10,
+            }}
+            source={{
+              uri: `https://api-gyozilla.onrender.com/${productDetails.image}`,
+            }}
+            alt="image"
+          />
+        </AspectRatio>
+        <VStack px={4} space={2} mt={2}>
+          <Heading size="sm" ml="-1">
+            Description :{" "}
+          </Heading>
+          <Text>{productDetails.description}</Text>
+        </VStack>
+        <HStack px={4} space={2} mt={2}>
+          <Heading size="sm" ml="-1">
+            Prix :{" "}
+          </Heading>
+          <Text>{productDetails.price}</Text>
+        </HStack>
+        <HStack px={4} space={2} mt={2}>
+          <Button onClick={decrementQuantity}>-</Button>
+
+          <Heading size="sm" ml="-1">
+            Nombre de produit :
+          </Heading>
+          <Text>{quantity}</Text>
+          <Button onClick={incrementQuantity}>+</Button>
+        </HStack>
+        <HStack px={4} space={2} mt={2}>
+          <Heading size="sm" ml="-1">
+            Total :
+          </Heading>
+          <Text>{totalPrice} €</Text>
+          <CustomButton onPress={addToCart} textButton="Ajouter au panier" />
+        </HStack>
+      </Box>
+
+      {/* {id && (
           <Box style={[styles.actionsContainer]}>
             <TouchableOpacity
               style={[styles.actionButton, styles.removeButton]}
@@ -187,8 +119,8 @@ const CustomCardDetailsProduct = ({
               <AddCardIcon name="cart-plus" size={30} color="black" />
             </TouchableOpacity>
           </Box>
-        )}
-      </TouchableOpacity>
+        )} */}
+      {/* </Box> */}
     </View>
   );
 };
