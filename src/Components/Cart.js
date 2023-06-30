@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { View, Text } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { CartContext } from "../utils/context/CartContext";
 import {
   AspectRatio,
@@ -11,70 +11,34 @@ import {
   Image,
   Stack,
   VStack,
+  Text,
+  Pressable,
+  Icon,
+  ScrollView,
 } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import GoBackButton from "./GoBackButton";
-import CustomButton from "./CustomButton";
 
-const Cart = (incrementQuantity, decrementQuantity) => {
-  const { cartItems, totalPrice, updateTotalPrice, quantity } =
-    useContext(CartContext);
+const Cart = () => {
+  const {
+    cartItems,
+    totalPrice,
+    updateTotalPrice,
+    quantity,
+    setQuantity,
+    clearCart,
+    incrementQuantity,
+    decrementQuantity,
+  } = useContext(CartContext);
 
   useEffect(() => {
     updateTotalPrice();
   }, [cartItems, updateTotalPrice]);
 
-  const getUniqueItems = (items) => {
-    const uniqueItems = [];
-    items.forEach((item) => {
-      const existingItem = uniqueItems.find(
-        (uItem) => uItem.name === item.name
-      );
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        uniqueItems.push({ ...item, quantity: 1 });
-      }
-    });
-    return uniqueItems;
-  };
-
-  const uniqueCartItems = getUniqueItems(cartItems);
+  //const totalPriceForProduct = productDetails.price * quantity;
 
   return (
-    <View>
-      {/* <GoBackButton />
-      <Text>Panier :</Text>
-      <Divider />
-      {uniqueCartItems.map((item, index) => {
-        return (
-          <Box>
-            <VStack>
-              <Image
-                resizeMode="cover"
-                style={{
-                  flex: 1,
-                  minWidth: 150,
-                  maxHeight: 150,
-                  minHeight: 150,
-                  marginTop: 10,
-                }}
-                source={{
-                  uri: `https://api-gyozilla.onrender.com/${item.image}`,
-                }}
-                alt="image"
-              />
-              <HStack key={index}>
-                <Text>
-                  {item.quantity} {item.name} :{" "}
-                </Text>
-              </HStack>
-              <Text>{item.price} €</Text>
-            </VStack>
-          </Box>
-        );
-      })}
-      <Text>Prix total : {totalPrice} €</Text> */}
-      <GoBackButton />
+    <ScrollView style={{ backgroundColor: "white" }}>
       <Box style={{ width: "100%", marginBottom: 10 }}>
         <Stack
           p="2"
@@ -88,57 +52,79 @@ const Cart = (incrementQuantity, decrementQuantity) => {
             Panier :
           </Heading>
         </Stack>
-        {uniqueCartItems.map((item, index) => {
+        <HStack alignItems={"center"} justifyContent={"space-between"}>
+          <GoBackButton textButton="continuer mes achats" test="test" />
+          <Pressable
+            accessibilityLabel="vider le panier"
+            onPress={clearCart}
+            pr={15}
+          >
+            <Icon
+              as={MaterialCommunityIcons}
+              name="delete"
+              size={"md"}
+              color="#5F8D85"
+              marginTop={1}
+            />
+          </Pressable>
+        </HStack>
+        <Divider mt={2} mb={2} />
+
+        {cartItems.map((item, index) => {
           return (
             <>
-              <AspectRatio w="50%" key={index}>
-                <Image
-                  resizeMode="cover"
-                  style={{
-                    flex: 1,
-                    minWidth: 50,
-                    maxHeight: 50,
-                    minHeight: 50,
-                    marginTop: 10,
-                  }}
-                  source={{
-                    uri: `https://api-gyozilla.onrender.com/${item.image}`,
-                  }}
-                  alt="image"
-                />
-              </AspectRatio>
-              <VStack px={4} space={2} mt={2}>
-                <Heading size="sm" ml="-1">
-                  Description :{" "}
-                </Heading>
-                <Text>{item.description}</Text>
-              </VStack>
-              <HStack px={4} space={2} mt={2}>
-                <Heading size="sm" ml="-1">
-                  Prix :{" "}
-                </Heading>
-                <Text>{item.price}</Text>
-              </HStack>
-              <HStack px={4} space={2} mt={2}>
-                {/* <Button onPress={decrementQuantity}>-</Button> */}
+              <Box bgColor={"#faeccb"} mx={5} my={3} borderRadius={10}>
+                <HStack alignItems={"center"} justifyContent={"space-between"}>
+                  <VStack ml={5} justifyContent={"center"} maxWidth={"70%"}>
+                    <Heading size="md">
+                      <Text>{item.name}</Text>
+                    </Heading>
+                    <Text>{item.price * item.quantity} €</Text>
+                  </VStack>
 
-                <Heading size="sm" ml="-1">
-                  Nombre de produit :
-                </Heading>
-                <Text>{quantity}</Text>
-                {/* <Button onPress={incrementQuantity}>+</Button> */}
-              </HStack>
-              <HStack px={4} space={2} mt={2}>
-                <Heading size="sm" ml="-1">
-                  Total :
-                </Heading>
-                <Text>{totalPrice} €</Text>
-              </HStack>
+                  <HStack p={4} space={3} alignItems={"center"}>
+                    <TouchableOpacity
+                      style={{ alignItems: "center" }}
+                      onPress={() => decrementQuantity(item, index)}
+                    >
+                      <Icon
+                        as={MaterialCommunityIcons}
+                        name="minus"
+                        size={"lg"}
+                        color="white"
+                        bgColor="#5F8D85"
+                        borderRadius={50}
+                      />
+                    </TouchableOpacity>
+                    <Heading size="md">
+                      <Text>{item.quantity}</Text>
+                    </Heading>
+                    <TouchableOpacity
+                      onPress={() => incrementQuantity(item, index)}
+                    >
+                      <Icon
+                        as={MaterialCommunityIcons}
+                        name="plus"
+                        size={"lg"}
+                        color="white"
+                        bgColor="#5F8D85"
+                        borderRadius={50}
+                      />
+                    </TouchableOpacity>
+                  </HStack>
+                </HStack>
+                <HStack px={4} space={2} mt={2}></HStack>
+              </Box>
             </>
           );
         })}
+        <Divider mt={2} mb={2} />
+        <HStack justifyContent={"space-between"} mx={5}>
+          <Heading>Total</Heading>
+          <Heading>{totalPrice} €</Heading>
+        </HStack>
       </Box>
-    </View>
+    </ScrollView>
   );
 };
 

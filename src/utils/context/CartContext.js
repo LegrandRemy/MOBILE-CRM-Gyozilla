@@ -9,22 +9,61 @@ export const CartProvider = ({ children }) => {
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  console.log("cartItems dans context", cartItems);
-
   // Fonction pour ajouter un produit au panier
   const addToCart = (product) => {
-    let newCart = [...cartItems];
-    for (i = 0; i < quantity; i++) {
-      newCart.push(product);
-    }
+    // for (i = 0; i < quantity; i++) {
+    //   newCart.push(product);
+    // }
+    let data = {
+      ...product,
+      quantity: quantity,
+    };
+    // let newCart = [...cartItems, data];
+    const isExist =
+      cartItems.filter((item) => item.id === product.id).length > 0;
+    console.log("[...cartItems, { ...product, quantity: quantity }]", [
+      ...cartItems,
+      { ...product, quantity: quantity },
+    ]);
+    let newCart =
+      isExist === true
+        ? cartItems.map((item) =>
+            item.id === product.id
+              ? {
+                  ...product,
+                  quantity: Number(quantity) + Number(item.quantity),
+                }
+              : item
+          )
+        : [...cartItems, { ...product, quantity: quantity }];
     setCartItems(newCart);
+  };
+
+  const incrementQuantity = (item, index) => {
+    const totalQuantity = item.quantity + 1;
+    setQuantity(totalQuantity);
+    updateTotalPrice();
+    let data = cartItems;
+    data[index].quantity = totalQuantity;
+    setCartItems(data);
+  };
+
+  const decrementQuantity = (item, index) => {
+    if (quantity > 1) {
+      const totalQuantity = item.quantity - 1;
+      setQuantity(totalQuantity);
+      updateTotalPrice();
+      let data = cartItems;
+      data[index].quantity = totalQuantity;
+      setCartItems(data);
+    }
   };
 
   //Fonction pour mettre à jour le prix total
   const updateTotalPrice = () => {
     let total = 0;
     cartItems.forEach((item) => {
-      total += item.price * quantity;
+      total += item.price * item.quantity;
     });
     setTotalPrice(total);
   };
@@ -55,6 +94,8 @@ export const CartProvider = ({ children }) => {
     setQuantity,
     totalPrice,
     updateTotalPrice,
+    decrementQuantity,
+    incrementQuantity,
   };
 
   return (

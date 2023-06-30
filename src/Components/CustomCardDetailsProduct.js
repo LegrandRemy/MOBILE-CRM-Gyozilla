@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 import {
   AspectRatio,
@@ -8,31 +8,30 @@ import {
   Button,
   HStack,
   Heading,
+  Icon,
   Stack,
   VStack,
 } from "native-base";
 import CustomButton from "./CustomButton";
 import GoBackButton from "./GoBackButton";
 import { CartContext, CartProvider } from "../utils/context/CartContext";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const CustomCardDetailsProduct = ({ productDetails }) => {
   const { addToCart, cartItems, quantity, setQuantity, updateTotalPrice } =
     useContext(CartContext);
   console.log("cartItems", cartItems);
 
-  // const { setCart, cart } = useContext(CartContext);
-  //
-  // const addToCart = (value) => {
-  //   let newCart = [...cart];
-  //   for (i = 0; i < quantity; i++) {
-  //     newCart.push(value);
+  // const isFocused = useIsFocused();
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     setQuantity(1);
   //   }
-  //   setCart(newCart);
-  // };
+  // }, []);
 
   const navigation = useNavigation();
 
-  const totalPrice = productDetails.price * quantity;
+  const totalPriceForProduct = productDetails.price * quantity;
 
   const incrementQuantity = () => {
     const totalQuantity = quantity + 1;
@@ -51,6 +50,7 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
   const handleAddToCart = () => {
     addToCart(productDetails);
     setQuantity(1);
+
     updateTotalPrice();
   };
 
@@ -103,20 +103,40 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
           </Heading>
           <Text>{productDetails.price}</Text>
         </HStack>
-        <HStack px={4} space={2} mt={2}>
-          <Button onPress={decrementQuantity}>-</Button>
+        <HStack px={4} space={2} mt={2} alignItems={"center"}>
+          <TouchableOpacity onPress={decrementQuantity}>
+            <Icon
+              as={MaterialCommunityIcons}
+              name="minus"
+              size={"md"}
+              color="white"
+              bgColor="#5F8D85"
+              marginTop={1}
+              borderRadius={50}
+            />
+          </TouchableOpacity>
 
           <Heading size="sm" ml="-1">
             Nombre de produit :
           </Heading>
           <Text>{quantity}</Text>
-          <Button onPress={incrementQuantity}>+</Button>
+          <TouchableOpacity onPress={incrementQuantity}>
+            <Icon
+              as={MaterialCommunityIcons}
+              name="plus"
+              size={"md"}
+              color="white"
+              bgColor="#5F8D85"
+              marginTop={1}
+              borderRadius={50}
+            />
+          </TouchableOpacity>
         </HStack>
         <HStack px={4} space={2} mt={2}>
           <Heading size="sm" ml="-1">
             Total :
           </Heading>
-          <Text>{totalPrice} €</Text>
+          <Text>{totalPriceForProduct} €</Text>
           <CustomButton
             onPress={handleAddToCart}
             textButton="Ajouter au panier"

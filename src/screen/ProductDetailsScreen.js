@@ -26,6 +26,7 @@ const ProductDetailsScreen = ({ route, productDetails }) => {
     };
     fetchProduct();
   }, []);
+
   const navigateToCart = () => {
     navigation.navigate("Cart");
   };
