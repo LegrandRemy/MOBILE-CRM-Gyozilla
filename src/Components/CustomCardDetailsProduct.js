@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -13,26 +13,50 @@ import {
 } from "native-base";
 import CustomButton from "./CustomButton";
 import GoBackButton from "./GoBackButton";
+import { CartContext, CartProvider } from "../utils/context/CartContext";
 
 const CustomCardDetailsProduct = ({ productDetails }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(productDetails.price);
-  //const { updateCartItems } = useContext(CartContext);
+  const { addToCart, cartItems, quantity, setQuantity, updateTotalPrice } =
+    useContext(CartContext);
+  console.log("cartItems", cartItems);
+
+  // const { setCart, cart } = useContext(CartContext);
+  //
+  // const addToCart = (value) => {
+  //   let newCart = [...cart];
+  //   for (i = 0; i < quantity; i++) {
+  //     newCart.push(value);
+  //   }
+  //   setCart(newCart);
+  // };
 
   const navigation = useNavigation();
 
+  const totalPrice = productDetails.price * quantity;
+
   const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+    const totalQuantity = quantity + 1;
+    setQuantity(totalQuantity);
+    updateTotalPrice();
   };
 
   const decrementQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      const totalQuantity = quantity - 1;
+      setQuantity(totalQuantity);
+      updateTotalPrice();
     }
   };
 
-  console.log("image", productDetails.image);
-  console.log("product", productDetails);
+  const handleAddToCart = () => {
+    addToCart(productDetails);
+    setQuantity(1);
+    updateTotalPrice();
+  };
+
+  //console.log("totalPrice", totalPrice);
+  // console.log("image", productDetails.image);
+  //console.log("quantity", quantity);
 
   return (
     <View>
@@ -80,47 +104,25 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
           <Text>{productDetails.price}</Text>
         </HStack>
         <HStack px={4} space={2} mt={2}>
-          <Button onClick={decrementQuantity}>-</Button>
+          <Button onPress={decrementQuantity}>-</Button>
 
           <Heading size="sm" ml="-1">
             Nombre de produit :
           </Heading>
           <Text>{quantity}</Text>
-          <Button onClick={incrementQuantity}>+</Button>
+          <Button onPress={incrementQuantity}>+</Button>
         </HStack>
         <HStack px={4} space={2} mt={2}>
           <Heading size="sm" ml="-1">
             Total :
           </Heading>
           <Text>{totalPrice} €</Text>
-          <CustomButton onPress={addToCart} textButton="Ajouter au panier" />
+          <CustomButton
+            onPress={handleAddToCart}
+            textButton="Ajouter au panier"
+          />
         </HStack>
       </Box>
-
-      {/* {id && (
-          <Box style={[styles.actionsContainer]}>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.removeButton]}
-              onPress={decrementQuantity}
-            >
-              <RemoveIcon name="remove" size={20} color="black" />
-            </TouchableOpacity>
-            <Text style={styles.quantityText}>{quantity}</Text>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.addButton]}
-              onPress={incrementQuantity}
-            >
-              <AddIcon name="add" size={20} color="black" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.actionButton, styles.cartButton]}
-              onPress={addToCart}
-            >
-              <AddCardIcon name="cart-plus" size={30} color="black" />
-            </TouchableOpacity>
-          </Box>
-        )} */}
-      {/* </Box> */}
     </View>
   );
 };

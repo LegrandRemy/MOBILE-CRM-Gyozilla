@@ -19,6 +19,7 @@ import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as Linking from 'expo-linking';
 
+import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {
   ...DefaultTheme,
@@ -35,6 +36,13 @@ export default function App() {
   const [isLogged, setIsLogged] = useState(false)
   const [load, setLoad] = useState(false)
 
+  // const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    if (fakeUser) {
+      setUser(fakeUser);
+    }
+  }, []);
   const inter = () => {
     if (!load) {
       setLoad(true)
@@ -53,16 +61,20 @@ export default function App() {
             setIsLogged: setIsLogged,
           }}
         >
-          <StatusBar translucent={false} style="light"></StatusBar>
-          <NavigationContainer>
-            {!load ? (
-              <Loader />
-            ) : user && user.role ? (
-              <StackDashBoardNavigator />
-            ) : (
-              <RootStackNavigator />
-            )}
-          </NavigationContainer>
+          <CartProvider
+          // value={{ cart: cart, setCart: setCart }}
+          >
+            <StatusBar translucent={false} style="light"></StatusBar>
+            <NavigationContainer>
+              {!load ? (
+                <Loader />
+              ) : user && user.role ? (
+                <StackDashBoardNavigator />
+              ) : (
+                <RootStackNavigator />
+              )}
+            </NavigationContainer>
+          </CartProvider>
         </UserContext.Provider>
       </NativeBaseProvider>
     </PaperProvider>
