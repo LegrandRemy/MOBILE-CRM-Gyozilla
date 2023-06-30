@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Icon,
-  Box,
-  Image,
-  IconButton,
-  Menu,
-  Pressable,
-} from "native-base";
+import { Icon, Box, Image, IconButton, Menu, Pressable } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useContext } from "react";
 import { UserContext } from "../../utils/context/UserContext";
@@ -99,11 +92,12 @@ const Header = () => {
             icon={
               <Icon
                 as={MaterialCommunityIcons}
-                name="ticket-percent"
+                name="account"
                 size="xl"
                 color="#faeccb"
               />
             }
+            onPress={() => handlePress("LoginRegister")}
           />
           <Image
             source={require("../../../assets/logo_gyozilla.png")}
@@ -115,12 +109,12 @@ const Header = () => {
             icon={
               <Icon
                 as={MaterialCommunityIcons}
-                name="account"
+                name="cart"
                 size="xl"
                 color="#faeccb"
               />
             }
-            onPress={() => handlePress("LoginRegister")}
+            onPress={() => handlePress("Cart")}
           />
         </Box>
       )}

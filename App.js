@@ -12,6 +12,7 @@ import jwtDecode from "jwt-decode";
 import Loader from "./src/components/loader";
 import { NativeBaseProvider, extendTheme } from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {
   ...DefaultTheme,
@@ -27,15 +28,25 @@ export default function App() {
   const [user, setUser] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
+  const fakeUser = {
+    lastName: "toto",
+    name: "Super",
+    mail: "toto@test.com",
+  };
 
+  // const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    if (fakeUser) {
+      setUser(fakeUser);
+    }
+  }, []);
   const inter = () => {
     if (!load) {
       setLoad(true);
     }
   };
   setTimeout(inter, 4000);
-
-  console.log(user);
 
   return (
     <PaperProvider theme={theme}>
@@ -48,16 +59,20 @@ export default function App() {
             setIsLogged: setIsLogged,
           }}
         >
-          <StatusBar translucent={false} style="light"></StatusBar>
-          <NavigationContainer>
-            {!load ? (
-              <Loader />
-            ) : user && user.role ? (
-              <StackDashBoardNavigator />
-            ) : (
-              <RootStackNavigator />
-            )}
-          </NavigationContainer>
+          <CartProvider
+          // value={{ cart: cart, setCart: setCart }}
+          >
+            <StatusBar translucent={false} style="light"></StatusBar>
+            <NavigationContainer>
+              {!load ? (
+                <Loader />
+              ) : user && user.role ? (
+                <StackDashBoardNavigator />
+              ) : (
+                <RootStackNavigator />
+              )}
+            </NavigationContainer>
+          </CartProvider>
         </UserContext.Provider>
       </NativeBaseProvider>
     </PaperProvider>
