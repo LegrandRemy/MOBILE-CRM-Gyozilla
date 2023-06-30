@@ -87,6 +87,7 @@ const Home = () => {
         paddingBottom={6}
       >
         <Box
+          backgroundColor={'red'}
           display={'flex'}
           flexWrap={'wrap'}
           flexDirection={'row'}

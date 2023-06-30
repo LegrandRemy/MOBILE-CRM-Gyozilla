@@ -3,22 +3,23 @@ import {
   Text,
   ImageBackground,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native'
 import React from 'react'
 import { Box } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
 const ListHomeImgBG = ({ lastProducts }) => {
   const navigation = useNavigation()
 
-  const handlePress = (id) => {
-    navigation.navigate('ProductDetailsScreen', { id: id })
+  const handlePress = (item) => {
+    navigation.navigate('LastProductsHome', { item: item })
   }
   return lastProducts?.map((item) => {
     return (
       <TouchableHighlight
-        onPress={() => handlePress(item.id)}
+        onPress={() => handlePress(item)}
         style={{
         width:'48%',
         marginHorizontal: 3,
