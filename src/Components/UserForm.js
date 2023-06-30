@@ -11,6 +11,7 @@ import {
   Icon,
   IconButton,
   Modal,
+  ScrollView,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { validateEmail, validatePassword } from "../utils/FormValidation";
@@ -104,7 +105,7 @@ const UserForm = () => {
           // }, 2000);
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
         toast.show({
           title: "Erreur",
           description: "Le compte n'a pas pu être créé",
@@ -177,97 +178,39 @@ const UserForm = () => {
   // }, [user]);
 
   return (
-    <Center flex={1} px="5">
-      <VStack space={4} w="100%">
-        <Heading size="xl" color="coolGray.800" alignSelf="center">
-          {isSignIn ? "Connexion" : "Inscription"}
-        </Heading>
+    <ScrollView px="5" pt="10" contentContainerStyle={{ flexGrow: 1 }}>
+      <Center flex={1}>
+        <VStack space={4} w="100%">
+          <Heading size="xl" color="coolGray.800" alignSelf="center">
+            {isSignIn ? "Connexion" : "Inscription"}
+          </Heading>
 
-        {isSignIn ? (
-          <>
-            <FormControl
-              isInvalid={
-                !isSignIn && signInEmail && !validateEmail(signInEmail)
-              }
-            >
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
+          {isSignIn ? (
+            <>
+              <FormControl
+                isInvalid={
+                  !isSignIn && signInEmail && !validateEmail(signInEmail)
+                }
               >
-                Email
-              </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Email"
-                color="black"
-                fontSize="md"
-                type="email"
-                value={signInEmail}
-                onChangeText={(value) => setSignInEmail(value)}
-              />
-              {!isSignIn && signInEmail && !validateEmail(signInEmail) && (
-                <FormControl.ErrorMessage
-                  leftIcon={
-                    <Icon
-                      as={MaterialIcons}
-                      name="error"
-                      size={5}
-                      color="red.500"
-                    />
-                  }
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
                 >
-                  Adresse email invalide.
-                </FormControl.ErrorMessage>
-              )}
-            </FormControl>
-            <FormControl
-              isInvalid={
-                !isSignIn && signInPassword && !validatePassword(signInPassword)
-              }
-            >
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
-              >
-                Mot de passe
-              </FormControl.Label>
-              <HStack space={2}>
+                  Email
+                </FormControl.Label>
                 <Input
-                  width={"100%"}
                   variant="underlined"
-                  placeholder="Mot de passe"
+                  placeholder="Email"
                   color="black"
                   fontSize="md"
-                  value={signInPassword}
-                  onChangeText={(value) => setSignInPassword(value)}
-                  type={isPasswordVisible ? "text" : "password"}
-                  position={"relative"}
+                  type="email"
+                  value={signInEmail}
+                  onChangeText={(value) => setSignInEmail(value)}
                 />
-                <IconButton
-                  width={50}
-                  variant="unstyled"
-                  position={"absolute"}
-                  right={0}
-                  icon={
-                    <Icon
-                      as={MaterialIcons}
-                      name={isPasswordVisible ? "visibility-off" : "visibility"}
-                      size={8}
-                      color="coolGray.600"
-                    />
-                  }
-                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                />
-              </HStack>
-              {!isSignIn &&
-                signInPassword &&
-                !validatePassword(signInPassword) && (
+                {!isSignIn && signInEmail && !validateEmail(signInEmail) && (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon
@@ -278,132 +221,137 @@ const UserForm = () => {
                       />
                     }
                   >
-                    Le mot de passe doit contenir au moins une minuscule, une
-                    majuscule, un chiffre et un caractère spécial.
+                    Adresse email invalide.
                   </FormControl.ErrorMessage>
                 )}
-            </FormControl>
-          </>
-        ) : (
-          <>
-            <FormControl>
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
+              </FormControl>
+              <FormControl
+                isInvalid={
+                  !isSignIn &&
+                  signInPassword &&
+                  !validatePassword(signInPassword)
+                }
               >
-                Prénom
-              </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Prénom"
-                color="black"
-                fontSize="md"
-                value={firstName}
-                onChangeText={(value) => setFirstName(value)}
-              />
-            </FormControl>
-
-            <FormControl>
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
-              >
-                Nom
-              </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Nom"
-                color="black"
-                fontSize="md"
-                value={lastName}
-                onChangeText={(value) => setLastName(value)}
-              />
-            </FormControl>
-
-            <FormControl isInvalid={!isSignIn && !validateEmail(signUpEmail)}>
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
-              >
-                Email
-              </FormControl.Label>
-              <Input
-                variant="underlined"
-                placeholder="Email"
-                type="email"
-                color="black"
-                fontSize="md"
-                value={signUpEmail}
-                onChangeText={setSignUpEmail}
-              />
-              {!isSignIn && signUpEmail && !validateEmail(signUpEmail) && (
-                <FormControl.ErrorMessage
-                  leftIcon={
-                    <Icon
-                      as={MaterialIcons}
-                      name="error"
-                      size={5}
-                      color="red.500"
-                    />
-                  }
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
                 >
-                  Adresse email invalide.
-                </FormControl.ErrorMessage>
-              )}
-            </FormControl>
-
-            <FormControl
-              isInvalid={!isSignIn && !validatePassword(signUpPassword)}
-            >
-              <FormControl.Label
-                _text={{
-                  color: "coolGray.800",
-                  fontSize: "xl",
-                  fontWeight: 600,
-                }}
-              >
-                Mot de passe
-              </FormControl.Label>
-              <HStack space={2}>
+                  Mot de passe
+                </FormControl.Label>
+                <HStack space={2}>
+                  <Input
+                    width={"100%"}
+                    variant="underlined"
+                    placeholder="Mot de passe"
+                    color="black"
+                    fontSize="md"
+                    value={signInPassword}
+                    onChangeText={(value) => setSignInPassword(value)}
+                    type={isPasswordVisible ? "text" : "password"}
+                    position={"relative"}
+                  />
+                  <IconButton
+                    width={50}
+                    variant="unstyled"
+                    position={"absolute"}
+                    right={0}
+                    icon={
+                      <Icon
+                        as={MaterialIcons}
+                        name={
+                          isPasswordVisible ? "visibility-off" : "visibility"
+                        }
+                        size={8}
+                        color="coolGray.600"
+                      />
+                    }
+                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
+                </HStack>
+                {!isSignIn &&
+                  signInPassword &&
+                  !validatePassword(signInPassword) && (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon
+                          as={MaterialIcons}
+                          name="error"
+                          size={5}
+                          color="red.500"
+                        />
+                      }
+                    >
+                      Le mot de passe doit contenir au moins une minuscule, une
+                      majuscule, un chiffre et un caractère spécial.
+                    </FormControl.ErrorMessage>
+                  )}
+              </FormControl>
+            </>
+          ) : (
+            <>
+              <FormControl>
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
+                >
+                  Prénom
+                </FormControl.Label>
                 <Input
-                  width={"100%"}
                   variant="underlined"
-                  placeholder="Mot de passe"
+                  placeholder="Prénom"
                   color="black"
                   fontSize="md"
-                  value={signUpPassword}
-                  onChangeText={setSignUpPassword}
-                  type={isPasswordVisible ? "text" : "password"}
-                  position={"relative"}
+                  value={firstName}
+                  onChangeText={(value) => setFirstName(value)}
                 />
-                <IconButton
-                  width={50}
-                  variant="unstyled"
-                  position={"absolute"}
-                  right={0}
-                  icon={
-                    <Icon
-                      as={MaterialIcons}
-                      name={isPasswordVisible ? "visibility-off" : "visibility"}
-                      size={8}
-                      color="coolGray.600"
-                    />
-                  }
-                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+              </FormControl>
+
+              <FormControl>
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
+                >
+                  Nom
+                </FormControl.Label>
+                <Input
+                  variant="underlined"
+                  placeholder="Nom"
+                  color="black"
+                  fontSize="md"
+                  value={lastName}
+                  onChangeText={(value) => setLastName(value)}
                 />
-              </HStack>
-              {!isSignIn &&
-                signUpPassword &&
-                !validatePassword(signUpPassword) && (
+              </FormControl>
+
+              <FormControl isInvalid={!isSignIn && !validateEmail(signUpEmail)}>
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
+                >
+                  Email
+                </FormControl.Label>
+                <Input
+                  variant="underlined"
+                  placeholder="Email"
+                  type="email"
+                  color="black"
+                  fontSize="md"
+                  value={signUpEmail}
+                  onChangeText={setSignUpEmail}
+                />
+                {!isSignIn && signUpEmail && !validateEmail(signUpEmail) && (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon
@@ -414,75 +362,136 @@ const UserForm = () => {
                       />
                     }
                   >
-                    Le mot de passe doit contenir au moins une minuscule, une
-                    majuscule, un chiffre et un caractère spécial.
+                    Adresse email invalide.
                   </FormControl.ErrorMessage>
                 )}
-            </FormControl>
-          </>
-        )}
+              </FormControl>
 
-        <Button
-          bg="#5F8D85"
-          _text={{ color: "black", fontSize: "xl" }}
-          onPress={isSignIn ? handleSignIn : handleSignUp}
-          disabled={
-            isSignIn
-              ? !signInEmail || !signInPassword
-              : !firstName ||
-                !lastName ||
-                !validateEmail(signUpEmail) ||
-                !validatePassword(signUpPassword)
-          }
-        >
-          {isSignIn ? "Se connecter" : "S'inscrire"}
-        </Button>
+              <FormControl
+                isInvalid={!isSignIn && !validatePassword(signUpPassword)}
+              >
+                <FormControl.Label
+                  _text={{
+                    color: "coolGray.800",
+                    fontSize: "xl",
+                    fontWeight: 600,
+                  }}
+                >
+                  Mot de passe
+                </FormControl.Label>
+                <HStack space={2}>
+                  <Input
+                    width={"100%"}
+                    variant="underlined"
+                    placeholder="Mot de passe"
+                    color="black"
+                    fontSize="md"
+                    value={signUpPassword}
+                    onChangeText={setSignUpPassword}
+                    type={isPasswordVisible ? "text" : "password"}
+                    position={"relative"}
+                  />
+                  <IconButton
+                    width={50}
+                    variant="unstyled"
+                    position={"absolute"}
+                    right={0}
+                    icon={
+                      <Icon
+                        as={MaterialIcons}
+                        name={
+                          isPasswordVisible ? "visibility-off" : "visibility"
+                        }
+                        size={8}
+                        color="coolGray.600"
+                      />
+                    }
+                    onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  />
+                </HStack>
+                {!isSignIn &&
+                  signUpPassword &&
+                  !validatePassword(signUpPassword) && (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon
+                          as={MaterialIcons}
+                          name="error"
+                          size={5}
+                          color="red.500"
+                        />
+                      }
+                    >
+                      Le mot de passe doit contenir au moins une minuscule, une
+                      majuscule, un chiffre et un caractère spécial.
+                    </FormControl.ErrorMessage>
+                  )}
+              </FormControl>
+            </>
+          )}
 
-        {isSignIn && (
           <Button
-            variant="link"
-            _text={{ color: "#5F8D85", fontSize: "md" }}
-            onPress={() => setIsModalOpen(true)}
-          >
-            Retrouvez votre mot de passe
-          </Button>
-        )}
-
-        <HStack justifyContent="center" alignItems="center">
-          <Text color="coolGray.600">
-            {isSignIn ? "Vous n'avez pas de compte ? " : "Déjà membre ? "}
-          </Text>
-          <IconButton
-            variant="link"
-            icon={
-              <Icon
-                as={MaterialIcons}
-                name="swap-horiz"
-                size={10}
-                color="#5F8D85"
-              />
+            bg="#5F8D85"
+            _text={{ color: "black", fontSize: "xl" }}
+            onPress={isSignIn ? handleSignIn : handleSignUp}
+            disabled={
+              isSignIn
+                ? !signInEmail || !signInPassword
+                : !firstName ||
+                  !lastName ||
+                  !validateEmail(signUpEmail) ||
+                  !validatePassword(signUpPassword)
             }
-            onPress={() => setIsSignIn(!isSignIn)}
-          />
-        </HStack>
-      </VStack>
+          >
+            {isSignIn ? "Se connecter" : "S'inscrire"}
+          </Button>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Content>
-          <Modal.Header>Retrouver votre mot de passe</Modal.Header>
-          <Modal.Body>
-            <VStack space={2}>
-              <Input placeholder="Votre email" />
-            </VStack>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button bg="#5F8D85" onPress={handleResetPassword}>
-              Envoyer
+          {isSignIn && (
+            <Button
+              variant="link"
+              _text={{ color: "#5F8D85", fontSize: "md" }}
+              onPress={() => setIsModalOpen(true)}
+            >
+              Retrouvez votre mot de passe
             </Button>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-    </Center>
+          )}
+
+          <HStack justifyContent="center" alignItems="center">
+            <Text color="coolGray.600">
+              {isSignIn ? "Vous n'avez pas de compte ? " : "Déjà membre ? "}
+            </Text>
+            <IconButton
+              variant="link"
+              icon={
+                <Icon
+                  as={MaterialIcons}
+                  name="swap-horiz"
+                  size={10}
+                  color="#5F8D85"
+                />
+              }
+              onPress={() => setIsSignIn(!isSignIn)}
+            />
+          </HStack>
+        </VStack>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <Modal.Content>
+            <Modal.Header>Retrouver votre mot de passe</Modal.Header>
+            <Modal.Body>
+              <VStack space={2}>
+                <Input placeholder="Votre email" />
+              </VStack>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button bg="#5F8D85" color="white" onPress={handleResetPassword}>
+                Envoyer
+              </Button>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
+      </Center>
+    </ScrollView>
   );
 };
 

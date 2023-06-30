@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { Keyboard, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
@@ -10,8 +10,15 @@ import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwtDecode from "jwt-decode";
 import Loader from "./src/components/loader";
-import { NativeBaseProvider, extendTheme } from "native-base";
+import {
+  KeyboardAvoidingView,
+  NativeBaseProvider,
+  extendTheme,
+} from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as Linking from 'expo-linking';
+
 
 const theme = {
   ...DefaultTheme,
@@ -34,8 +41,6 @@ export default function App() {
     }
   }
   setTimeout(inter, 4000)
-
-  console.log(user);
 
   return (
     <PaperProvider theme={theme}>
