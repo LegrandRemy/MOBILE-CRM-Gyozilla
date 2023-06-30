@@ -100,9 +100,9 @@ const UserForm = () => {
             backgroundColor: "#008000",
             placement: "top",
           });
-          // setTimeout(() => {
-          // navigation.navigate("Main");
-          // }, 2000);
+          setTimeout(() => {
+            navigation.navigate("Main");
+          }, 2000);
         }
       } catch (err) {
         console.log(err);
