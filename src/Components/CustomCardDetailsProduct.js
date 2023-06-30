@@ -14,20 +14,13 @@ import {
 } from "native-base";
 import CustomButton from "./CustomButton";
 import GoBackButton from "./GoBackButton";
+
 import { CartContext, CartProvider } from "../utils/context/CartContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const CustomCardDetailsProduct = ({ productDetails }) => {
   const { addToCart, cartItems, quantity, setQuantity, updateTotalPrice } =
     useContext(CartContext);
-  console.log("cartItems", cartItems);
-
-  // const isFocused = useIsFocused();
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setQuantity(1);
-  //   }
-  // }, []);
 
   const navigation = useNavigation();
 
@@ -53,10 +46,6 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
 
     updateTotalPrice();
   };
-
-  //console.log("totalPrice", totalPrice);
-  // console.log("image", productDetails.image);
-  //console.log("quantity", quantity);
 
   return (
     <View>

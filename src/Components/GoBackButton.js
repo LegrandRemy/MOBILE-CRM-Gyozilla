@@ -6,7 +6,6 @@ import { TouchableOpacity } from "react-native";
 
 const GoBackButton = (props) => {
   const navigation = useNavigation();
-  console.log("textButton", props);
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}
