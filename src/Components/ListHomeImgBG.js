@@ -3,7 +3,7 @@ import {
   Text,
   ImageBackground,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native'
 import React from 'react'
 import { Box } from 'native-base'
@@ -13,15 +13,11 @@ const ListHomeImgBG = ({ lastProducts }) => {
   const navigation = useNavigation()
 
   const handlePress = (id) => {
-    navigation.navigate('ProductDetailsScreen', { id: id })
+    navigation.navigate('LastProductHome', { item: item })
   }
   return lastProducts?.map((item) => {
     console.log(item)
     return (
-      // <TouchableHighlight
-      //   onPress={() => handlePress(item.id)}
-      //   underlayColor="transparent"
-      // >
       <Box
         display={'flex'}
         flexWrap={'wrap'}
@@ -37,6 +33,11 @@ const ListHomeImgBG = ({ lastProducts }) => {
         // width={380}
         // height={380}
       >
+        {/* <TouchableOpacity
+          onPress={() => handlePress(item.id)}
+          underlayColor="transparent"
+          style={{ alignItems: 'center' }}
+        > */}
         <Text
           style={{
             fontWeight: 'bold',
@@ -59,8 +60,8 @@ const ListHomeImgBG = ({ lastProducts }) => {
           }}
           resizeMode="contain"
         ></ImageBackground>
+        {/* </TouchableOpacity> */}
       </Box>
-      // </TouchableHighlight>
     )
   })
 }
