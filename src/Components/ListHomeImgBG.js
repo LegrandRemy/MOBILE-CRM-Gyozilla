@@ -8,60 +8,49 @@ import {
 import React from 'react'
 import { Box } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
 const ListHomeImgBG = ({ lastProducts }) => {
   const navigation = useNavigation()
 
-  const handlePress = (id) => {
-    navigation.navigate('LastProductHome', { item: item })
+  const handlePress = (item) => {
+    navigation.navigate('LastProductsHome', { item: item })
   }
   return lastProducts?.map((item) => {
-    console.log(item)
+    console.log('ICI', item.id)
     return (
-      <Box
-        display={'flex'}
-        flexWrap={'wrap'}
-        flexDirection={'column'}
-        width={'48%'}
-        margin={0.5}
-        marginTop={3}
-        backgroundColor={'#5F8D85'}
-        justifyContent={'center'}
-        padding={0}
-        paddingBottom={0}
-        borderRadius={6}
-        // width={380}
-        // height={380}
+      <TouchableHighlight
+        onPress={() => handlePress(item)}
+        style={{
+          width: '20%',
+          backgroundColor: 'green',
+        }}
       >
-        {/* <TouchableOpacity
-          onPress={() => handlePress(item.id)}
-          underlayColor="transparent"
-          style={{ alignItems: 'center' }}
-        > */}
-        <Text
-          style={{
-            fontWeight: 'bold',
-            marginTop: 15,
-            textAlign: 'center',
-            width: '100%',
-            paddingBottom: 2,
-          }}
-        >
-          {item.name}
-        </Text>
-        <ImageBackground
-          key={item.id}
-          style={{
-            width: '100%',
-            height: 150,
-          }}
-          source={{
-            uri: `https://api-gyozilla.onrender.com/${item.image}`,
-          }}
-          resizeMode="contain"
-        ></ImageBackground>
-        {/* </TouchableOpacity> */}
-      </Box>
+        <Box>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              marginTop: 15,
+              textAlign: 'center',
+              width: '100%',
+              paddingBottom: 2,
+            }}
+          >
+            {item.name}
+          </Text>
+          <ImageBackground
+            key={item.id}
+            style={{
+              width: '100%',
+              height: 200,
+            }}
+            source={{
+              uri: `https://api-gyozilla.onrender.com/${item.image}`,
+            }}
+            resizeMode="contain"
+          ></ImageBackground>
+        </Box>
+      </TouchableHighlight>
     )
   })
 }

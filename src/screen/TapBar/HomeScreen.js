@@ -88,6 +88,7 @@ const Home = () => {
           Quel type de gourmand êtes-vous? &#127836;
         </Heading>
         <Box
+          backgroundColor={'red'}
           display={'flex'}
           flexWrap={'wrap'}
           flexDirection={'row'}
