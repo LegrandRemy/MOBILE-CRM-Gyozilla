@@ -17,25 +17,16 @@ const ListHomeImgBG = ({ lastProducts }) => {
   }
   return lastProducts?.map((item) => {
     return (
-      // <TouchableHighlight
-      //   onPress={() => handlePress(item.id)}
-      //   underlayColor="transparent"
-      // >
-      <Box
-        display={'flex'}
-        flexWrap={'wrap'}
-        flexDirection={'column'}
-        width={'48%'}
-        margin={0.5}
-        marginTop={3}
-        backgroundColor={'#5F8D85'}
-        justifyContent={'center'}
-        padding={0}
-        paddingBottom={0}
-        borderRadius={6}
-        // width={380}
-        // height={380}
+      <TouchableHighlight
+        onPress={() => handlePress(item.id)}
+        style={{
+        width:'48%',
+        marginHorizontal: 3,
+        marginBottom: 10
+        }}
+        underlayColor='transparent'
       >
+      <Box maxHeight={200}>
         <Text
           style={{
             fontWeight: 'bold',
@@ -59,7 +50,7 @@ const ListHomeImgBG = ({ lastProducts }) => {
           resizeMode="contain"
         ></ImageBackground>
       </Box>
-      // </TouchableHighlight>
+      </TouchableHighlight>
     )
   })
 }

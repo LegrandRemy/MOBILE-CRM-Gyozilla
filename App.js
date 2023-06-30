@@ -38,11 +38,7 @@ export default function App() {
 
   // const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    if (fakeUser) {
-      setUser(fakeUser);
-    }
-  }, []);
+
   const inter = () => {
     if (!load) {
       setLoad(true)

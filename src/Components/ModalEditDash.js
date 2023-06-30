@@ -71,7 +71,7 @@ const ModalEditDash = ({visible, closeModal, add}) => {
                     />
                     {errors.productDescription ? <Text>{errors.productDescription}</Text>: ''}
 
-                    <Input
+                    {/* <Input
                         margin={2}
                         variant={'outline'}
                         placeholder="Nom du produit"
@@ -79,7 +79,7 @@ const ModalEditDash = ({visible, closeModal, add}) => {
                         onBlur={handleBlur('productName')}
                         value={values.productName}
                     />
-                    {errors.productName ? <Text>{errors.productName}</Text>: ''}
+                    {errors.productName ? <Text>{errors.productName}</Text>: ''} */}
                     <Input
                         margin={2}
                         variant={'outline'}

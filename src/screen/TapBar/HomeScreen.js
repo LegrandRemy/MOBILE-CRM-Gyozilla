@@ -71,13 +71,6 @@ const Home = () => {
         </Heading>
         <Text>Découvrez les dernières actualités Gyozilla®</Text>
         <FlatListNewsCarousel propsData={lastNews} />
-      </Box>
-      <Box
-        backgroundColor={'white'}
-        justifyContent={'center'}
-        paddingBottom={6}
-        paddingLeft={4}
-      >
         <Heading
           color="#F8A500"
           width={250}
@@ -87,16 +80,19 @@ const Home = () => {
         >
           Quel type de gourmand êtes-vous? &#127836;
         </Heading>
+      </Box>
+      <Box
+        backgroundColor={'white'}
+        alignItems={'center'}
+        paddingBottom={6}
+      >
         <Box
           display={'flex'}
           flexWrap={'wrap'}
           flexDirection={'row'}
-          marginBottom={0}
-          paddingLeft={0}
-          paddingBottom={0}
+          justifyContent={'center'}
           borderRadius={10}
-          width={380}
-          height={'auto'}
+          width={'95%'}
         >
           <ListHomeImgBG lastProducts={randomProducts} />
         </Box>
