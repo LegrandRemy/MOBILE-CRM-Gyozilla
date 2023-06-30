@@ -4,32 +4,33 @@ import {
   ImageBackground,
   Image,
   TouchableHighlight,
-} from 'react-native'
-import React from 'react'
-import { Box } from 'native-base'
-import { useNavigation } from '@react-navigation/native'
+} from "react-native";
+import React from "react";
+import { Box } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
 const ListHomeImgBG = ({ lastProducts }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const handlePress = (id) => {
-    navigation.navigate('ProductDetailsScreen', { id: id })
-  }
-  return lastProducts?.map((item) => {
+    navigation.navigate("ProductDetailsScreen", { id: id });
+  };
+  return lastProducts?.map((item, index) => {
     return (
       // <TouchableHighlight
       //   onPress={() => handlePress(item.id)}
       //   underlayColor="transparent"
       // >
       <Box
-        display={'flex'}
-        flexWrap={'wrap'}
-        flexDirection={'column'}
-        width={'48%'}
+        key={index}
+        display={"flex"}
+        flexWrap={"wrap"}
+        flexDirection={"column"}
+        width={"48%"}
         margin={0.5}
         marginTop={3}
-        backgroundColor={'#5F8D85'}
-        justifyContent={'center'}
+        backgroundColor={"#5F8D85"}
+        justifyContent={"center"}
         padding={0}
         paddingBottom={0}
         borderRadius={6}
@@ -38,19 +39,19 @@ const ListHomeImgBG = ({ lastProducts }) => {
       >
         <Text
           style={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
             marginTop: 15,
-            textAlign: 'center',
-            width: '100%',
+            textAlign: "center",
+            width: "100%",
             paddingBottom: 2,
           }}
         >
           {item.name}
         </Text>
         <ImageBackground
-          key={item.id}
+          key={index}
           style={{
-            width: '100%',
+            width: "100%",
             height: 150,
           }}
           source={{
@@ -60,8 +61,8 @@ const ListHomeImgBG = ({ lastProducts }) => {
         ></ImageBackground>
       </Box>
       // </TouchableHighlight>
-    )
-  })
-}
+    );
+  });
+};
 
-export default ListHomeImgBG
+export default ListHomeImgBG;

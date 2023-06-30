@@ -91,7 +91,7 @@ const Cart = (incrementQuantity, decrementQuantity) => {
         {uniqueCartItems.map((item, index) => {
           return (
             <>
-              <AspectRatio w="50%">
+              <AspectRatio w="50%" key={index}>
                 <Image
                   resizeMode="cover"
                   style={{
