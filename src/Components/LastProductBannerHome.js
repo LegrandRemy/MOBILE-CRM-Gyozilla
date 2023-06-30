@@ -1,16 +1,16 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { AspectRatio, Box, Image, Skeleton } from 'native-base'
+import { View, Text, TouchableOpacity } from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { AspectRatio, Box, Image, Skeleton } from "native-base";
 
 const LastProductBannerHome = ({ item }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const handlePress = (item) => {
-    navigation.navigate('LastProductsHome', { item: item })
-  }
+    navigation.navigate("LastProductsHome", { item: item });
+  };
   return (
     <>
-      {item && item[0]?.image ? (
+      {/* {item && item[0]?.image ? (
         <TouchableOpacity
           onPress={() => handlePress(item)}
           underlayColor="transparent"
@@ -26,13 +26,13 @@ const LastProductBannerHome = ({ item }) => {
             alt="en ce moment"
           />
         </TouchableOpacity>
-      ) : (
-        <Box alignItems={'center'} marginY={-188} marginBottom={3}>
-          <Skeleton borderRadius={10} width={'90%'} height={200} />
-        </Box>
-      )}
+      ) : ( */}
+      <Box alignItems={"center"} marginBottom={3}>
+        <Skeleton borderRadius={10} width={"90%"} height={200} />
+      </Box>
+      {/* )} */}
     </>
-  )
-}
+  );
+};
 
-export default LastProductBannerHome
+export default LastProductBannerHome;
