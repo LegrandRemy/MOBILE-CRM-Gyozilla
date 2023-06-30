@@ -16,7 +16,6 @@ const ListHomeImgBG = ({ lastProducts }) => {
     navigation.navigate('ProductDetailsScreen', { id: id })
   }
   return lastProducts?.map((item) => {
-    console.log(item)
     return (
       // <TouchableHighlight
       //   onPress={() => handlePress(item.id)}

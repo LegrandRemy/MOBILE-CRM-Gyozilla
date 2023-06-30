@@ -6,22 +6,8 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { addProduct } from '../utils/api-call/addProduct';
 import { View } from 'react-native';
-import DocumentPicker from 'react-native-document-picker';
 
 const ModalEditDash = ({visible, closeModal, add}) => {
-    const chooseFile = async ()=>{
-        try {
-            const res = await DocumentPicker.pick({
-            type: [DocumentPicker.types.allFiles],
-            });
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-            console.log('Sélection de fichier annulée');
-            } else {
-            console.log('Erreur lors de la sélection du fichier :', err);
-            }
-        }
-    }
 
     const validationSchema = yup.object().shape({
         productName: yup.string().required('Le nom du produit est obligatoire'),
@@ -84,13 +70,7 @@ const ModalEditDash = ({visible, closeModal, add}) => {
                         errors={touched.productDescription && errors.productDescription}
                     />
                     {errors.productDescription ? <Text>{errors.productDescription}</Text>: ''}
-                    <Button title="Choisir un fichier" onPress={chooseFile}>Choisir un fichier</Button>
-                    <Input
-                        value={values.productImage}
-                        placeholder="Chemin du fichier"
-                        
-                    />
-                    {errors.productImage ? <Text>{errors.productImage}</Text>: ''}
+
                     <Input
                         margin={2}
                         variant={'outline'}
