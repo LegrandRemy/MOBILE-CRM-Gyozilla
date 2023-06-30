@@ -10,9 +10,15 @@ import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwtDecode from "jwt-decode";
 import Loader from "./src/components/loader";
-import { KeyboardAvoidingView, NativeBaseProvider, extendTheme } from "native-base";
+import {
+  KeyboardAvoidingView,
+  NativeBaseProvider,
+  extendTheme,
+} from "native-base";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as Linking from 'expo-linking';
+
 
 const theme = {
   ...DefaultTheme,
@@ -36,10 +42,7 @@ export default function App() {
   };
   setTimeout(inter, 4000);
 
-  console.log(user);
-
   return (
-    
     <PaperProvider theme={theme}>
       <NativeBaseProvider>
         <UserContext.Provider
@@ -49,16 +52,16 @@ export default function App() {
             isLogged: isLogged,
             setIsLogged: setIsLogged,
           }}
-          >
+        >
           <StatusBar translucent={false} style="light"></StatusBar>
           <NavigationContainer>
             {!load ? (
               <Loader />
-              ) : user && user.role ? (
+            ) : user && user.role ? (
               <StackDashBoardNavigator />
-              ) : (
-                <RootStackNavigator />
-                )}
+            ) : (
+              <RootStackNavigator />
+            )}
           </NavigationContainer>
         </UserContext.Provider>
       </NativeBaseProvider>
