@@ -114,7 +114,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     } else {
       setLastStep(true)
     }
-  };
+  }
   // console.log("selectedItemFromMenu", selectedItemFromMenu);
   // console.log("selectedStep", selectedStep);
 
