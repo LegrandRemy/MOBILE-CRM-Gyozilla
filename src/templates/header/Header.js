@@ -30,15 +30,14 @@ const Header = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
-            height: 100,
+            height: 80,
             backgroundColor: "#1d292b",
           }}
         >
           <Image
-            marginTop={10}
             source={require("../../../assets/logo_gyozilla.png")}
             alt="Logo"
-            style={{ marginLeft: 10, width: "25%", height: 100 }}
+            style={{ marginLeft: 10, width: "25%", height: 80, marginTop:-10 }}
           />
           <Box
             marginRight={4}
@@ -46,6 +45,7 @@ const Header = () => {
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",
+              height:'100%'
             }}
           >
             <Text style={{ color: "white" }}>
@@ -64,7 +64,6 @@ const Header = () => {
                       name="chevron-down"
                       size={"md"}
                       color="white"
-                      marginTop={1}
                     />
                   </Pressable>
                 );

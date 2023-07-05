@@ -16,23 +16,23 @@ const LastProductsHome = () => {
   const route = useRoute()
   const { item } = route.params
   const navigation = useNavigation()
-  console.log(item)
+  console.log(route.params)
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      {item[0] ? (
+      {item ? (
         <View style={styles.container}>
           <Box>
-            <Text style={styles.productName}>{item[0]?.name}</Text>
+            <Text style={styles.productName}>{item?.name}</Text>
           </Box>
           <Image
             source={{
-              uri: `https://api-gyozilla.onrender.com/${item[0].image}`,
+              uri: `https://api-gyozilla.onrender.com/${item.image}`,
             }}
             style={styles.productImage}
             resizeMode="cover"
             alt="Image du produit"
           />
-          <Text style={styles.productDescription}>{item[0]?.description}</Text>
+          <Text style={styles.productDescription}>{item.description}</Text>
           <Box style={styles.hungryBox}>
             <Text style={styles.hungryName}>
               Vous le voulez? C'est par ici!{' '}
