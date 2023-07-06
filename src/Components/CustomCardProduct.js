@@ -9,8 +9,9 @@ import {
   Stack,
   HStack,
   Radio,
+  Text,
 } from "native-base";
-import { REACT_APP_URL_API } from '@env'
+import { REACT_APP_URL_API } from "@env";
 
 const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
   const navigation = useNavigation();
@@ -18,7 +19,7 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[{ width: "50%", height: 200, marginBottom: 10 }, customStyle]}
+      style={[{ width: "50%", height: 250, marginBottom: 10 }, customStyle]}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -40,10 +41,10 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
           }}
         >
           <Stack
-            p="4"
+            p="2"
             alignItems="center"
             justifyContent="center"
-            height={75}
+            height={65}
             space={2}
             bgColor="#5F8D85"
           >
@@ -63,6 +64,9 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
                 alt="image"
               />
             </AspectRatio>
+          </Box>
+          <Box>
+            <Heading>{product ? product.price : menu.price} €</Heading>
           </Box>
         </Box>
       </HStack>

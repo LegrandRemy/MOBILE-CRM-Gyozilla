@@ -72,56 +72,60 @@ const Cart = () => {
 
         {cartItems.map((item, index) => {
           return (
-            <>
-              <Box bgColor={"#faeccb"} mx={5} my={3} borderRadius={10}>
-                <HStack alignItems={"center"} justifyContent={"space-between"}>
-                  <VStack ml={5} justifyContent={"center"} maxWidth={"70%"}>
-                    <Heading size="md">
-                      <Text>{item.name}</Text>
-                    </Heading>
-                    <Text>{item.price * item.quantity} €</Text>
-                  </VStack>
+            <Box
+              bgColor={"#faeccb"}
+              mx={5}
+              my={3}
+              borderRadius={10}
+              key={index}
+            >
+              <HStack alignItems={"center"} justifyContent={"space-between"}>
+                <VStack ml={5} justifyContent={"center"} maxWidth={"70%"}>
+                  <Heading size="md">
+                    <Text>{item.name}</Text>
+                  </Heading>
+                  <Text>{(item.price * item.quantity).toFixed(2)} €</Text>
+                </VStack>
 
-                  <HStack p={4} space={3} alignItems={"center"}>
-                    <TouchableOpacity
-                      style={{ alignItems: "center" }}
-                      onPress={() => decrementQuantity(item, index)}
-                    >
-                      <Icon
-                        as={MaterialCommunityIcons}
-                        name="minus"
-                        size={"lg"}
-                        color="white"
-                        bgColor="#5F8D85"
-                        borderRadius={50}
-                      />
-                    </TouchableOpacity>
-                    <Heading size="md">
-                      <Text>{item.quantity}</Text>
-                    </Heading>
-                    <TouchableOpacity
-                      onPress={() => incrementQuantity(item, index)}
-                    >
-                      <Icon
-                        as={MaterialCommunityIcons}
-                        name="plus"
-                        size={"lg"}
-                        color="white"
-                        bgColor="#5F8D85"
-                        borderRadius={50}
-                      />
-                    </TouchableOpacity>
-                  </HStack>
+                <HStack p={4} space={3} alignItems={"center"}>
+                  <TouchableOpacity
+                    style={{ alignItems: "center" }}
+                    onPress={() => decrementQuantity(item, index)}
+                  >
+                    <Icon
+                      as={MaterialCommunityIcons}
+                      name="minus"
+                      size={"lg"}
+                      color="white"
+                      bgColor="#5F8D85"
+                      borderRadius={50}
+                    />
+                  </TouchableOpacity>
+                  <Heading size="md">
+                    <Text>{item.quantity}</Text>
+                  </Heading>
+                  <TouchableOpacity
+                    onPress={() => incrementQuantity(item, index)}
+                  >
+                    <Icon
+                      as={MaterialCommunityIcons}
+                      name="plus"
+                      size={"lg"}
+                      color="white"
+                      bgColor="#5F8D85"
+                      borderRadius={50}
+                    />
+                  </TouchableOpacity>
                 </HStack>
-                <HStack px={4} space={2} mt={2}></HStack>
-              </Box>
-            </>
+              </HStack>
+              <HStack px={4} space={2} mt={2}></HStack>
+            </Box>
           );
         })}
         <Divider mt={2} mb={2} />
         <HStack justifyContent={"space-between"} mx={5}>
           <Heading>Total</Heading>
-          <Heading>{totalPrice} €</Heading>
+          <Heading>{totalPrice.toFixed(2)} €</Heading>
         </HStack>
       </Box>
     </ScrollView>

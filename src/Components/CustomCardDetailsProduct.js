@@ -24,7 +24,8 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
 
   const navigation = useNavigation();
 
-  const totalPriceForProduct = productDetails.price * quantity;
+  const totalPriceForProduct = (productDetails.price * quantity).toFixed(2);
+  // console.log("productDetails.price*quantity", productDetails.price * quantity);
 
   const incrementQuantity = () => {
     const totalQuantity = quantity + 1;
@@ -41,6 +42,7 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
   };
 
   const handleAddToCart = () => {
+    console.log("productDetails", productDetails);
     addToCart(productDetails);
     setQuantity(1);
 
@@ -106,9 +108,8 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
           </TouchableOpacity>
 
           <Heading size="sm" ml="-1">
-            Nombre de produit :
+            {quantity}
           </Heading>
-          <Text>{quantity}</Text>
           <TouchableOpacity onPress={incrementQuantity}>
             <Icon
               as={MaterialCommunityIcons}
@@ -122,13 +123,11 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
           </TouchableOpacity>
         </HStack>
         <HStack px={4} space={2} mt={2}>
-          <Heading size="sm" ml="-1">
-            Total :
-          </Heading>
-          <Text>{totalPriceForProduct} €</Text>
           <CustomButton
             onPress={handleAddToCart}
-            textButton="Ajouter au panier"
+            textButton={`Ajouter au panier - ${totalPriceForProduct} €`}
+            width={"100%"}
+            marginTop={20}
           />
         </HStack>
       </Box>

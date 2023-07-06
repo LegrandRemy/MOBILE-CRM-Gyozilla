@@ -18,7 +18,11 @@ const StackRestaurantMenuNavigator = ({ route }) => {
         name="ProductDetailsScreen"
         component={ProductDetailsScreen}
       ></Stack.Screen>
-      <Stack.Screen name="Cart" component={Cart}></Stack.Screen>
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
     </Stack.Navigator>
   );
 };

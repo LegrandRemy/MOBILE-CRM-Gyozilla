@@ -35,7 +35,12 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     instanceAxios
       .get("/products")
       .then((response) => {
-        setProducts(response.data);
+        const updatedData = response.data.map((product) => ({
+          ...product,
+          price: product.price.toFixed(2),
+        }));
+        setProducts(updatedData);
+        //console.log("response.data", JSON.stringify(updatedData, null, 2));
       })
       .catch((error) => {
         console.error(error);
@@ -96,10 +101,14 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     setIsFiltered(true);
     setSelectedStep(0);
     setIsMenuClicked(true);
+    // console.log(
+    //   "products.filter((product) => product.id_menus === menuId)",
+    //   products.filter((product) => product.id_menus === menuId)
+    // );
   };
 
-  const handleDetailsProductClick = (productId) => {
-    navigation.navigate("ProductDetailsScreen", { productId });
+  const handleDetailsProductClick = (product) => {
+    navigation.navigate("ProductDetailsScreen", { product });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
@@ -187,7 +196,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                     >
                       <CustomCardProduct
                         product={product}
-                        onPress={() => handleDetailsProductClick(product.id)}
+                        onPress={() => handleDetailsProductClick(product)}
                         customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
@@ -208,7 +217,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
                   customStyle={{ padding: 5 }}
                   key={product.id}
                   product={product}
-                  onPress={() => handleDetailsProductClick(product.id)}
+                  onPress={() => handleDetailsProductClick(product)}
                 />
               ))}
             </View>

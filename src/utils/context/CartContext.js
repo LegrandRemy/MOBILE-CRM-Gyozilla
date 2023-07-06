@@ -11,31 +11,35 @@ export const CartProvider = ({ children }) => {
 
   // Fonction pour ajouter un produit au panier
   const addToCart = (product) => {
-    // for (i = 0; i < quantity; i++) {
-    //   newCart.push(product);
-    // }
-    let data = {
+    console.log("producttttttt", product);
+    let formattedPrice;
+    if (product.price) {
+      formattedPrice = Number(product.price).toFixed(2);
+      console.log(formattedPrice);
+    } else {
+      formattedPrice = "";
+      console.log("recoucou");
+    }
+    const updatedProduct = {
       ...product,
+      price: formattedPrice,
       quantity: quantity,
     };
-    // let newCart = [...cartItems, data];
+    console.log("formattedPrice", formattedPrice);
     const isExist =
       cartItems.filter((item) => item.id === product.id).length > 0;
-    console.log("[...cartItems, { ...product, quantity: quantity }]", [
-      ...cartItems,
-      { ...product, quantity: quantity },
-    ]);
-    let newCart =
-      isExist === true
-        ? cartItems.map((item) =>
-            item.id === product.id
-              ? {
-                  ...product,
-                  quantity: Number(quantity) + Number(item.quantity),
-                }
-              : item
-          )
-        : [...cartItems, { ...product, quantity: quantity }];
+
+    let newCart = isExist
+      ? cartItems.map((item) =>
+          item.id === product.id
+            ? {
+                ...updatedProduct,
+                quantity: Number(quantity) + Number(item.quantity),
+              }
+            : item
+        )
+      : [...cartItems, updatedProduct];
+
     setCartItems(newCart);
   };
 
