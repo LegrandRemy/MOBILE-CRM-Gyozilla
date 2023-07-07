@@ -45,7 +45,7 @@ const Engagements = () => {
         Toute notre équipe travaille avec joie pour vous satisfaire
       </Text>
       <View style={styles.imageContainer}>
-        <Image source={team} style={styles.image} />
+        <Image alt="team" source={team} style={styles.image} />
       </View>
       <Text style={styles.subtitle}>
         La qualité est garantie pour chacun des produits
@@ -97,6 +97,7 @@ const Engagements = () => {
           <Box>
             <AspectRatio w="100%" height={200} ratio={16 / 9}>
               <Image
+                alt="plats"
                 height={200}
                 width={"100%"}
                 resizeMode={"cover"}
@@ -145,6 +146,7 @@ const Engagements = () => {
           <Box>
             <AspectRatio w="100%" height={200} ratio={16 / 9}>
               <Image
+                alt="Boissons"
                 height={200}
                 source={boissons}
                 width={"100%"}

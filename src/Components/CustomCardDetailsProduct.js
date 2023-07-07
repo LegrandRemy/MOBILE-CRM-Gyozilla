@@ -42,7 +42,6 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
   };
 
   const handleAddToCart = () => {
-    console.log("productDetails", productDetails);
     addToCart(productDetails);
     setQuantity(1);
 
@@ -92,7 +91,7 @@ const CustomCardDetailsProduct = ({ productDetails }) => {
           <Heading size="sm" ml="-1">
             Prix :{" "}
           </Heading>
-          <Text>{productDetails.price}</Text>
+          <Text>{productDetails.price} €</Text>
         </HStack>
         <HStack px={4} space={2} mt={2} alignItems={"center"}>
           <TouchableOpacity onPress={decrementQuantity}>

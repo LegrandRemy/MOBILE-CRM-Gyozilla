@@ -37,7 +37,7 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: "coolGray.100",
+            backgroundColor: "white",
           }}
         >
           <Stack
@@ -65,8 +65,10 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
               />
             </AspectRatio>
           </Box>
-          <Box>
-            <Heading>{product ? product.price : menu.price} €</Heading>
+          <Box alignItems={"flex-end"} mt={3} mr={1}>
+            <Heading color={"#5F8D85"}>
+              {product ? product.price : menu.price} €
+            </Heading>
           </Box>
         </Box>
       </HStack>

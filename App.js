@@ -18,7 +18,6 @@ import {
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as Linking from "expo-linking";
-
 import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {

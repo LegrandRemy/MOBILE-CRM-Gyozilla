@@ -45,6 +45,7 @@ const Cart = () => {
           alignItems="center"
           justifyContent="center"
           height={55}
+          width={"auto"}
           space={2}
           bgColor="#5F8D85"
         >

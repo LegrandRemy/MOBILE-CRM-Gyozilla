@@ -15,17 +15,14 @@ export const CartProvider = ({ children }) => {
     let formattedPrice;
     if (product.price) {
       formattedPrice = Number(product.price).toFixed(2);
-      console.log(formattedPrice);
     } else {
       formattedPrice = "";
-      console.log("recoucou");
     }
     const updatedProduct = {
       ...product,
       price: formattedPrice,
       quantity: quantity,
     };
-    console.log("formattedPrice", formattedPrice);
     const isExist =
       cartItems.filter((item) => item.id === product.id).length > 0;
 
