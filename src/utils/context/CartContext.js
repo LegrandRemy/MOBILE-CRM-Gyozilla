@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
 
   // Fonction pour ajouter un produit au panier
   const addToCart = (product) => {
-    console.log("producttttttt", product);
+    // console.log("producttttttt", product);
     let formattedPrice;
     if (product.price) {
       formattedPrice = Number(product.price).toFixed(2);

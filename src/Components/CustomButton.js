@@ -16,7 +16,7 @@ const CustomButton = (props) => {
         marginBottom: props.marginBottom,
       }}
     >
-      <Text style={{ alignSelf: "center", color: "#faeccb" }}>
+      <Text style={{ alignSelf: "center", color: "#faeccb", fontSize: 20 }}>
         {props.textButton}
       </Text>
     </TouchableOpacity>

@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { REACT_APP_URL_API } from "@env";
 
 const baseUrl = REACT_APP_URL_API + "api/";
+const imageUrl = REACT_APP_URL_API;
 
 // console.log("baseUrl", baseUrl);
 
@@ -22,6 +23,7 @@ instanceAxios.interceptors.request.use(
     if (token) {
       // console.log(token, 'gettoken');
       config.headers["Authorization"] = "Bearer " + token;
+      config.headers["ngrok-skip-browser-warning"] = true;
     }
     return config;
   },
@@ -55,4 +57,4 @@ instanceAxios.interceptors.response.use(
   }
 );
 
-export { instanceAxios };
+export { baseUrl, imageUrl, instanceAxios };
