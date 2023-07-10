@@ -9,16 +9,26 @@ import {
   Stack,
   HStack,
   Radio,
+  Text,
+  Icon,
+  VStack,
+  IconButton,
 } from "native-base";
-import { REACT_APP_URL_API } from '@env'
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { REACT_APP_URL_API } from "@env";
 
 const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
   const navigation = useNavigation();
 
+  const handlePress = (screenName) => {
+    navigation.navigate(screenName, { product: product });
+  };
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[{ width: "50%", height: 200, marginBottom: 10 }, customStyle]}
+      style={[{ width: "50%", height: 250, marginBottom: 10 }, customStyle]}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -36,14 +46,14 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: "coolGray.100",
+            backgroundColor: "white",
           }}
         >
           <Stack
-            p="4"
+            p="2"
             alignItems="center"
             justifyContent="center"
-            height={75}
+            height={65}
             space={2}
             bgColor="#5F8D85"
           >
@@ -51,7 +61,7 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
               {product ? product.name : menu.name}
             </Heading>
           </Stack>
-          <Box>
+          <Stack>
             <AspectRatio w="100%">
               <Image
                 resizeMode="cover"
@@ -63,7 +73,31 @@ const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
                 alt="image"
               />
             </AspectRatio>
-          </Box>
+          </Stack>
+          <HStack
+            alignItems={"center"}
+            justifyContent={"space-around"}
+            mt={3}
+            mr={1}
+          >
+            <IconButton
+              width={"30%"}
+              icon={
+                <Icon
+                  as={MaterialCommunityIcons}
+                  name="eye"
+                  size={"lg"}
+                  color="#5F8D85"
+                  marginTop={1}
+                  borderRadius={50}
+                />
+              }
+              onPress={() => handlePress("CustomCardDetailsProduct")}
+            />
+            <Heading color={"#5F8D85"}>
+              {product ? product.price : menu.price} €
+            </Heading>
+          </HStack>
         </Box>
       </HStack>
     </TouchableOpacity>

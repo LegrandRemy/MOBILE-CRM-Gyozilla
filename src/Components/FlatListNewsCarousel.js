@@ -1,14 +1,14 @@
-import { View, Text, FlatList, Image, TouchableHighlight } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { REACT_APP_URL_API } from '@env'
+import { View, Text, FlatList, Image, TouchableHighlight } from "react-native";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { REACT_APP_URL_API } from "@env";
 
 const FlatListNewsCarousel = ({ propsData }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const handlePress = (id) => {
-    navigation.navigate('OneNews', { id: id })
-  }
+    navigation.navigate("OneNews", { id: id });
+  };
 
   const renderNewsCarouselItem = ({ item }) => (
     <TouchableHighlight
@@ -32,12 +32,12 @@ const FlatListNewsCarousel = ({ propsData }) => {
           resizeMode="cover"
           alt="Image des actualités"
         />
-        <Text style={{ fontWeight: 'bold', color: '#5F8D85' }}>
+        <Text style={{ fontWeight: "bold", color: "#5F8D85" }}>
           {item.name}
         </Text>
       </View>
     </TouchableHighlight>
-  )
+  );
 
   return (
     <FlatList
@@ -46,9 +46,9 @@ const FlatListNewsCarousel = ({ propsData }) => {
       horizontal
       pagingEnabled
       showsHorizontalScrollIndicator={false}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item, index) => index}
     />
-  )
-}
+  );
+};
 
-export default FlatListNewsCarousel
+export default FlatListNewsCarousel;

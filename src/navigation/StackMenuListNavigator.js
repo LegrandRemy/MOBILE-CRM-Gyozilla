@@ -7,6 +7,7 @@ import MenuList from "../screen/TapBar/MenuListScreen";
 import MyAccount from "../screen/MyAccountScreen";
 import ListProducts from "../screen/ListProductsScreen";
 import Engagements from "../screen/EngagementsScreen";
+import ProductDetails from "../screen/ProductDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,10 @@ const StackNavigator = () => {
       ></Stack.Screen>
       <Stack.Screen name="MyAccount" component={MyAccount}></Stack.Screen>
       <Stack.Screen name="ListProducts" component={ListProducts}></Stack.Screen>
+      <Stack.Screen
+        name="ProductDetailsScreen"
+        component={ProductDetails}
+      ></Stack.Screen>
       <Stack.Screen name="Contactez-nous" component={ContactUs}></Stack.Screen>
       <Stack.Screen name="Engagements" component={Engagements}></Stack.Screen>
     </Stack.Navigator>

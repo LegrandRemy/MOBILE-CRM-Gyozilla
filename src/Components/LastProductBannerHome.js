@@ -10,11 +10,11 @@ const LastProductBannerHome = ({ item }) => {
   };
   return (
     <>
-      {/* {item && item[0]?.image ? (
+      {item && item[0]?.image ? (
         <TouchableOpacity
           onPress={() => handlePress(item)}
           underlayColor="transparent"
-          style={{ alignItems: 'center' }}
+          style={{ alignItems: "center" }}
         >
           <Image
             width={380}
@@ -26,11 +26,11 @@ const LastProductBannerHome = ({ item }) => {
             alt="en ce moment"
           />
         </TouchableOpacity>
-      ) : ( */}
-      <Box alignItems={"center"} marginBottom={3}>
-        <Skeleton borderRadius={10} width={"90%"} height={200} />
-      </Box>
-      {/* )} */}
+      ) : (
+        <Box alignItems={"center"} marginBottom={3}>
+          <Skeleton borderRadius={10} width={"90%"} height={200} />
+        </Box>
+      )}
     </>
   );
 };

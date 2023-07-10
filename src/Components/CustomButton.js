@@ -7,16 +7,16 @@ const CustomButton = (props) => {
       onPress={props.onPress}
       style={{
         alignItems: "center",
-        width: "30%",
+        width: props.width,
         backgroundColor: "#77614c",
         //paddingHorizontal: 12,
         paddingVertical: 12,
         borderRadius: 5,
-        marginTop: 20,
-        marginBottom: 50,
+        marginTop: props.marginTop,
+        marginBottom: props.marginBottom,
       }}
     >
-      <Text style={{ alignSelf: "center", color: "#faeccb" }}>
+      <Text style={{ alignSelf: "center", color: "#faeccb", fontSize: 20 }}>
         {props.textButton}
       </Text>
     </TouchableOpacity>

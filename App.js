@@ -18,7 +18,6 @@ import {
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import * as Linking from "expo-linking";
-
 import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {
@@ -38,11 +37,6 @@ export default function App() {
 
   // const [cart, setCart] = useState([]);
 
-  // useEffect(() => {
-  //   if (fakeUser) {
-  //     setUser(fakeUser);
-  //   }
-  // }, []);
   const inter = () => {
     if (!load) {
       setLoad(true);

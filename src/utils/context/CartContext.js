@@ -9,22 +9,62 @@ export const CartProvider = ({ children }) => {
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  console.log("cartItems dans context", cartItems);
-
   // Fonction pour ajouter un produit au panier
   const addToCart = (product) => {
-    let newCart = [...cartItems];
-    for (i = 0; i < quantity; i++) {
-      newCart.push(product);
+    // console.log("producttttttt", product);
+    let formattedPrice;
+    if (product.price) {
+      formattedPrice = Number(product.price).toFixed(2);
+    } else {
+      formattedPrice = "";
     }
+    const updatedProduct = {
+      ...product,
+      price: formattedPrice,
+      quantity: quantity,
+    };
+    const isExist =
+      cartItems.filter((item) => item.id === product.id).length > 0;
+
+    let newCart = isExist
+      ? cartItems.map((item) =>
+          item.id === product.id
+            ? {
+                ...updatedProduct,
+                quantity: Number(quantity) + Number(item.quantity),
+              }
+            : item
+        )
+      : [...cartItems, updatedProduct];
+
     setCartItems(newCart);
+  };
+
+  const incrementQuantity = (item, index) => {
+    const totalQuantity = item.quantity + 1;
+    setQuantity(totalQuantity);
+    updateTotalPrice();
+    let data = cartItems;
+    data[index].quantity = totalQuantity;
+    setCartItems(data);
+  };
+
+  const decrementQuantity = (item, index) => {
+    if (quantity > 1) {
+      const totalQuantity = item.quantity - 1;
+      setQuantity(totalQuantity);
+      updateTotalPrice();
+      let data = cartItems;
+      data[index].quantity = totalQuantity;
+      setCartItems(data);
+    }
   };
 
   //Fonction pour mettre à jour le prix total
   const updateTotalPrice = () => {
     let total = 0;
     cartItems.forEach((item) => {
-      total += item.price * quantity;
+      total += item.price * item.quantity;
     });
     setTotalPrice(total);
   };
@@ -55,6 +95,8 @@ export const CartProvider = ({ children }) => {
     setQuantity,
     totalPrice,
     updateTotalPrice,
+    decrementQuantity,
+    incrementQuantity,
   };
 
   return (

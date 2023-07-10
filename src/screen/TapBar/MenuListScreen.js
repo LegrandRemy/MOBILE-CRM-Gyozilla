@@ -5,7 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Box, Card, ScrollView } from "native-base";
 import CustomCardProduct from "../../components/CustomCardProduct";
 import CustomCardRestaurantMenu from "../../components/CustomCardRestaurantMenu";
-import { REACT_APP_URL_API } from '@env'
+import { REACT_APP_URL_API } from "@env";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const MenuList = ({ route, props }) => {
   const navigation = useNavigation();
@@ -13,7 +14,6 @@ const MenuList = ({ route, props }) => {
   const [expanded, setExpanded] = useState("");
 
   const handleMenuItemPress = (screenName, data) => {
-    // console.log("handleMenuItemPress", screenName);
     navigation.navigate(screenName, data);
   };
 
@@ -28,6 +28,13 @@ const MenuList = ({ route, props }) => {
         expanded={expanded === "monCompte"}
         onPress={() => handleAccordion("monCompte")}
         style={{ backgroundColor: "#eaeaea", color: "#F8A500" }}
+        right={() =>
+          expanded ? (
+            <MaterialCommunityIcons size={20} name="chevron-up" />
+          ) : (
+            <MaterialCommunityIcons size={20} name="chevron-down" />
+          )
+        }
       >
         <List.Item
           title="Mon profil"
@@ -51,6 +58,13 @@ const MenuList = ({ route, props }) => {
         expanded={expanded === "RestaurantMenu"}
         onPress={() => handleAccordion("RestaurantMenu")}
         style={{ backgroundColor: "#eaeaea" }}
+        right={() =>
+          expanded ? (
+            <MaterialCommunityIcons size={20} name="chevron-up" />
+          ) : (
+            <MaterialCommunityIcons size={20} name="chevron-down" />
+          )
+        }
       >
         <List.Item
           title="Nouveautés"

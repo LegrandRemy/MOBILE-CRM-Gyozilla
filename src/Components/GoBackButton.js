@@ -1,12 +1,11 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Box, Button, Icon, Text, View } from "native-base";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 
-const GoBackButton = ({ customStyleGoBack }) => {
+const GoBackButton = (props) => {
   const navigation = useNavigation();
-
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}
@@ -20,7 +19,7 @@ const GoBackButton = ({ customStyleGoBack }) => {
           justifyContent: "flex-start",
           padding: 15,
         },
-        customStyleGoBack,
+        props.customStyleGoBack,
       ]}
     >
       <Icon
@@ -41,7 +40,7 @@ const GoBackButton = ({ customStyleGoBack }) => {
           margin: 0,
         }}
       >
-        Retour
+        {props.textButton}
       </Text>
     </TouchableOpacity>
   );

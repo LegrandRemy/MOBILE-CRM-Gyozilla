@@ -17,8 +17,6 @@ const BottomNav = () => {
       shifting={true}
       sceneAnimationEnabled={false}
       screenOptions={({ route }) => ({
-        // tabBarStyle: { height: 50 },
-        // tabBarStyle: { paddingTop: 1, marginBottom: 5, paddingBottom: 5,  },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let newSize;

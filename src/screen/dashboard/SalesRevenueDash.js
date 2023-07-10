@@ -1,12 +1,33 @@
-import React from 'react'
-import { Text } from 'native-base'
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Text } from 'native-base'
 import { Dimensions, View } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
+import { getOrdersByFranchisePeriod } from '../../utils/api-call/getOrdersByFranchisePeriod'
 
 const SalesRevenueDash = () => {
+  const [period, setPeriod] = useState('day')
+
+  const switchOrdersPeriod = (idFranchise, newPeriod)=>{
+    setPeriod(newPeriod)
+      getOrdersByFranchisePeriod(idFranchise, newPeriod)
+      .then((res)=>{
+        console.log(res.data);
+      })
+  }
+
   return (
-    <View>
-  <Text>Bezier Line Chart</Text>
+    <View style={{marginTop:10}}>
+  <Box>
+  <Button.Group isAttached colorScheme="yellow" mx={{
+    base: "auto",
+    md: 0
+  }} size="sm">
+      <Button onPress={()=>switchOrdersPeriod(1,'day')} variant={period === 'day' ? 'solid' : 'outline'}>Jour</Button>
+      <Button variant="outline">Semaine</Button>
+      <Button variant="outline">Mois</Button>
+      <Button variant="outline">Année</Button>
+    </Button.Group>;
+  </Box>
   <LineChart
     data={{
       labels: ["January", "February", "March", "April", "May", "June"],
