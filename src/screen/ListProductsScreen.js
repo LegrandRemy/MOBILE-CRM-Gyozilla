@@ -11,9 +11,9 @@ import {
   ScrollView,
   Stack,
 } from "native-base";
-import CustomCardProduct from "../Components/CustomCardProduct";
-import CustomButton from "../Components/CustomButton";
-import Loader from "../Components/loader";
+import CustomCardProduct from "../components/CustomCardProduct";
+import CustomButton from "../components/CustomButton";
+import Loader from "../components/Loader";
 
 const checkNew = (item) => {
   const today = new Date();

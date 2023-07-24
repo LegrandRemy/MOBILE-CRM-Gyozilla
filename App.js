@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
-import BottomNav from "./src/Components/TapBar";
+import BottomNav from "./src/components/TapBar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import Loader from "./src/Components/loader";
+import Loader from "./src/components/Loader";
 import { NativeBaseProvider } from "native-base";
 import StackNewsNavigator from "./src/navigation/StackNewsNavigator";
 

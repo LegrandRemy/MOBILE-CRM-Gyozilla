@@ -56,8 +56,8 @@ const CustomCardProduct = ({ product, onClick, menu }) => {
                 resizeMode="cover"
                 source={{
                   uri: product
-                    ? `https://api-gyozilla.onrender.com/${product.image}`
-                    : `https://api-gyozilla.onrender.com/${menu.image}`,
+                    ? `https://api.gyozilla-restaurants.fr/${product.image}`
+                    : `https://api.gyozilla-restaurants.fr/${menu.image}`,
                 }}
                 alt="image"
               />

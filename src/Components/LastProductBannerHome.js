@@ -21,7 +21,7 @@ const LastProductBannerHome = ({ item }) => {
             height={150}
             borderRadius={10}
             source={{
-              uri: `https://api-gyozilla.onrender.com/${item.item.image}`,
+              uri: `https://api.gyozilla-restaurants.fr/${item.item.image}`,
             }}
             alt="image"
           />

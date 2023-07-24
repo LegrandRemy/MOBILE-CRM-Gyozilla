@@ -13,7 +13,7 @@ const FlatListNewsCarousel = ({propsData}) => {
         <TouchableHighlight onPress={()=>handlePress(item.id)} underlayColor="transparent">
         <View key={item.id} style={{ width: 200, minHeight: 250, marginRight: 30 }}>
         <Image
-            source={{uri: `https://api-gyozilla.onrender.com/${item.image}`}}
+            source={{uri: `https://api.gyozilla-restaurants.fr/${item.image}`}}
             style={{ flex: 1, minWidth: 150, maxHeight: 150, minHeight: 150, marginTop:10}}
             resizeMode="cover"
             alt="Image des actualités"
