@@ -26,7 +26,7 @@ const LastProductsHome = () => {
           </Box>
           <Image
             source={{
-              uri: `https://api-gyozilla.onrender.com/${item.image}`,
+              uri: `https://api.gyozilla-restaurants.fr/${item.image}`,
             }}
             style={styles.productImage}
             resizeMode="cover"

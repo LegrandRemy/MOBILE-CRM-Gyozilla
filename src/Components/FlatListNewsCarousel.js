@@ -20,7 +20,7 @@ const FlatListNewsCarousel = ({ propsData }) => {
         style={{ width: 250, minHeight: 250, marginRight: 12 }}
       >
         <Image
-          source={{ uri: `https://api-gyozilla.onrender.com/${item.image}` }}
+          source={{ uri: `https://api.gyozilla-restaurants.fr/${item.image}` }}
           style={{
             flex: 1,
             minWidth: 150,

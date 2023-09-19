@@ -46,7 +46,7 @@ const ListHomeImgBG = ({ lastProducts }) => {
               height: 150,
             }}
             source={{
-              uri: `https://api-gyozilla.onrender.com/${item.image}`,
+              uri: `https://api.gyozilla-restaurants.fr/${item.image}`,
             }}
             resizeMode="contain"
           ></ImageBackground>

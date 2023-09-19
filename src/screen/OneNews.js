@@ -25,7 +25,7 @@ const OneNews = () => {
         <View style={styles.container}>
           <Text style={styles.newsName}>{news?.name}</Text>
           <Image
-            source={{ uri: `https://api-gyozilla.onrender.com/${news?.image}` }}
+            source={{ uri: `https://api.gyozilla-restaurants.fr/${news?.image}` }}
             style={styles.newsImage}
             resizeMode="cover"
             alt="Image de l'actualité"

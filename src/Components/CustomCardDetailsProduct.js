@@ -75,7 +75,7 @@ const CustomCardDetailsProduct = ({ route }) => {
               marginTop: 10,
             }}
             source={{
-              uri: `https://api-gyozilla.onrender.com/${product.image}`,
+              uri: `https://api.gyozilla-restaurants.fr/${product.image}`,
             }}
             alt="image"
           />
