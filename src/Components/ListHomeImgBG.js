@@ -20,11 +20,13 @@ const ListHomeImgBG = ({ lastProducts }) => {
     console.log('ICI', item.id)
     return (
       <TouchableHighlight
-        onPress={() => handlePress(item)}
+        onPress={() => handlePress(item.id)}
         style={{
-          width: '20%',
-          backgroundColor: 'green',
+          width: '48%',
+          marginHorizontal: 3,
+          marginBottom: 10,
         }}
+        underlayColor="transparent"
       >
         <Box>
           <Text

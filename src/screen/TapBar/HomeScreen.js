@@ -88,16 +88,11 @@ const Home = () => {
           Quel type de gourmand êtes-vous? &#127836;
         </Heading>
         <Box
-          backgroundColor={'red'}
           display={'flex'}
           flexWrap={'wrap'}
           flexDirection={'row'}
-          marginBottom={0}
-          paddingLeft={0}
-          paddingBottom={0}
-          borderRadius={10}
-          width={380}
-          height={'auto'}
+          justifyContent={'center'}
+          width={'95%'}
         >
           <ListHomeImgBG lastProducts={randomProducts} />
         </Box>
