@@ -2,7 +2,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { REACT_APP_URL_API } from "@env";
 
-const baseUrl = REACT_APP_URL_API + "api/";
+const baseUrl = "https://api.gyozilla-restaurants.fr/api/";
 const imageUrl = REACT_APP_URL_API;
 
 // console.log("baseUrl", baseUrl);
