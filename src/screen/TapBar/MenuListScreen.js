@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { List, Divider, Collapse, Text } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
-import { Box, Card, ScrollView } from "native-base";
-import CustomCardProduct from "../../components/CustomCardProduct";
-import CustomCardRestaurantMenu from "../../components/CustomCardRestaurantMenu";
-import { REACT_APP_URL_API } from "@env";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useState } from 'react'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { List, Divider, Collapse, Text } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/native'
+import { Box, Card, ScrollView } from 'native-base'
+import CustomCardProduct from '../../components/CustomCardProduct'
+import CustomCardRestaurantMenu from '../../components/CustomCardRestaurantMenu'
+import { REACT_APP_URL_API } from '@env'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const MenuList = ({ route, props }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
-  const [expanded, setExpanded] = useState("");
+  const [expanded, setExpanded] = useState('')
 
   const handleMenuItemPress = (screenName, data) => {
-    navigation.navigate(screenName, data);
-  };
+    navigation.navigate(screenName, data)
+  }
 
   const handleAccordion = (accordionId) => {
-    setExpanded(expanded === accordionId ? "" : accordionId);
-  };
+    setExpanded(expanded === accordionId ? '' : accordionId)
+  }
 
-  return route.name !== "Menu" ? (
+  return route.name !== 'Menu' ? (
     <View>
       <List.Accordion
         title="Mon compte"
-        expanded={expanded === "monCompte"}
-        onPress={() => handleAccordion("monCompte")}
-        style={{ backgroundColor: "#eaeaea", color: "#F8A500" }}
+        expanded={expanded === 'monCompte'}
+        onPress={() => handleAccordion('monCompte')}
+        style={{ backgroundColor: '#eaeaea', color: '#F8A500' }}
         right={() =>
           expanded ? (
             <MaterialCommunityIcons size={20} name="chevron-up" />
@@ -38,16 +38,16 @@ const MenuList = ({ route, props }) => {
       >
         <List.Item
           title="Mon profil"
-          onPress={() => handleMenuItemPress("MyAccount")}
-          style={{ backgroundColor: "#eaeaea", color: "#F8A500" }}
+          onPress={() => handleMenuItemPress('MyAccount')}
+          style={{ backgroundColor: '#eaeaea', color: '#F8A500' }}
         />
         <List.Item
           title="Ma fidélité"
-          onPress={() => handleMenuItemPress("MyFidelity")}
+          onPress={() => handleMenuItemPress('MyFidelity')}
         />
         <List.Item
           title="Mes commandes"
-          onPress={() => handleMenuItemPress("Myorders")}
+          onPress={() => handleMenuItemPress('Myorders')}
         />
       </List.Accordion>
 
@@ -55,9 +55,9 @@ const MenuList = ({ route, props }) => {
 
       <List.Accordion
         title="La carte"
-        expanded={expanded === "RestaurantMenu"}
-        onPress={() => handleAccordion("RestaurantMenu")}
-        style={{ backgroundColor: "#eaeaea" }}
+        expanded={expanded === 'RestaurantMenu'}
+        onPress={() => handleAccordion('RestaurantMenu')}
+        style={{ backgroundColor: '#eaeaea' }}
         right={() =>
           expanded ? (
             <MaterialCommunityIcons size={20} name="chevron-up" />
@@ -69,54 +69,54 @@ const MenuList = ({ route, props }) => {
         <List.Item
           title="Nouveautés"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "News",
-              title: "NOUVEAUTES",
+            handleMenuItemPress('ListProducts', {
+              name: 'News',
+              title: 'NOUVEAUTES',
             })
           }
         />
         <List.Item
           title="Menus"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Menus",
-              title: "MENU",
+            handleMenuItemPress('ListProducts', {
+              name: 'Menus',
+              title: 'MENU',
             })
           }
         />
         <List.Item
           title="Entrées"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Starter",
-              title: "ENTREES",
+            handleMenuItemPress('ListProducts', {
+              name: 'Starter',
+              title: 'ENTREES',
             })
           }
         />
         <List.Item
           title="Plats"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Dishes",
-              title: "PLATS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Dishes',
+              title: 'PLATS',
             })
           }
         />
         <List.Item
           title="Desserts"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Desserts",
-              title: "DESSERTS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Desserts',
+              title: 'DESSERTS',
             })
           }
         />
         <List.Item
           title="Boissons"
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Drinks",
-              title: "BOISSONS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Drinks',
+              title: 'BOISSONS',
             })
           }
         />
@@ -126,13 +126,13 @@ const MenuList = ({ route, props }) => {
 
       <List.Item
         title="Contactez-nous"
-        onPress={() => handleMenuItemPress("Contactez-nous")}
-        style={{ backgroundColor: "#eaeaea" }}
+        onPress={() => handleMenuItemPress('Contactez-nous')}
+        style={{ backgroundColor: '#eaeaea' }}
       />
       <List.Item
         title="Nos engagements"
-        onPress={() => handleMenuItemPress("Engagements")}
-        style={{ backgroundColor: "#eaeaea" }}
+        onPress={() => handleMenuItemPress('Engagements')}
+        style={{ backgroundColor: '#eaeaea' }}
       />
     </View>
   ) : (
@@ -141,88 +141,88 @@ const MenuList = ({ route, props }) => {
         <CustomCardRestaurantMenu
           title="Nouveautés"
           src={{
-            uri: `${REACT_APP_URL_API}image/nouveautes.jpg`,
+            uri: `${REACT_APP_URL_API}image/badge-nouveautes.webp`,
           }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "News",
-              title: "NOUVEAUTES",
+            handleMenuItemPress('ListProducts', {
+              name: 'News',
+              title: 'NOUVEAUTES',
             })
           }
         />
         <CustomCardRestaurantMenu
           title="Menus"
           src={{
-            uri: `${REACT_APP_URL_API}image/badge-nouveautes.png`,
+            uri: `${REACT_APP_URL_API}image/nouveautes.webp`,
           }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Menus",
-              title: "MENUS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Menus',
+              title: 'MENUS',
             })
           }
         />
         <CustomCardRestaurantMenu
           title="Entrées"
-          src={{ uri: `${REACT_APP_URL_API}image/entrees.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/entrees.webp` }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Starter",
-              title: "ENTREES",
+            handleMenuItemPress('ListProducts', {
+              name: 'Starter',
+              title: 'ENTREES',
             })
           }
         />
         <CustomCardRestaurantMenu
           title="Plats"
-          src={{ uri: `${REACT_APP_URL_API}image/plats.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/plats.webp` }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Dishes",
-              title: "PLATS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Dishes',
+              title: 'PLATS',
             })
           }
         />
 
         <CustomCardRestaurantMenu
           title="Desserts"
-          src={{ uri: `${REACT_APP_URL_API}image/desserts.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/desserts.webp` }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Desserts",
-              title: "DESSERTS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Desserts',
+              title: 'DESSERTS',
             })
           }
         />
         <CustomCardRestaurantMenu
           title="Boissons"
-          src={{ uri: `${REACT_APP_URL_API}image/boissons.jpg` }}
+          src={{ uri: `${REACT_APP_URL_API}image/boissons.webp` }}
           onPress={() =>
-            handleMenuItemPress("ListProducts", {
-              name: "Drinks",
-              title: "BOISSONS",
+            handleMenuItemPress('ListProducts', {
+              name: 'Drinks',
+              title: 'BOISSONS',
             })
           }
         />
       </View>
     </ScrollView>
-  );
-};
+  )
+}
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    flexDirection: "row",
-    flexWrap: "wrap",
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingHorizontal: 10,
   },
   cardProduct: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    border: "none",
-    cursor: "pointer",
-    position: "relative",
-    shadowColor: "#000",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: 'none',
+    cursor: 'pointer',
+    position: 'relative',
+    shadowColor: '#000',
     shadowOffset: {
       width: 15,
       height: 10,
@@ -232,36 +232,36 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   titleContainer: {
-    backgroundColor: "#5F8D85",
+    backgroundColor: '#5F8D85',
     opacity: 0.8,
     padding: 5,
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     borderRadius: 5,
   },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "white",
+    fontWeight: 'bold',
+    color: 'white',
   },
   cardImage: {
     flexGrow: 1,
   },
   actionsContainer: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    position: "absolute",
+    position: 'absolute',
     bottom: -50,
     left: 0,
-    backgroundColor: "#5F8D85",
+    backgroundColor: '#5F8D85',
     opacity: 0.6,
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     padding: 5,
   },
   actionButton: {
-    backgroundColor: "black",
+    backgroundColor: 'black',
     borderRadius: 50,
     padding: 5,
   },
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   cartButton: {},
   quantityText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-});
-export default MenuList;
+})
+export default MenuList
