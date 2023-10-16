@@ -14,6 +14,7 @@ import {
 import CustomCardProduct from "../components/CustomCardProduct";
 import CustomButton from "../components/CustomButton";
 import Loader from "../components/loader";
+import GoBackButton from "../components/GoBackButton";
 
 const checkNew = (item) => {
   const today = new Date();

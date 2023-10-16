@@ -4,9 +4,22 @@ import BottomNav from "./src/components/TapBar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import Loader from "./src/components/loader";
-import { NativeBaseProvider } from "native-base";
 import StackNewsNavigator from "./src/navigation/StackNewsNavigator";
+import { UserContext } from "./src/utils/context/UserContext";
+import { useEffect } from "react";
+import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from "jwt-decode";
+import Loader from "./src/components/loader";
+import {
+  KeyboardAvoidingView,
+  NativeBaseProvider,
+  extendTheme,
+} from "native-base";
+import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as Linking from "expo-linking";
+import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {
   ...DefaultTheme,
