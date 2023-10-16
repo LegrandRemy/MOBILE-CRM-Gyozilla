@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwtDecode from "jwt-decode";
-import Loader from "./src/components/loader";
+import Loader from "./src/components/Loader";
 import {
   KeyboardAvoidingView,
   NativeBaseProvider,

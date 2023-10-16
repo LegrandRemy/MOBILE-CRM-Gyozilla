@@ -6,7 +6,7 @@ import { instanceAxios } from "../utils/interceptor";
 
 import CustomCardProduct from "../components/CustomCardProduct";
 import CustomButton from "../components/CustomButton";
-import Loader from "../components/loader";
+import Loader from "../components/Loader";
 import GoBackButton from "../components/GoBackButton";
 
 const checkNew = (item) => {
