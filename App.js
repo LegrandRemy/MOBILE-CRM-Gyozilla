@@ -4,7 +4,7 @@ import BottomNav from "./src/components/TapBar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import Loader from "./src/components/Loader";
+import Loader from "./src/components/loader";
 import { NativeBaseProvider } from "native-base";
 import StackNewsNavigator from "./src/navigation/StackNewsNavigator";
 

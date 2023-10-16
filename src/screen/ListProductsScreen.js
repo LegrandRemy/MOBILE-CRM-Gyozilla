@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import CustomCardProduct from "../components/CustomCardProduct";
 import CustomButton from "../components/CustomButton";
-import Loader from "../components/Loader";
+import Loader from "../components/loader";
 
 const checkNew = (item) => {
   const today = new Date();
