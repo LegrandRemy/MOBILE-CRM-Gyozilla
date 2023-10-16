@@ -1,12 +1,24 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
-import BottomNav from "./src/components/TapBar";
+import { Keyboard, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
 import { useState } from "react";
-import Loader from "./src/components/Loader";
-import { NativeBaseProvider } from "native-base";
-import StackNewsNavigator from "./src/navigation/StackNewsNavigator";
+import { UserContext } from "./src/utils/context/UserContext";
+import { useEffect } from "react";
+import StackDashBoardNavigator from "./src/navigation/StackDashBoardNavigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwtDecode from "jwt-decode";
+import Loader from "./src/components/loader";
+import {
+  KeyboardAvoidingView,
+  NativeBaseProvider,
+  extendTheme,
+} from "native-base";
+import RootStackNavigator from "./src/navigation/RootStackNavigator";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import * as Linking from "expo-linking";
+import { CartContext, CartProvider } from "./src/utils/context/CartContext";
 
 const theme = {
   ...DefaultTheme,
@@ -17,21 +29,47 @@ const theme = {
   },
   roundness: 10,
 };
+
 export default function App() {
+  const [user, setUser] = useState([]);
+  const [isLogged, setIsLogged] = useState(false);
   const [load, setLoad] = useState(false);
+
+  // const [cart, setCart] = useState([]);
+
   const inter = () => {
     if (!load) {
       setLoad(true);
     }
   };
   setTimeout(inter, 4000);
+
   return (
     <PaperProvider theme={theme}>
       <NativeBaseProvider>
-        <StatusBar translucent={false} style="light"></StatusBar>
-        <NavigationContainer>
-          {!load ? <Loader></Loader> : <BottomNav></BottomNav>}
-        </NavigationContainer>
+        <UserContext.Provider
+          value={{
+            user: user,
+            setUser: setUser,
+            isLogged: isLogged,
+            setIsLogged: setIsLogged,
+          }}
+        >
+          <CartProvider
+          // value={{ cart: cart, setCart: setCart }}
+          >
+            <StatusBar translucent={false} style="light"></StatusBar>
+            <NavigationContainer>
+              {!load ? (
+                <Loader />
+              ) : user && user.role ? (
+                <StackDashBoardNavigator />
+              ) : (
+                <RootStackNavigator />
+              )}
+            </NavigationContainer>
+          </CartProvider>
+        </UserContext.Provider>
       </NativeBaseProvider>
     </PaperProvider>
   );

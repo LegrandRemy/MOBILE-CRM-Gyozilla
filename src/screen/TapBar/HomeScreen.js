@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, TouchableHighlight } from "react-native";
-import {
-  Box,
-  Heading,
-  Text,
-  AspectRatio,
-  Skeleton,
-  FlatList,
-} from "native-base";
+import { Box, Heading, Text, FlatList } from "native-base";
 import ListHomeImgBG from "../../components/ListHomeImgBG";
 import SearchHomeInput from "../../components/SearchHomeInput";
 import { instanceAxios } from "../../utils/interceptor";
 import FlatListNewsCarousel from "../../components/FlatListNewsCarousel";
 import LastProductBannerHome from "../../components/LastProductBannerHome";
+import { useContext } from "react";
+import { UserContext } from "../../utils/context/UserContext";
 
 const Home = () => {
   const [lastNews, setLastNews] = useState();
   const [lastProducts, setLastProducts] = useState();
-  console.log("lastProducts", lastProducts);
+  const [randomProducts, setRandomProducts] = useState();
   useEffect(() => {
     instanceAxios
       .get("products/lastProduct")
@@ -27,6 +22,16 @@ const Home = () => {
       .catch((error) => {
         setLastProducts([]);
       });
+    instanceAxios.get("products").then((res) => {
+      let data = [];
+      do {
+        let random = Math.round(Math.random() * res.data.length);
+        if (!data.includes(res.data[random])) {
+          data.push(res.data[random]);
+        }
+      } while (data.length < 4);
+      setRandomProducts(data);
+    });
   }, []);
 
   useEffect(() => {
@@ -41,56 +46,59 @@ const Home = () => {
   }, []);
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
-      <Box paddingBottom={10} backgroundColor={"#77614c"}>
+    <ScrollView>
+      <Box paddingBottom={10} backgroundColor={"white"}>
         <SearchHomeInput />
-        <Heading color="#faeccb" fontSize={18} marginLeft={4} marginTop={4}>
+        <Heading
+          color="#F8A500"
+          fontSize={18}
+          marginLeft={4}
+          marginTop={4}
+          marginBottom={-40}
+        >
           En ce moment
         </Heading>
+        <FlatList
+          // marginTop={-65}
+          horizontal={true}
+          data={lastProducts}
+          key={(item) => item.id}
+          renderItem={(item) => <LastProductBannerHome item={item} />}
+        />
+        <LastProductBannerHome item={lastProducts} />
       </Box>
-      {/* {(lastProducts)?
-      <TouchableHighlight onPress={}>
-        <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <AspectRatio w="90%" ratio={16 / 9}>
-            <Image
-              borderRadius={10}
-              source={{uri: `https://api.gyozilla-restaurants.fr/${lastProducts?.image}`}}
-              alt="image"
-            />
-          </AspectRatio>
-        </Box>
-      </TouchableHighlight>
-
-      :
-      <Box alignItems={"center"} marginY={-8} marginBottom={3}>
-          <Skeleton borderRadius={10} width={"90%"} height={200}/>
-      </Box>
-      } */}
-      <FlatList
-        horizontal={true}
-        data={lastProducts}
-        key={(item) => item.id}
-        renderItem={(item) => <LastProductBannerHome item={item} />}
-      />
-      {/* <LastProductBannerHome item={lastNews} /> */}
-      <Box backgroundColor={"blue"} marginLeft={4}>
-        <Heading color="black" fontSize={18} marginTop={4}>
-          Chaud devant !!!!!
+      <Box
+        backgroundColor={"white"}
+        paddingLeft={4}
+        paddingTop={5}
+        paddingBottom={8}
+      >
+        <Heading color="#F8A500" fontSize={18} marginTop={0} marginBottom={2}>
+          Ca se passe près de chez vous
         </Heading>
-        <Text color="black">Découvrez les actualités Gyozilla®</Text>
+        <Text>Découvrez les dernières actualités Gyozilla®</Text>
         <FlatListNewsCarousel propsData={lastNews} />
-        <Heading color="black" width={250} fontSize={18} marginTop={20}>
-          Une petite ou une grosse faim ? &#127836;
-        </Heading>
-        <Box
-          flexDirection={"row"}
-          flexWrap={"wrap"}
-          marginRight={4}
-          justifyContent={"center"}
-          marginTop={10}
-          marginBottom={10}
+        <Heading
+          color="#F8A500"
+          width={250}
+          fontSize={18}
+          marginTop={7}
+          marginBottom={4}
         >
-          {/* <ListHomeImgBG props={products} /> */}
+          Quel type de gourmand êtes-vous? &#127836;
+        </Heading>
+      </Box>
+      <Box backgroundColor={"white"} alignItems={"center"} paddingBottom={6}>
+        <Box
+          backgroundColor={"red"}
+          display={"flex"}
+          flexWrap={"wrap"}
+          flexDirection={"row"}
+          justifyContent={"center"}
+          borderRadius={10}
+          width={"95%"}
+        >
+          {/* <ListHomeImgBG lastProducts={randomProducts} /> */}
         </Box>
       </Box>
     </ScrollView>

@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Radio, ScrollView, useNavigation } from "native-base";
+
 import { instanceAxios } from "../utils/interceptor";
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Checkbox,
-  Heading,
-  Radio,
-  ScrollView,
-  Stack,
-} from "native-base";
+
 import CustomCardProduct from "../components/CustomCardProduct";
 import CustomButton from "../components/CustomButton";
-import Loader from "../components/Loader";
+import Loader from "../components/loader";
+import GoBackButton from "../components/GoBackButton";
 
 const checkNew = (item) => {
   const today = new Date();
@@ -33,14 +27,20 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const [selectedStep, setSelectedStep] = useState(0);
   const [lastStep, setLastStep] = useState(false);
 
+  const [selectedItemFromMenu, setSelectedItemFromMenu] = useState([]);
+  const [selectedItem, setSelectedItem] = useState("");
+
   const { name } = route.params;
-  console.log("route", route);
-  console.log("name", name);
   useEffect(() => {
     instanceAxios
       .get("/products")
       .then((response) => {
-        setProducts(response.data);
+        const updatedData = response.data.map((product) => ({
+          ...product,
+          price: product.price.toFixed(2),
+        }));
+        setProducts(updatedData);
+        //console.log("response.data", JSON.stringify(updatedData, null, 2));
       })
       .catch((error) => {
         console.error(error);
@@ -57,7 +57,7 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   }, [name]);
 
   useEffect(() => {
-    if (products.length !== 0 && !isFiltered) {
+    if (products.length !== 0 && !isFiltered && name) {
       let filteredProducts = [];
       switch (name) {
         case "Menus":
@@ -101,10 +101,14 @@ const ListProductsScreen = ({ route, navigation, props }) => {
     setIsFiltered(true);
     setSelectedStep(0);
     setIsMenuClicked(true);
+    // console.log(
+    //   "products.filter((product) => product.id_menus === menuId)",
+    //   products.filter((product) => product.id_menus === menuId)
+    // );
   };
 
-  const handleProductClick = (productId) => {
-    navigation.navigate("ProductDetailsScreen", { productId });
+  const handleDetailsProductClick = (product) => {
+    navigation.navigate("ProductDetailsScreen", { product });
   };
 
   const totalSteps = ["Entrées", "Plats", "Desserts", "Boissons"];
@@ -112,10 +116,16 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   const handleStepContinue = () => {
     if (selectedStep < totalSteps.length - 1) {
       setSelectedStep((prevStep) => prevStep + 1);
+      let selected = [...selectedItemFromMenu];
+      selected[selectedStep] = selectedItem;
+
+      setSelectedItemFromMenu(selected);
     } else {
       setLastStep(true);
     }
   };
+  // console.log("selectedItemFromMenu", selectedItemFromMenu);
+  // console.log("selectedStep", selectedStep);
 
   const handleStepBack = () => {
     if (selectedStep > 0) {
@@ -128,8 +138,19 @@ const ListProductsScreen = ({ route, navigation, props }) => {
   );
   const dataToShow = isMenuClicked ? filteredProducts : products;
 
+  // console.log(
+  //   "selectedItemFromMenu[selectedStep]",
+  //   selectedItemFromMenu[selectedStep - 1]
+  // );
+  // console.log('selectedItemFromMenu', selectedItemFromMenu)
+  // console.log('selectedStep', selectedStep)
+
+  // const goBack = () => {
+  //   navigation.goBack();
+  // };
   return (
     <ScrollView style={styles.container}>
+      <GoBackButton customStyleGoBack={{}} />
       <View style={styles.cardTitle}>
         <Text style={styles.title}>{route.params.title}</Text>
       </View>
@@ -139,42 +160,69 @@ const ListProductsScreen = ({ route, navigation, props }) => {
             <CustomCardProduct
               menu={menu}
               key={menu.id}
-              onClick={() => handleMenuClick(menu.id)}
+              onPress={() => handleMenuClick(menu.id)}
+              customStyle={{ padding: 5 }}
             />
           ))}
         </View>
       ) : isFiltered ? (
         <>
-          <Radio.Group
-            name="myRadioGroup"
-            accessibilityLabel="favorite number"
-            aria-label="product"
-          >
+          {isMenuClicked ? (
             <View style={styles.cardContainer}>
-              {isMenuClicked
-                ? filteredProducts.map((product) => (
-                    <View key={product.id} style={styles.box}>
+              <Radio.Group
+                name="myRadioGroup"
+                accessibilityLabel="favorite number"
+                aria-label="product"
+                onChange={(value) => {
+                  setSelectedItem(value);
+                }}
+                value={selectedItemFromMenu[selectedStep] || null}
+              >
+                <View
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {filteredProducts.map((product) => (
+                    <View
+                      key={product.id}
+                      style={{
+                        width: "50%",
+                        alignItems: "center",
+                      }}
+                    >
                       <CustomCardProduct
-                        key={product.id}
                         product={product}
-                        // onClick={handleProductClick}
+                        onPress={() => handleDetailsProductClick(product)}
+                        customStyle={{ width: "100%", padding: 5 }}
                       />
                       <Radio
                         my={1}
-                        label={`product-${product.id}`}
+                        accessibilityLabel={`product-${product.id}`}
                         aria-label={`product-${product.id}`}
+                        value={product.id}
                       ></Radio>
                     </View>
-                  ))
-                : products.map((product) => (
-                    <CustomCardProduct
-                      key={product.id}
-                      product={product}
-                      // onClick={handleProductClick}
-                    />
                   ))}
+                </View>
+              </Radio.Group>
             </View>
-          </Radio.Group>
+          ) : (
+            <View style={styles.cardContainer}>
+              {products.map((product) => (
+                <CustomCardProduct
+                  customStyle={{ padding: 5 }}
+                  key={product.id}
+                  product={product}
+                  onPress={() => handleDetailsProductClick(product)}
+                />
+              ))}
+            </View>
+          )}
+
           {isMenuClicked && (
             <View style={styles.navigationButtons}>
               {selectedStep > 0 && (
@@ -207,6 +255,10 @@ const ListProductsScreen = ({ route, navigation, props }) => {
 export default ListProductsScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
   cardContainer: {
     width: "100%",
     flexDirection: "row",
@@ -217,14 +269,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
   },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
   cardTitle: {
     backgroundColor: "#faeccb",
     alignItems: "center",
-    margin: 30,
+    marginBottom: 30,
+    marginHorizontal: 30,
     padding: 10,
     borderRadius: 10,
   },

@@ -1,22 +1,59 @@
-import { View, Text, ImageBackground } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import React from "react";
+import { Box } from "native-base";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
-const ListHomeImgBG = ({props}) => {
+const ListHomeImgBG = ({ lastProducts }) => {
+  const navigation = useNavigation();
+
+  const handlePress = (item) => {
+    navigation.navigate("LastProductsHome", { item: item });
+  };
+  return lastProducts?.map((item) => {
     return (
-        <>
-        {props.map((prop) => (
-            <ImageBackground key={prop.id} style={{
-                width:150,
-                height:150,
-                padding:10,
-                marginHorizontal: 5,
-                marginVertical: 5,
-            }} source={{uri: `https://api.gyozilla-restaurants.fr/${prop.image}`}} resizeMode="contain" >
-                <Text style={{fontWeight:"600"}}>{prop.name}</Text>
-            </ImageBackground>
-        ))}
-        </>
-    )
-}
+      <TouchableHighlight
+        onPress={() => handlePress(item)}
+        style={{
+          width: "48%",
+          marginHorizontal: 3,
+          marginBottom: 10,
+        }}
+        underlayColor="transparent"
+      >
+        <Box maxHeight={200}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              marginTop: 15,
+              textAlign: "center",
+              width: "100%",
+              paddingBottom: 2,
+            }}
+          >
+            {item.name}
+          </Text>
+          <ImageBackground
+            key={index}
+            style={{
+              width: "100%",
+              height: 150,
+            }}
+            source={{
+              uri: `https://api.gyozilla-restaurants.fr/${item.image}`,
+            }}
+            resizeMode="contain"
+          ></ImageBackground>
+        </Box>
+      </TouchableHighlight>
+    );
+  });
+};
 
-export default ListHomeImgBG
+export default ListHomeImgBG;

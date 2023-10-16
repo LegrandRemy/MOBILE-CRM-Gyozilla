@@ -9,15 +9,26 @@ import {
   Stack,
   HStack,
   Radio,
+  Text,
+  Icon,
+  VStack,
+  IconButton,
 } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const CustomCardProduct = ({ product, onClick, menu }) => {
+import { REACT_APP_URL_API } from "@env";
+
+const CustomCardProduct = ({ product, onPress, menu, customStyle }) => {
   const navigation = useNavigation();
+
+  const handlePress = (screenName) => {
+    navigation.navigate(screenName, { product: product });
+  };
 
   return (
     <TouchableOpacity
-      onPress={onClick}
-      style={{ width: "50%", height: 200, marginBottom: 10 }}
+      onPress={onPress}
+      style={[{ width: "50%", height: 250, marginBottom: 10 }, customStyle]}
     >
       <HStack space={2} height={"100%"}>
         <Box
@@ -35,14 +46,14 @@ const CustomCardProduct = ({ product, onClick, menu }) => {
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: "coolGray.100",
+            backgroundColor: "white",
           }}
         >
           <Stack
-            p="4"
+            p="2"
             alignItems="center"
             justifyContent="center"
-            height={75}
+            height={65}
             space={2}
             bgColor="#5F8D85"
           >
@@ -50,21 +61,44 @@ const CustomCardProduct = ({ product, onClick, menu }) => {
               {product ? product.name : menu.name}
             </Heading>
           </Stack>
-          <Box>
+          <Stack>
             <AspectRatio w="100%">
               <Image
                 resizeMode="cover"
                 source={{
                   uri: product
-                    ? `https://api.gyozilla-restaurants.fr/${product.image}`
-                    : `https://api.gyozilla-restaurants.fr/${menu.image}`,
+                    ? `${REACT_APP_URL_API}${product.image}`
+                    : `${REACT_APP_URL_API}${menu.image}`,
                 }}
                 alt="image"
               />
             </AspectRatio>
-          </Box>
+          </Stack>
+          <HStack
+            alignItems={"center"}
+            justifyContent={"space-around"}
+            mt={3}
+            mr={1}
+          >
+            <IconButton
+              width={"30%"}
+              icon={
+                <Icon
+                  as={MaterialCommunityIcons}
+                  name="eye"
+                  size={"lg"}
+                  color="#5F8D85"
+                  marginTop={1}
+                  borderRadius={50}
+                />
+              }
+              onPress={() => handlePress("CustomCardDetailsProduct")}
+            />
+            <Heading color={"#5F8D85"}>
+              {product ? product.price : menu.price} €
+            </Heading>
+          </HStack>
         </Box>
-        <Radio my={1} label={`product`} aria-label={`product`}></Radio>
       </HStack>
     </TouchableOpacity>
   );

@@ -1,5 +1,5 @@
-import instance from "../interceptor";
+import { instanceAxios } from "../interceptor";
 
-export const getProductById= async (id) => {
-    return await instance.get(`products/${id}`)
+export const getProductById = async (id) => {
+    return await instanceAxios.get(`products/${id}`)
 }
